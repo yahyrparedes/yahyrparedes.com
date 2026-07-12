@@ -1,0 +1,24 @@
+{
+  "name": "yahyrparedes-site",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio personal de Yahyr Paredes · Software developer disponible para proyectos",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.4.2",
+    "@tailwindcss/vite": "^4.1.13",
+    "astro": "^5.14.0",
+    "sharp": "^0.34.0",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.7.2"
+  }
+}

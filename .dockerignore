@@ -1,0 +1,14 @@
+node_modules
+dist
+.astro
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.DS_Store
+*.md
+!README.md
+public/admin/config.yml.bak
+.vscode
+.idea

@@ -1,0 +1,16 @@
+{
+  "name": "Yahyr Paredes · Software developer",
+  "short_name": "yahyrparedes",
+  "description": "Software developer disponible para proyectos · Cortijos Nuevos, Jaén, España",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAFAF7",
+  "theme_color": "#5C6B5A",
+  "lang": "es-ES",
+  "categories": ["technology", "business", "productivity"],
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

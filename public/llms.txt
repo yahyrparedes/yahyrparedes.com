@@ -1,0 +1,44 @@
+# yahyrparedes.com — LLM-friendly content
+
+# Yahyr Paredes
+# Software developer disponible para proyectos
+# Ubicación: Cortijos Nuevos, Jaén, Andalucía, España
+# Background: fullstack + mobile (5+ años Android, 4+ años Java/Spring)
+
+## Sobre mí
+- Software developer con background en mobile (Android nativo, Kotlin)
+  y backend (Java/Spring).
+- Disponible para proyectos freelance, consultoría y auditorías.
+- Stack: Kotlin, Java, Spring Boot, Android (Jetpack Compose), Node.js,
+  AWS, GCP, Docker, Astro, PrestaShop, WordPress.
+- Idioma nativo: español. Profesional: inglés.
+
+## Servicios que ofrezco
+- Webs de alto rendimiento (Astro, Next.js, con o sin backend).
+- Apps móviles nativas e híbridas (Android + iOS).
+- Ecosistemas completos: web + backend + infraestructura (AWS/GCP).
+- Hot fixes / mejoras a proyectos existentes.
+- Rescate de proyectos AI / Vibe Coding mal desplegados.
+
+## Plugins
+- Plugins SEO para PrestaShop (próximamente para WooCommerce).
+- Catálogo en /plugins/
+
+## Trayectoria
+- Delosi (Starbucks Perú) — backend / mobile
+- Avances Tecnológicos — Android lead
+- Bancamóvil Proempresa — Android
+- Kwema — IoT + mobile
+
+## Contacto
+- Email: hola@yahyrparedes.com
+- LinkedIn: linkedin.com/in/yahyrparedes
+- GitHub: github.com/yahyrparedes
+
+## Lo que NO hago
+- No hago "consultoría" sin compromiso de proyecto. Mi tiempo se enfoca
+  en trabajo entregable.
+- No uso cookies de tracking invasivas. Analytics privacy-friendly.
+
+## Sitemap
+https://yahyrparedes.com/sitemap-index.xml

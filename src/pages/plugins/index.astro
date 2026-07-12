@@ -1,0 +1,148 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { site } from '@data/site';
+import { productJsonLd } from '@lib/seo';
+
+const jsonLd = site.plugins.map((p) => productJsonLd({
+  name: p.name, description: p.description, price: p.price, priceUnit: p.priceUnit, platform: p.platform,
+}));
+---
+
+<BaseLayout
+  title="Tiger — Marketing Suite para PrestaShop"
+  description="5 módulos open source para tu tienda PrestaShop. Google Shopping, Rich Snippets, Pixel Suite, Meta Shop y Search Console. La alternativa a los €200/mes europeos."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="container-page py-12 sm:py-16 max-w-6xl">
+    <!-- Hero suite -->
+    <header class="text-center mb-16 fade-in-up max-w-3xl mx-auto">
+      <div class="inline-block px-3 py-1 rounded-full bg-sage-100 text-sage-600 text-xs font-semibold mb-4">
+        🐯 Tiger Suite · Open Source
+      </div>
+      <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-ink-300 text-balance">
+        Marketing Suite para PrestaShop
+      </h1>
+      <p class="mt-5 text-lg sm:text-xl text-ink-200 text-pretty">
+        La alternativa open source a los módulos europeos de €200/mes.
+        <br class="hidden sm:block" />
+        Hechos en LATAM, para LATAM.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-sm text-ink-100">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-100 border border-sage-100">
+          ✓ 5 módulos independientes
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-100 border border-sage-100">
+          ✓ MIT License
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-100 border border-sage-100">
+          ✓ Sin telemetría
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cream-100 border border-sage-100">
+          ✓ Sin lock-in
+        </span>
+      </div>
+    </header>
+
+    <!-- The 5 modules -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {site.plugins.map((p, i) => (
+        <a
+          href={`/plugins/${p.slug}`}
+          class="group relative p-6 sm:p-7 bg-gradient-to-br from-cream-100 to-sage-50 rounded-2xl border-2 border-sage-100 hover:border-sage-300 hover:shadow-lg hover:shadow-sage-200/40 transition-all flex flex-col fade-in-up"
+          style={`animation-delay: ${0.05 * (i + 1)}s`}
+        >
+          <div class="flex items-start justify-between mb-4">
+            <span class="text-4xl" aria-hidden="true">{p.icon}</span>
+            <span class="text-xs font-mono text-ink-100 bg-cream-300/60 px-2 py-0.5 rounded">
+              {p.moduleName}
+            </span>
+          </div>
+          <h2 class="font-display font-bold text-lg text-ink-300 mb-2">{p.name}</h2>
+          <p class="text-sm text-ink-200 text-pretty leading-relaxed flex-1">{p.tagline}</p>
+          <div class="mt-5 flex items-center justify-between text-xs">
+            <span class="font-semibold text-sage-500">{p.price}</span>
+            <span class="text-ink-100">{p.platform} {p.version}</span>
+          </div>
+          <p class="mt-4 text-sm font-medium text-sage-500 group-hover:translate-x-1 transition-transform inline-block">
+            Ver módulo →
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <!-- Why Tiger -->
+    <section class="mt-20">
+      <h2 class="font-display font-bold text-3xl sm:text-4xl text-ink-300 text-balance text-center mb-10">
+        Por qué Tiger
+      </h2>
+      <div class="grid sm:grid-cols-3 gap-4 sm:gap-6">
+        <div class="p-6 bg-cream-100 rounded-2xl border border-sage-100">
+          <div class="text-3xl mb-3">💸</div>
+          <h3 class="font-display font-bold text-lg text-ink-300 mb-2">€0 vs €200/mes</h3>
+          <p class="text-ink-200 text-pretty">
+            Los módulos europeos cuestan €150-300 al mes. Para una tienda LATAM con 200-2000 productos, es inviable. Tiger es open source sin costes ocultos.
+          </p>
+        </div>
+        <div class="p-6 bg-cream-100 rounded-2xl border border-sage-100">
+          <div class="text-3xl mb-3">🔌</div>
+          <h3 class="font-display font-bold text-lg text-ink-300 mb-2">Standalone</h3>
+          <p class="text-ink-200 text-pretty">
+            5 módulos independientes. Instala solo lo que necesitas. Funcionan por separado, sin dependencias entre ellos.
+          </p>
+        </div>
+        <div class="p-6 bg-cream-100 rounded-2xl border border-sage-100">
+          <div class="text-3xl mb-3">🌎</div>
+          <h3 class="font-display font-bold text-lg text-ink-300 mb-2">LATAM-first</h3>
+          <p class="text-ink-200 text-pretty">
+            Hechos por developers que entienden el mercado LATAM: multi-moneda, multi-idioma, multi-país de verdad. No traducción automática.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open source vs Pro -->
+    <section class="mt-20 p-6 sm:p-10 bg-gradient-to-br from-sage-50 to-cream-100 rounded-2xl border border-sage-100">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl text-ink-300 text-balance mb-2 text-center">
+        Hoy gratis. Pronto Pro para los que quieran soporte.
+      </h2>
+      <p class="text-ink-200 text-pretty text-center max-w-2xl mx-auto mb-8">
+        Todos los módulos son MIT open source y siempre lo serán. Lo que viene es opcional, para quien quiera soporte profesional.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        <div class="p-5 bg-cream-100 rounded-xl border-2 border-sage-200">
+          <div class="text-xs font-bold text-sage-600 uppercase tracking-wider mb-2">Open Source</div>
+          <p class="text-2xl font-display font-bold text-ink-300 mb-3">Gratis</p>
+          <ul class="space-y-2 text-sm text-ink-200">
+            <li class="flex items-start gap-2"><span class="text-sage-500">✓</span> Todos los módulos en GitHub</li>
+            <li class="flex items-start gap-2"><span class="text-sage-500">✓</span> Sin límites de uso</li>
+            <li class="flex items-start gap-2"><span class="text-sage-500">✓</span> Soporte comunidad</li>
+          </ul>
+        </div>
+        <div class="p-5 bg-amber-100 rounded-xl border-2 border-amber-200 relative">
+          <span class="absolute top-2 right-2 text-xs font-bold text-amber-500 bg-cream-100 px-2 py-0.5 rounded-full">PRONTO</span>
+          <div class="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">Pro</div>
+          <p class="text-2xl font-display font-bold text-ink-300 mb-3">$29<span class="text-sm text-ink-100 font-normal">/mes por tienda</span></p>
+          <ul class="space-y-2 text-sm text-ink-200">
+            <li class="flex items-start gap-2"><span class="text-amber-500">✓</span> Soporte email prioritario</li>
+            <li class="flex items-start gap-2"><span class="text-amber-500">✓</span> Backups de configuración</li>
+            <li class="flex items-start gap-2"><span class="text-amber-500">✓</span> Onboarding asistido</li>
+            <li class="flex items-start gap-2"><span class="text-amber-500">✓</span> Instalación incluida</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="mt-16 text-center">
+      <a
+        href="https://github.com/yahyrparedes"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-ink-300 text-cream-100 font-semibold hover:bg-ink-400 transition-all shadow-md"
+      >
+        Ver en GitHub
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+    </div>
+  </article>
+</BaseLayout>

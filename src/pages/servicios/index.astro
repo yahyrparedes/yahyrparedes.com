@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { site } from '@data/site';
+import { serviceJsonLd } from '@lib/seo';
+
+const services = site.services;
+const jsonLd = services.map((s) => serviceJsonLd({ name: s.name, description: s.description, provider: site.name }));
+---
+
+<BaseLayout
+  title="Servicios"
+  description={`5 servicios de software development: webs, apps móviles, ecosistemas completos, hot fixes y AI rescue. Por ${site.name}.`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <article class="container-page py-12 sm:py-16 max-w-6xl">
+    <header class="text-center mb-12 fade-in-up max-w-3xl mx-auto">
+      <h1 class="font-display font-bold text-4xl sm:text-5xl text-ink-300 text-balance">
+        Servicios
+      </h1>
+      <p class="mt-4 text-lg text-ink-200 text-pretty">
+        5 formas de ayudarte con tu proyecto tech. Elige la que encaje con lo que necesitas.
+      </p>
+    </header>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {services.map((s, i) => (
+        <a
+          href={`/servicios/${s.slug}`}
+          class="group p-6 sm:p-8 bg-cream-100 rounded-2xl border-2 border-sage-100 hover:border-sage-300 hover:shadow-lg hover:shadow-sage-200/40 transition-all flex flex-col fade-in-up"
+          style={`animation-delay: ${0.05 * (i + 1)}s`}
+        >
+          <div class="w-14 h-14 rounded-2xl bg-sage-50 flex items-center justify-center mb-5 group-hover:bg-sage-100 transition-colors">
+            <span class="text-3xl">
+              {s.icon === 'web' ? '🌐' : s.icon === 'mobile' ? '📱' : s.icon === 'stack' ? '🏗️' : s.icon === 'wrench' ? '🔧' : '✨'}
+            </span>
+          </div>
+          <h2 class="font-display font-bold text-xl text-ink-300 mb-2">{s.name}</h2>
+          <p class="text-sm text-ink-200 text-pretty leading-relaxed flex-1">{s.description}</p>
+          <p class="mt-5 text-sm font-semibold text-amber-500">Desde {s.pricing.toLowerCase().includes('a medida') ? 'a medida' : s.pricing.split(' ').slice(0, 2).join(' ')}</p>
+          <p class="mt-3 text-sm font-medium text-sage-500 group-hover:translate-x-1 transition-transform">
+            Ver detalles →
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center bg-gradient-to-br from-sage-50 to-amber-50 rounded-2xl p-8 sm:p-12 border border-sage-100">
+      <h2 class="font-display font-bold text-2xl text-ink-300 text-balance">
+        ¿No encuentras lo que buscas?
+      </h2>
+      <p class="mt-3 text-ink-200 text-pretty max-w-xl mx-auto">
+        Cada proyecto es único. Si tienes algo en mente que no encaja en estos 5 servicios, hablamos.
+      </p>
+      <a
+        href="/contacto"
+        class="inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl bg-ink-300 text-cream-100 font-semibold hover:bg-ink-400 transition-all"
+      >
+        Cuéntame tu proyecto
+      </a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,17 @@
+/* TEAM */
+	Desarrollador: Yahyr Paredes
+	GitHub: https://github.com/yahyrparedes
+	LinkedIn: https://linkedin.com/in/yahyrparedes
+
+/* SITE */
+	Last update: 2026/07/11
+	Standards: HTML5, CSS3, ES2022
+	Components: Astro 5, Tailwind CSS 4
+	Hosting: Coolify + nginx (self-hosted)
+	CDN: Cloudflare
+	Analytics: Umami (privacy-friendly)
+
+/* THANKS */
+	Astro — https://astro.build
+	Tailwind CSS — https://tailwindcss.com
+	Cloudflare — https://cloudflare.com
