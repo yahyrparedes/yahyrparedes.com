@@ -3,80 +3,129 @@ import { site } from '@data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-24 border-t border-sage-100 bg-cream-300/40">
-  <div class="container-page py-12 sm:py-16">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10 text-sm">
+<footer class="bg-cream-100 mt-12 border-t border-cream-200">
+  <div class="container-page py-16 sm:py-20">
 
-      <!-- Col 1: Yahyr -->
-      <div>
-        <h3 class="font-display font-bold text-ink-300 mb-3 text-xs uppercase tracking-wider">Yahyr</h3>
-        <ul class="space-y-2">
-          <li><a href="/sobre-mi" class="text-ink-200 hover:text-ink-300 transition-colors">Sobre mí</a></li>
-          <li><a href="/perfil" class="text-ink-200 hover:text-ink-300 transition-colors">Perfil profesional</a></li>
-          <li><a href="/contacto" class="text-ink-200 hover:text-ink-300 transition-colors">Contacto</a></li>
-        </ul>
-      </div>
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-12">
 
-      <!-- Col 2: Servicios -->
-      <div>
-        <h3 class="font-display font-bold text-ink-300 mb-3 text-xs uppercase tracking-wider">Servicios</h3>
-        <ul class="space-y-2">
-          <li><a href="/servicios/webs" class="text-ink-200 hover:text-ink-300 transition-colors">Webs de alto rendimiento</a></li>
-          <li><a href="/servicios/apps" class="text-ink-200 hover:text-ink-300 transition-colors">Apps móviles</a></li>
-          <li><a href="/servicios/ecosistema" class="text-ink-200 hover:text-ink-300 transition-colors">Ecosistema completo</a></li>
-          <li><a href="/servicios/hot-fixes" class="text-ink-200 hover:text-ink-300 transition-colors">Hot fixes</a></li>
-          <li><a href="/servicios/ai-rescue" class="text-ink-200 hover:text-ink-300 transition-colors">AI Rescue</a></li>
-        </ul>
-      </div>
+      <!-- Bio + foto circular -->
+      <div class="lg:col-span-5">
+        <div class="flex items-start gap-5">
+          <div class="relative flex-shrink-0">
+            <div class="absolute inset-1 rounded-full bg-butter/50 -z-10" aria-hidden="true"></div>
+            <img
+              src="/images/personal-3.png"
+              alt={site.name}
+              class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover ring-2 ring-cream-200"
+              width="96"
+              height="96"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <h2 class="font-display font-semibold text-2xl sm:text-3xl text-ink-300 text-balance leading-tight">
+              {site.name}
+            </h2>
+            <p class="mt-1 text-sm text-ink-200">
+              {site.role} · {site.location}
+            </p>
+          </div>
+        </div>
 
-      <!-- Col 3: Plugins -->
-      <div>
-        <h3 class="font-display font-bold text-ink-300 mb-3 text-xs uppercase tracking-wider">Tiger Suite</h3>
-        <ul class="space-y-2">
-          {site.plugins.map((p) => (
-            <li><a href={`/plugins/${p.slug}`} class="text-ink-200 hover:text-ink-300 transition-colors">{p.name.replace('Tiger ', '')}</a></li>
-          ))}
-          <li class="pt-1"><a href="/plugins" class="text-sage-500 font-medium hover:text-sage-600">Ver suite completa →</a></li>
-        </ul>
-      </div>
+        <p class="mt-6 text-ink-200 text-pretty leading-relaxed max-w-md">
+          {site.bio}
+        </p>
 
-      <!-- Col 4: Recursos -->
-      <div>
-        <h3 class="font-display font-bold text-ink-300 mb-3 text-xs uppercase tracking-wider">Recursos</h3>
-        <ul class="space-y-2">
-          <li><a href="/blog" class="text-ink-200 hover:text-ink-300 transition-colors">Blog</a></li>
-          <li><a href="/sitemap-index.xml" class="text-ink-200 hover:text-ink-300 transition-colors">Mapa del sitio</a></li>
-          <li><a href="/llms.txt" class="text-ink-200 hover:text-ink-300 transition-colors">LLM-friendly content</a></li>
-          <li><a href="/robots.txt" class="text-ink-200 hover:text-ink-300 transition-colors">robots.txt</a></li>
-        </ul>
-      </div>
-
-      <!-- Col 5: Conecta -->
-      <div>
-        <h3 class="font-display font-bold text-ink-300 mb-3 text-xs uppercase tracking-wider">Conecta</h3>
-        <ul class="space-y-2">
+        <!-- Social pills -->
+        <div class="mt-6 flex flex-wrap gap-2">
           {site.socials.map((s) => (
-            <li>
-              <a
-                href={s.url}
-                target={s.url.startsWith('http') ? '_blank' : undefined}
-                rel={s.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                class="text-ink-200 hover:text-ink-300 transition-colors"
-              >
-                {s.label}
+            <a
+              href={s.url}
+              target={s.url.startsWith('http') ? '_blank' : undefined}
+              rel={s.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cream text-ink-200 hover:text-coral hover:bg-coral-100 transition-all text-sm font-medium"
+            >
+              {s.icon === 'linkedin' && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              )}
+              {s.icon === 'github' && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+              )}
+              {s.icon === 'email' && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              )}
+              <span>{s.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- 3 columnas de links -->
+      <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 sm:gap-10 text-sm">
+        <div>
+          <h3 class="font-display italic text-ink-100 mb-4 text-sm">
+            Sobre mí
+          </h3>
+          <ul class="space-y-2.5">
+            <li><a href="/sobre-mi" class="text-ink-200 hover:text-coral transition-colors">Quién soy</a></li>
+            <li><a href="/perfil" class="text-ink-200 hover:text-coral transition-colors">Perfil profesional</a></li>
+            <li><a href="/contacto" class="text-ink-200 hover:text-coral transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-display italic text-ink-100 mb-4 text-sm">
+            Servicios
+          </h3>
+          <ul class="space-y-2.5">
+            <li><a href="/servicios/webs" class="text-ink-200 hover:text-coral transition-colors">Webs</a></li>
+            <li><a href="/servicios/apps" class="text-ink-200 hover:text-coral transition-colors">Apps móviles</a></li>
+            <li><a href="/servicios/ecosistema" class="text-ink-200 hover:text-coral transition-colors">Ecosistema</a></li>
+            <li><a href="/servicios/hot-fixes" class="text-ink-200 hover:text-coral transition-colors">Hot fixes</a></li>
+            <li><a href="/servicios/ai-rescue" class="text-ink-200 hover:text-coral transition-colors">AI Rescue</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-display italic text-ink-100 mb-4 text-sm">
+            Tiger Suite
+          </h3>
+          <ul class="space-y-2.5">
+            {site.plugins.slice(0, 4).map((p) => (
+              <li>
+                <a href={`/plugins/${p.slug}`} class="text-ink-200 hover:text-coral transition-colors inline-flex items-center gap-1.5">
+                  <span class="text-xs">{p.icon}</span>
+                  <span>{p.name.replace('Tiger ', '')}</span>
+                </a>
+              </li>
+            ))}
+            <li class="pt-1">
+              <a href="/plugins" class="text-coral font-semibold hover:text-coral-300 transition-colors">
+                Ver suite completa →
               </a>
             </li>
-          ))}
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <div class="mt-12 pt-8 border-t border-sage-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-100">
-      <p>© {year} {site.name} · Hecho en {site.location}, {site.country}</p>
-      <p class="flex items-center gap-3">
-        <a href="mailto:{site.email}" class="hover:text-ink-300 transition-colors">{site.email}</a>
-        <span class="text-sage-200">·</span>
+    <div class="mt-14 pt-8 border-t border-cream-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-100">
+      <p class="font-display italic">© {year} {site.name} · Hecho en {site.location}, {site.country}</p>
+      <p class="flex items-center gap-3 flex-wrap justify-center">
+        <a href="mailto:{site.email}" class="hover:text-coral transition-colors">{site.email}</a>
+        <span class="text-ink-100/50">·</span>
+        <a href="/sitemap-index.xml" class="hover:text-coral transition-colors">Sitemap</a>
+        <span class="text-ink-100/50">·</span>
+        <a href="/llms.txt" class="hover:text-coral transition-colors">LLM-friendly</a>
+        <span class="text-ink-100/50">·</span>
         <span>Built with Astro</span>
       </p>
     </div>

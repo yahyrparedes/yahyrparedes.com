@@ -1,22 +1,38 @@
+/* Tipografía: Fraunces (serif) + Inter (sans) via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&display=swap');
 @import "tailwindcss";
 @import "./fonts.css";
 
 /* ─────────────────────────────────────────────────────────
-   Yahyr Paredes · Design tokens
-   Paleta profesional: ink, cream, sage, amber
+   Yahyr Paredes · Ali Abdaal-inspired design system
+   Paleta cálida: cream (beige), ink, coral, sky, lilac, butter
    ───────────────────────────────────────────────────────── */
 @theme {
+  /* Backgrounds: beige cálido (estilo Ali Abdaal) */
+  --color-cream: #F8F2EA;        /* background principal */
+  --color-cream-100: #F2EBE0;    /* cards */
+  --color-cream-200: #EBE3D5;    /* cards más oscuras / borders suaves */
+  --color-cream-300: #E0D6C2;    /* hover de cards */
+
+  /* Texto: negro casi puro */
   --color-ink: #1A1A1A;
-  --color-ink-100: #6B7280;
-  --color-ink-200: #4B5563;
-  --color-ink-300: #1F2937;
+  --color-ink-100: #6B6B6B;
+  --color-ink-200: #4A4A4A;
+  --color-ink-300: #2A2A2A;
 
-  --color-cream: #FAFAF7;
-  --color-cream-100: #FFFFFF;
-  --color-cream-200: #FAFAF7;
-  --color-cream-300: #F3F0E8;
+  /* Acentos vibrantes planos */
+  --color-coral: #F08060;        /* badges principales (estilo "Join 230k+") */
+  --color-coral-100: #FBE2D7;    /* hover de coral */
+  --color-coral-300: #E66B4A;    /* coral oscuro */
+  --color-sky: #A8D5E5;          /* CTAs (botones Subscribe-style) */
+  --color-sky-100: #D4EBF3;      /* hover de sky */
+  --color-sky-300: #7FB8CC;      /* sky oscuro */
+  --color-lilac: #C8B6E0;        /* detalles (blobs, swoops, acentos) */
+  --color-lilac-100: #EBE3F2;    /* lilac claro */
+  --color-butter: #F5D547;       /* highlight (badges, emphasis) */
 
-  --color-sage: #5C6B5A;
+  /* Mantenemos sage/amber como alias para retro-compatibilidad con código existente */
+  --color-sage: #475744;
   --color-sage-50: #F0F2EF;
   --color-sage-100: #DDE2D9;
   --color-sage-200: #B5BFB1;
@@ -24,17 +40,17 @@
   --color-sage-400: #5C6B5A;
   --color-sage-500: #475744;
   --color-sage-600: #364433;
-
-  --color-amber: #C8945C;
-  --color-amber-100: #F4E6D2;
+  --color-amber: #F08060;
+  --color-amber-100: #FBE2D7;
   --color-amber-200: #E8CFA8;
-  --color-amber-300: #C8945C;
-  --color-amber-400: #A77640;
+  --color-amber-300: #F08060;
+  --color-amber-400: #E66B4A;
   --color-amber-500: #8A5F2F;
 
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Tipografía: Fraunces (serif) para display, Inter para body */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", "Plus Jakarta Sans", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
@@ -53,20 +69,23 @@
     line-height: 1.6;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
     color: var(--color-ink-300);
+    font-feature-settings: "ss01", "ss02";  /* Fraunces stylistic alternates */
   }
+  h1 { font-weight: 600; letter-spacing: -0.03em; }
+  h2 { font-weight: 500; }
   a { color: inherit; text-decoration: none; }
   :focus-visible {
-    outline: 2px solid var(--color-sage);
+    outline: 2px solid var(--color-coral);
     outline-offset: 3px;
     border-radius: 4px;
   }
   ::selection {
-    background-color: var(--color-amber-200);
+    background-color: var(--color-butter);
     color: var(--color-ink);
   }
 }
@@ -80,6 +99,24 @@
   }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
+
+  /* Pill CTA estilo Ali Abdaal (rounded-full, full width opcional) */
+  .pill-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 9999px;
+    background-color: var(--color-sky);
+    color: var(--color-ink-300);
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  .pill-cta:hover {
+    background-color: var(--color-sky-300);
+    color: var(--color-cream-100);
+  }
 
   @media (prefers-reduced-motion: no-preference) {
     .fade-in-up { animation: fadeInUp 0.6s var(--ease-out-quart) both; }
