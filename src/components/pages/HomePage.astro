@@ -11,6 +11,7 @@ const selectedWork = currentLang === 'en'
         name: 'Starbucks Perú',
         tag: 'STARBUCKS PERÚ',
         tagColor: 'green',
+        image: '/images/work/starbucks-phone.png',
         title: 'Modernizing the Starbucks Rewards experience',
         body: 'New mobile experience built with Kotlin Multiplatform, Compose and SwiftUI.',
         href: '/en/experience',
@@ -19,6 +20,7 @@ const selectedWork = currentLang === 'en'
         name: 'Kwema',
         tag: 'KWEMA',
         tagColor: 'blue',
+        image: '/images/work/kwema-phone.png',
         title: 'Safety in real-time critical environments',
         body: 'Mobile platform using BLE, iBeacon and background services to protect workers when it matters most.',
         href: '/en/experience',
@@ -27,6 +29,7 @@ const selectedWork = currentLang === 'en'
         name: 'Interseguro',
         tag: 'INTERSEGURO',
         tagColor: 'orange',
+        image: '/images/work/interseguro-dash.png',
         title: 'Scaling an insurance platform to the next level',
         body: 'Migration, new features and performance improvements for one of the most critical insurance products in Peru.',
         href: '/en/experience',
@@ -37,6 +40,7 @@ const selectedWork = currentLang === 'en'
         name: 'Starbucks Perú',
         tag: 'STARBUCKS PERÚ',
         tagColor: 'green',
+        image: '/images/work/starbucks-phone.png',
         title: 'Modernizando la experiencia Starbucks Rewards',
         body: 'Nueva experiencia móvil construida con Kotlin Multiplatform, Compose y SwiftUI.',
         href: '/es/experience',
@@ -45,6 +49,7 @@ const selectedWork = currentLang === 'en'
         name: 'Kwema',
         tag: 'KWEMA',
         tagColor: 'blue',
+        image: '/images/work/kwema-phone.png',
         title: 'Seguridad en entornos críticos en tiempo real',
         body: 'Plataforma móvil que usa BLE, iBeacon y servicios en segundo plano para proteger a los trabajadores cuando más importa.',
         href: '/es/experience',
@@ -53,6 +58,7 @@ const selectedWork = currentLang === 'en'
         name: 'Interseguro',
         tag: 'INTERSEGURO',
         tagColor: 'orange',
+        image: '/images/work/interseguro-dash.png',
         title: 'Llevando una plataforma de seguros al siguiente nivel',
         body: 'Migración, nuevas funcionalidades y mejoras de rendimiento para uno de los productos de seguros más críticos de Perú.',
         href: '/es/experience',
@@ -73,9 +79,9 @@ const howSteps = [
   description={t(Astro.url, 'hero.subheadline')}
   type="profile"
 >
-  <section class="bg-hero min-h-[calc(100vh-4rem)] flex items-center relative pt-12 sm:pt-20 pb-16 sm:pb-20">
+  <section class="bg-hero py-12 sm:py-20">
     <div class="container-page w-full">
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         <div class="lg:col-span-7">
           <p class="eyebrow mb-6">{t(Astro.url, 'hero.eyebrow')}</p>
 
@@ -117,11 +123,11 @@ const howSteps = [
         </div>
 
         <div class="lg:col-span-5 relative">
-          <div class="relative aspect-[3/2] w-full max-w-md mx-auto lg:mx-0 lg:max-w-none">
+          <div class="relative aspect-[4/5] sm:aspect-[3/2] lg:aspect-[4/5] w-full max-w-md mx-auto lg:ml-auto">
             <img
               src="/images/hero-banner.png"
               alt={site.name}
-              class="relative w-full h-full object-cover rounded-2xl ring-1 ring-border"
+              class="relative w-full h-full object-cover rounded-2xl ring-1 ring-border shadow-soft"
               width="1536"
               height="1024"
               loading="eager"
@@ -142,14 +148,15 @@ const howSteps = [
   </section>
 
   <section class="border-y border-border bg-midnight-100/30 mt-8">
-    <div class="container-page py-10">
-      <p class="eyebrow text-center mb-6">{t(Astro.url, 'trust.label')}</p>
-      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-        {['Starbucks', 'Kwema', 'Interseguro', 'Urbaner', 'Atlas', 'DELOSI'].map((logo) => (
-          <span class="text-ink-200 font-display font-bold text-base sm:text-lg tracking-tight opacity-70 hover:opacity-100 transition-opacity">
-            {logo}
-          </span>
-        ))}
+    <div class="container-page py-12">
+      <p class="eyebrow text-center mb-8">{t(Astro.url, 'trust.label')}</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-8 sm:gap-x-12 gap-y-6">
+        <img src="/images/logos/starbucks.png"   alt="Starbucks Perú"   class="h-10 sm:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+        <img src="/images/logos/kwema.png"       alt="Kwema"            class="h-10 sm:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+        <img src="/images/logos/interseguro.png" alt="Interseguro"      class="h-10 sm:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+        <img src="/images/logos/urbaner.png"     alt="Urbaner"          class="h-10 sm:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+        <img src="/images/logos/atlas.png"       alt="Atlas Tech"       class="h-10 sm:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+        <img src="/images/logos/delosi.png"      alt="DELOSI"           class="h-10 sm:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity" />
       </div>
     </div>
   </section>
@@ -190,10 +197,13 @@ const howSteps = [
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
       {selectedWork.map((work) => (
         <a href={work.href} class="card overflow-hidden group flex flex-col hover:border-blue-200/50 transition-colors">
-          <div class={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${work.tagColor === 'green' ? 'from-green/20 via-midnight-200 to-midnight-100' : work.tagColor === 'blue' ? 'from-blue-200/20 via-midnight-200 to-midnight-100' : 'from-orange/20 via-midnight-200 to-midnight-100'}`}>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-3xl font-display font-bold text-ink-200/40 uppercase tracking-wider">{work.name}</span>
-            </div>
+          <div class="relative aspect-[4/3] overflow-hidden bg-midnight-200 flex items-center justify-center p-6">
+            <img
+              src={work.image}
+              alt={work.name}
+              class="max-h-full max-w-full object-contain drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
           </div>
           <div class="p-6 flex-1 flex flex-col">
             <p class={`text-xs font-semibold uppercase tracking-wider mb-3 ${work.tagColor === 'green' ? 'text-green' : work.tagColor === 'blue' ? 'text-blue-200' : 'text-orange'}`}>{work.tag}</p>

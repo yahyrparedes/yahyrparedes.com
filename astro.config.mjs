@@ -12,11 +12,12 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: { format: 'directory' },
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'es',
     locales: ['es', 'en'],
     routing: {
       prefixDefaultLocale: true, // /es/ y /en/, no /about
-      redirectToDefaultLocale: true,
+      // redirectToDefaultLocale: false → mi src/pages/index.astro hace el redirect con detección de navegador
+      redirectToDefaultLocale: false,
     },
   },
   integrations: [
