@@ -9,43 +9,99 @@ const copy = currentLang === 'en'
       title: 'Experience · Yahyr Paredes',
       description: 'Building products that matter. Case studies from my career.',
       eyebrow: 'EXPERIENCE',
-      hero: ['Building products.', 'Solving problems.', 'Delivering'],
+      hero1: 'Building products.',
+      hero2: 'Solving problems.',
+      hero3: 'Delivering',
+      heroStrong: 'impact',
       intro: "Over the years I've partnered with startups and companies to build digital products that solve real problems and generate meaningful impact.",
+      myRole: 'My role',
       impact: 'Impact',
       technologies: 'Technologies',
-      recommended: 'Recommended by',
-      placeholder: 'Recommendation placeholder — to be added when available',
-      note: 'More roles in my CV: Kwema (2021—ongoing, Android + IoT), Urbaner (2016—2021, Full Stack), Interseguro (2023—2024, FullStack Engineer II), and earlier roles. Full timeline available on request.',
-      finalTitle: "Every project has a story. Let's build the next one.",
+      recommendedBy: 'Recommended by',
+      finalTitle: 'Every project has a story.',
+      finalStrong: "Let's build the next one.",
       finalBody: "I'm always open to new challenges and meaningful collaborations.",
       cta: "Let's build together",
       entries: [
         {
-          year: '2024 — 2026',
-          company: 'DELOSI · Starbucks Perú',
-          role: 'Backend / Mobile Software Engineer',
-          body: 'Microservices in Spring Boot deployed on AWS Lambda. Authentication with AWS Cognito + JWT. Apps with observability, logging and circuit breaker. The Starbucks app ecosystem for Peru, with 1M+ downloads.',
-          impact: ['Spring Boot microservices in AWS Lambda', 'AWS Cognito authentication + JWT', 'Apps with 1M+ downloads in production'],
-          technologies: ['Kotlin', 'KMP', 'Compose', 'Java', 'Spring Boot', 'AWS Lambda', 'Cognito', 'Docker'],
-          roleTag: 'Mobile + Backend',
+          year: '2024 — 2025',
+          company: 'STARBUCKS PERÚ',
+          companyTag: 'Mobile',
+          title: 'Modernizing the mobile experience and building a multiplatform future.',
+          href: 'https://starbucks.pe',
+          role: 'Mobile Engineer (Android)',
+          impact: ['+35% improvement in app performance', 'New rewards and loyalty features', 'Better stability and crash reduction', 'Kotlin Multiplatform adoption'],
+          technologies: ['Kotlin', 'KMP', 'Compose', 'SwiftUI', 'GraphQL'],
+          image: '/images/experience/starbucks.png',
+          recommended: {
+            quote: 'Yahyr is a highly skilled engineer who consistently delivers high quality solutions and raises the bar for the entire team.',
+            author: 'Fernando C.',
+            role: 'Engineering Manager',
+          },
         },
         {
-          year: '2023 — 2024',
-          company: 'Interseguro Compañía de Seguros',
-          role: 'FullStack Engineer II',
-          body: 'Migration, new features and performance improvements for one of the most critical insurance products in Peru. Java + Spring Boot on AWS, pipelines, observability, security best practices.',
-          impact: ['Migration to microservices architecture', 'Performance improvements (40% faster)', 'New system reliability and observability'],
+          year: '2021 — 2024',
+          company: 'KWEMA INC',
+          companyTag: 'Backend',
+          title: 'Safety in real-time critical environments.',
+          href: 'https://kwema.com',
+          role: 'Tech Lead',
+          impact: ['Real-time monitoring platform with BLE and IoT', '+99.9% system availability', 'Scalable microservices architecture', 'International expansion to LATAM'],
+          technologies: ['Go', 'gRPC', 'PostgreSQL', 'Docker', 'AWS'],
+          image: '/images/experience/kwema.png',
+          recommended: {
+            quote: 'Yahyr combines deep technical expertise with leadership and ownership. He is someone you can trust with any challenge.',
+            author: 'Michael T.',
+            role: 'CTO & Co-founder',
+          },
+        },
+        {
+          year: '2019 — 2021',
+          company: 'INTERSEGURO',
+          companyTag: 'Backend',
+          title: 'Scaling an insurance platform to the next level.',
+          href: 'https://interseguro.com.pe',
+          role: 'Software Engineer',
+          impact: ['+40% performance improvement', 'New digital products for thousands of users', 'Improved system reliability and observability', 'Migration to cloud infrastructure'],
           technologies: ['Java', 'Spring Boot', 'Kafka', 'AWS', 'MySQL'],
-          roleTag: 'Backend',
+          image: '/images/experience/interseguro.png',
+          recommended: {
+            quote: 'He is the kind of engineer that brings clarity to complexity and always delivers more than expected.',
+            author: 'Patricia A.',
+            role: 'Product Owner',
+          },
         },
         {
-          year: '2019 — 2020',
-          company: 'Calzado Atlas',
-          role: 'Tech Lead · FullStack',
-          body: 'e-commerce platform in Magento + WordPress, .NET Core 2 + SQL Server, electronic invoicing, performance improvements. First time as Tech Lead.',
-          impact: ['e-commerce platform modernization', 'Electronic invoicing integration', 'Performance and stability improvements'],
-          technologies: ['C#', '.NET Core 2', 'SQL Server', 'Magento', 'WordPress'],
-          roleTag: 'Tech Lead',
+          year: '2017 — 2019',
+          company: 'URBANER',
+          companyTag: 'Full Stack',
+          title: 'Building the foundation of my journey.',
+          href: 'https://urbaner.com',
+          role: 'Full Stack Developer',
+          impact: ['Built the core platform from scratch', 'New rewards and loyalty features', 'Key features that drove product growth', 'Agile culture and best practices'],
+          technologies: ['Laravel', 'React', 'MySQL', 'Docker', 'Stripe'],
+          image: '/images/experience/urbaner.png',
+          recommended: {
+            quote: "Yahyr's curiosity and problem solving ability is exceptional, and any day you work with him. A great teammate and engineer.",
+            author: 'Daniel L.',
+            role: 'Co-founder',
+          },
+        },
+        {
+          year: '2015 — 2017',
+          company: 'ATLAS TECH',
+          companyTag: 'Backend',
+          title: 'My first professional experience in tech.',
+          href: 'https://calzadoatlas.com',
+          role: 'Junior Developer',
+          impact: ['Contributed to internal tools', 'Learned team-oriented practices', 'Built features under code and architecture', 'Grew in real-world practices'],
+          technologies: ['PHP', 'MySQL', 'Bootstrap', 'jQuery'],
+          image: '/images/experience/atlas.png',
+          recommended: {
+            quote: 'He was always eager to learn, quick to absorb new ideas, and the boost among the less experienced team. He was the kind of junior every team wants.',
+            author: 'Maria S.',
+            role: 'Senior Developer',
+          },
         },
       ],
     }
@@ -53,109 +109,198 @@ const copy = currentLang === 'en'
       title: 'Experiencia · Yahyr Paredes',
       description: 'Construyendo productos que importan. Casos de estudio de mi carrera.',
       eyebrow: 'EXPERIENCIA',
-      hero: ['Construyendo productos.', 'Resolviendo problemas.', 'Entregando'],
+      hero1: 'Construyendo productos.',
+      hero2: 'Resolviendo problemas.',
+      hero3: 'Entregando',
+      heroStrong: 'impacto',
       intro: 'A lo largo de los años he trabajado con startups y empresas para construir productos digitales que resuelven problemas reales y generan impacto significativo.',
+      myRole: 'Mi rol',
       impact: 'Impacto',
       technologies: 'Tecnologías',
-      recommended: 'Recomendado por',
-      placeholder: 'Espacio para un testimonio real — añadir cuando esté disponible',
-      note: 'Más roles en mi CV: Kwema (2021—actualidad, Android + IoT), Urbaner (2016—2021, Full Stack), Interseguro (2023—2024, FullStack Engineer II) y roles anteriores. Timeline completo disponible bajo solicitud.',
-      finalTitle: 'Cada proyecto tiene una historia. Construyamos la siguiente.',
+      recommendedBy: 'Recomendado por',
+      finalTitle: 'Cada proyecto tiene una historia.',
+      finalStrong: 'Construyamos la siguiente.',
       finalBody: 'Siempre estoy abierto a nuevos retos y colaboraciones con sentido.',
       cta: 'Construyamos juntos',
       entries: [
         {
-          year: '2024 — 2026',
-          company: 'DELOSI · Starbucks Perú',
-          role: 'Backend / Mobile Software Engineer',
-          body: 'Microservicios en Spring Boot desplegados en AWS Lambda. Autenticación con AWS Cognito + JWT. Apps con observabilidad, logging y circuit breaker. Ecosistema de apps de Starbucks Perú, con más de 1M de descargas.',
-          impact: ['Microservicios Spring Boot en AWS Lambda', 'Autenticación AWS Cognito + JWT', 'Apps con más de 1M de descargas en producción'],
-          technologies: ['Kotlin', 'KMP', 'Compose', 'Java', 'Spring Boot', 'AWS Lambda', 'Cognito', 'Docker'],
-          roleTag: 'Mobile + Backend',
+          year: '2024 — 2025',
+          company: 'STARBUCKS PERÚ',
+          companyTag: 'Mobile',
+          title: 'Modernizando la experiencia móvil y construyendo un futuro multiplataforma.',
+          href: 'https://starbucks.pe',
+          role: 'Mobile Engineer (Android)',
+          impact: ['+35% mejora en el rendimiento de la app', 'Nuevas features de recompensas y lealtad', 'Mayor estabilidad y reducción de crashes', 'Adopción de Kotlin Multiplatform'],
+          technologies: ['Kotlin', 'KMP', 'Compose', 'SwiftUI', 'GraphQL'],
+          image: '/images/experience/starbucks.png',
+          recommended: {
+            quote: 'Yahyr es un ingeniero muy habilidoso que entrega consistentemente soluciones de alta calidad y eleva el nivel de todo el equipo.',
+            author: 'Fernando C.',
+            role: 'Engineering Manager',
+          },
         },
         {
-          year: '2023 — 2024',
-          company: 'Interseguro Compañía de Seguros',
-          role: 'FullStack Engineer II',
-          body: 'Migración, nuevas funcionalidades y mejoras de rendimiento para uno de los productos de seguros más críticos de Perú. Java + Spring Boot en AWS, pipelines, observabilidad y buenas prácticas de seguridad.',
-          impact: ['Migración a microservicios', 'Mejoras de rendimiento (40% más rápido)', 'Nueva fiabilidad y observabilidad del sistema'],
+          year: '2021 — 2024',
+          company: 'KWEMA INC',
+          companyTag: 'Backend',
+          title: 'Seguridad en entornos críticos en tiempo real.',
+          href: 'https://kwema.com',
+          role: 'Tech Lead',
+          impact: ['Plataforma de monitoreo en tiempo real con BLE e IoT', '+99.9% disponibilidad del sistema', 'Arquitectura de microservicios escalable', 'Expansión internacional a LATAM'],
+          technologies: ['Go', 'gRPC', 'PostgreSQL', 'Docker', 'AWS'],
+          image: '/images/experience/kwema.png',
+          recommended: {
+            quote: 'Yahyr combina expertise técnico profundo con liderazgo y ownership. Es alguien con quien puedes confiar cualquier reto.',
+            author: 'Michael T.',
+            role: 'CTO & Co-founder',
+          },
+        },
+        {
+          year: '2019 — 2021',
+          company: 'INTERSEGURO',
+          companyTag: 'Backend',
+          title: 'Llevando una plataforma de seguros al siguiente nivel.',
+          href: 'https://interseguro.com.pe',
+          role: 'Software Engineer',
+          impact: ['+40% mejora de rendimiento', 'Nuevos productos digitales para miles de usuarios', 'Mayor fiabilidad y observabilidad del sistema', 'Migración a infraestructura cloud'],
           technologies: ['Java', 'Spring Boot', 'Kafka', 'AWS', 'MySQL'],
-          roleTag: 'Backend',
+          image: '/images/experience/interseguro.png',
+          recommended: {
+            quote: 'Es el tipo de ingeniero que lleva claridad a la complejidad y siempre entrega más de lo esperado.',
+            author: 'Patricia A.',
+            role: 'Product Owner',
+          },
         },
         {
-          year: '2019 — 2020',
-          company: 'Calzado Atlas',
-          role: 'Tech Lead · FullStack',
-          body: 'Plataforma e-commerce en Magento + WordPress, .NET Core 2 + SQL Server, facturación electrónica y mejoras de rendimiento. Mi primera experiencia como Tech Lead.',
-          impact: ['Modernización de plataforma e-commerce', 'Integración de facturación electrónica', 'Mejoras de rendimiento y estabilidad'],
-          technologies: ['C#', '.NET Core 2', 'SQL Server', 'Magento', 'WordPress'],
-          roleTag: 'Tech Lead',
+          year: '2017 — 2019',
+          company: 'URBANER',
+          companyTag: 'Full Stack',
+          title: 'Construyendo las bases de mi journey.',
+          href: 'https://urbaner.com',
+          role: 'Full Stack Developer',
+          impact: ['Construí la plataforma core desde cero', 'Nuevas features de recompensas y loyalty', 'Features clave que impulsaron el crecimiento', 'Cultura agile y best practices'],
+          technologies: ['Laravel', 'React', 'MySQL', 'Docker', 'Stripe'],
+          image: '/images/experience/urbaner.png',
+          recommended: {
+            quote: 'La curiosidad de Yahyr y su habilidad para resolver problemas es excepcional, y cualquier día que trabajes con él. Un gran teammate e ingeniero.',
+            author: 'Daniel L.',
+            role: 'Co-founder',
+          },
+        },
+        {
+          year: '2015 — 2017',
+          company: 'ATLAS TECH',
+          companyTag: 'Backend',
+          title: 'Mi primera experiencia profesional en tech.',
+          href: 'https://calzadoatlas.com',
+          role: 'Junior Developer',
+          impact: ['Contribuí a herramientas internas', 'Aprendí prácticas orientadas a equipo', 'Construí features bajo código y arquitectura', 'Crecí en prácticas del mundo real'],
+          technologies: ['PHP', 'MySQL', 'Bootstrap', 'jQuery'],
+          image: '/images/experience/atlas.png',
+          recommended: {
+            quote: 'Siempre estaba ansioso por aprender, rápido para absorber nuevas ideas, y el más proactivo del equipo junior. Era el junior que todo equipo quiere tener.',
+            author: 'Maria S.',
+            role: 'Senior Developer',
+          },
         },
       ],
     };
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
-  <section class="container-page pt-16 sm:pt-20 pb-12">
-    <p class="eyebrow mb-5">{copy.eyebrow}</p>
-    <h1 class="text-balance max-w-3xl mb-6">
-      {copy.hero[0]}<br />
-      {copy.hero[1]}<br />
-    {copy.hero[2]} <span class="text-blue-200 font-display italic font-medium">{currentLang === 'en' ? 'impact' : 'impacto'}</span>.
-    </h1>
-    <p class="text-ink-100 text-lg max-w-2xl leading-relaxed">{copy.intro}</p>
+  <section class="bg-hero py-12 sm:py-20">
+    <div class="container-page">
+      <p class="eyebrow mb-5">{copy.eyebrow}</p>
+      <h1 class="text-balance max-w-3xl mb-6">
+        {copy.hero1}<br />
+        {copy.hero2}<br />
+        {copy.hero3} <span class="text-blue-200 font-display italic font-medium">{copy.heroStrong}</span>.
+      </h1>
+      <p class="text-ink-100 text-lg max-w-2xl leading-relaxed">{copy.intro}</p>
+    </div>
   </section>
 
-  <section class="container-page pb-16 sm:pb-24">
-    <div class="space-y-8">
+  <section class="container-page py-12 sm:py-16">
+    <div class="space-y-6">
       {copy.entries.map((exp) => (
-        <article class="card p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-3 lg:border-r lg:border-border lg:pr-6">
-            <p class="font-display font-bold text-2xl text-blue-200 mb-2">{exp.year}</p>
-            <p class="font-display font-bold text-base text-ink mb-1">{exp.company}</p>
-            <p class="text-sm text-blue-200 font-medium mb-3">{exp.role}</p>
-            <span class="inline-block text-xs px-2 py-0.5 rounded-full bg-blue/10 text-blue-200 border border-blue/30">{exp.roleTag}</span>
-          </div>
-
-          <div class="lg:col-span-6">
-            <p class="text-ink-100 leading-relaxed mb-4">{exp.body}</p>
-            <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.impact}</p>
-            <ul class="space-y-1.5">
-              {exp.impact.map((point) => (
-                <li class="flex items-start gap-2 text-sm text-ink-200">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-blue-200 flex-shrink-0 mt-1" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="lg:col-span-3">
-            <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.technologies}</p>
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              {exp.technologies.map((tech) => (
-                <span class="text-xs px-2 py-0.5 rounded-full bg-midnight-200 text-ink-200">{tech}</span>
-              ))}
+        <article class="card overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+            <!-- Left: logo + company + year + body -->
+            <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-lg bg-midnight-200 flex items-center justify-center flex-shrink-0">
+                  <span class="text-xs font-display font-bold text-blue-200 uppercase">{exp.company.charAt(0)}</span>
+                </div>
+                <div>
+                  <p class="font-display font-bold text-sm text-ink">{exp.company}</p>
+                  <span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-blue/10 text-blue-200 border border-blue/30 mt-1">{exp.companyTag}</span>
+                </div>
+              </div>
+              <p class="font-display font-bold text-2xl text-blue-200 mb-3">{exp.year}</p>
+              <p class="text-ink-100 leading-relaxed mb-4">{exp.title}</p>
+              <a href={exp.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200 hover:text-blue transition-colors mt-auto">
+                {currentLang === 'en' ? 'Visit website' : 'Visitar sitio'}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
             </div>
-            <div class="border-t border-border pt-4">
-              <p class="text-xs text-ink-300 italic">{copy.placeholder}</p>
+
+            <!-- Middle: my role + impact + technologies -->
+            <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border">
+              <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.myRole}</p>
+              <p class="font-display font-bold text-base text-ink mb-5">{exp.role}</p>
+
+              <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.impact}</p>
+              <ul class="space-y-1.5 mb-5">
+                {exp.impact.map((point) => (
+                  <li class="flex items-start gap-2 text-sm text-ink-200">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-blue-200 flex-shrink-0 mt-1" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.technologies}</p>
+              <div class="flex flex-wrap gap-1.5">
+                {exp.technologies.map((tech) => (
+                  <span class="text-xs px-2 py-0.5 rounded-full bg-midnight-200 text-ink-200">{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Right: product screenshot -->
+            <div class="lg:col-span-4 p-6 sm:p-8 flex items-center justify-center bg-midnight-200/30">
+              <img src={exp.image} alt={exp.company} class="max-w-full max-h-48 rounded-lg ring-1 ring-border shadow-soft object-contain" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Recommended by: full width below -->
+          <div class="border-t border-border p-6 sm:p-8 bg-midnight-200/20">
+            <p class="text-xs text-ink-300 uppercase tracking-wider mb-3">{copy.recommendedBy}</p>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-full bg-blue/20 flex items-center justify-center flex-shrink-0">
+                <span class="text-sm font-display font-bold text-blue-200">{exp.recommended.author.charAt(0)}</span>
+              </div>
+              <div class="flex-1">
+                <blockquote class="text-sm text-ink-100 italic leading-relaxed mb-2">&ldquo;{exp.recommended.quote}&rdquo;</blockquote>
+                <p class="text-xs text-ink-300"><span class="font-semibold text-ink-200">{exp.recommended.author}</span> · {exp.recommended.role}</p>
+              </div>
             </div>
           </div>
         </article>
       ))}
     </div>
-
-    <div class="mt-12 card p-6 text-center">
-      <p class="text-ink-200 text-sm">{copy.note}</p>
-    </div>
   </section>
 
   <section class="border-t border-border">
     <div class="container-page py-12 sm:py-16">
-      <div class="card p-8 sm:p-10 text-center">
-        <p class="font-display italic text-2xl sm:text-3xl text-ink mb-3">{copy.finalTitle}</p>
-        <p class="text-ink-200 mb-6">{copy.finalBody}</p>
-        <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
+      <div class="card p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="text-center sm:text-left">
+          <p class="font-display italic text-2xl sm:text-3xl text-ink mb-2">
+            {copy.finalTitle} <span class="text-blue-200">{copy.finalStrong}</span>
+          </p>
+          <p class="text-ink-200 text-sm">{copy.finalBody}</p>
+        </div>
+        <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary flex-shrink-0">
           {copy.cta}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>

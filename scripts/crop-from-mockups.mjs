@@ -1,16 +1,19 @@
 #!/usr/bin/env node
 /**
- * Recorta imágenes de los mockups de Mavila (img_desing/Home.png 1024x1536).
+ * Recorta imágenes de los mockups de Mavila (img_desing/*.png 1024x1536).
  */
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
 
 const SRC = 'img_desing/Home.png';
+const SRC_WORK = 'img_desing/Work.png';
 const OUT_LOGOS = 'public/images/logos';
 const OUT_WORK = 'public/images/work';
+const OUT_EXPERIENCE = 'public/images/experience';
 
 await mkdir(OUT_LOGOS, { recursive: true });
 await mkdir(OUT_WORK, { recursive: true });
+await mkdir(OUT_EXPERIENCE, { recursive: true });
 
 async function removeDarkBackground(inputBuffer) {
   const img = sharp(inputBuffer);
@@ -54,6 +57,25 @@ const work = [
 for (const w of work) {
   await sharp(SRC).extract({ left: w.left, top: w.top, width: w.width, height: w.height }).png().toFile(`${OUT_WORK}/${w.name}`);
   console.log(`✓ work/${w.name}`);
+}
+
+// ── EXPERIENCE SCREENSHOTS (Work.png) ──────────────────
+// 5 case studies, screenshots de los productos
+// Card 1 (Starbucks phones): x=580-810, y=420-580
+// Card 2 (Kwema dashboard): x=580-810, y=655-815
+// Card 3 (Interseguro dashboard): x=580-810, y=890-1050
+// Card 4 (Urbaner map): x=580-810, y=1125-1285
+// Card 5 (Atlas code): x=580-810, y=1360-1520
+const experience = [
+  { name: 'starbucks.png',  left: 580, top: 420,  width: 230, height: 160 },
+  { name: 'kwema.png',      left: 580, top: 655,  width: 230, height: 160 },
+  { name: 'interseguro.png', left: 580, top: 890,  width: 230, height: 160 },
+  { name: 'urbaner.png',    left: 580, top: 1125, width: 230, height: 160 },
+  { name: 'atlas.png',      left: 580, top: 1360, width: 230, height: 160 },
+];
+for (const e of experience) {
+  await sharp(SRC_WORK).extract({ left: e.left, top: e.top, width: e.width, height: e.height }).png().toFile(`${OUT_EXPERIENCE}/${e.name}`);
+  console.log(`✓ experience/${e.name}`);
 }
 
 console.log('\nHecho.');

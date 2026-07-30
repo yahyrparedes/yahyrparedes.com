@@ -10,7 +10,6 @@ const copy = currentLang === 'en'
       eyebrow: 'SERVICES',
       titleStart: 'How I can help build',
       titleStrong: 'your product',
-      titleEnd: '.',
       subheadline: 'From idea to scale and beyond. I partner with startups and companies to design, build and evolve digital products that create real impact.',
       tagMindset: 'Product mindset',
       tagArchitecture: 'Clean architecture',
@@ -18,8 +17,6 @@ const copy = currentLang === 'en'
       waysLabel: 'FIVE WAYS I CAN HELP',
       waysTitle: 'Solutions for every stage of your product journey.',
       viewDetails: 'View details',
-      fromChaos: 'FROM CHAOS',
-      toImpact: 'TO IMPACT',
       ctaTitle: 'Have a project in mind?',
       ctaBody: "Let's build something great together.",
       seeWork: 'See how I work',
@@ -28,6 +25,7 @@ const copy = currentLang === 'en'
         {
           slug: 'webs',
           num: '01',
+          icon: 'code',
           title: 'High-performance Web Applications',
           body: 'Web applications built for speed, scalability and great user experience. Modern stacks, clean code and best practices.',
           bullets: ['Next.js, React, TypeScript', 'Server-side rendering & ISR', 'Performance optimization', 'Scalable architectures', 'SEO & Core Web Vitals'],
@@ -35,6 +33,7 @@ const copy = currentLang === 'en'
         {
           slug: 'apps',
           num: '02',
+          icon: 'mobile',
           title: 'Native & Hybrid Mobile Apps',
           body: 'Mobile experiences that users love. Native or cross-platform, built with performance and quality in mind.',
           bullets: ['Android (Kotlin, Compose)', 'iOS (Swift, SwiftUI)', 'Flutter & KMP', 'Offline-first', 'Push & real-time'],
@@ -42,6 +41,7 @@ const copy = currentLang === 'en'
         {
           slug: 'ecosistema',
           num: '03',
+          icon: 'cube',
           title: 'End-to-End Product Ecosystem',
           body: 'I design and build the whole ecosystem: apps, backend, cloud infrastructure and integrations.',
           bullets: ['Backend & APIs', 'Cloud & DevOps', 'Databases & Storage', 'Integrations & 3rd parties', 'Security & Observability'],
@@ -49,6 +49,7 @@ const copy = currentLang === 'en'
         {
           slug: 'hot-fixes',
           num: '04',
+          icon: 'wrench',
           title: 'Hot Fixes & Improvements',
           body: 'Quick, effective solutions to fix issues, improve performance and enhance existing features.',
           bullets: ['Bug fixing', 'Performance tuning', 'Code refactoring', 'New features', 'Technical debt reduction'],
@@ -56,6 +57,7 @@ const copy = currentLang === 'en'
         {
           slug: 'ai-rescue',
           num: '05',
+          icon: 'sparkles',
           title: 'Project Rescue & AI / Vibe Coding',
           body: 'Rescue projects stuck or at risk. I leverage AI and modern workflows to move fast and deliver results.',
           bullets: ['Project audit', 'Architecture redesign', 'AI-assisted development', 'Rapid delivery', 'Team enablement'],
@@ -67,7 +69,6 @@ const copy = currentLang === 'en'
       eyebrow: 'SERVICIOS',
       titleStart: 'Cómo puedo ayudarte a construir',
       titleStrong: 'tu producto',
-      titleEnd: '.',
       subheadline: 'De la idea al crecimiento y más allá. Me asocio con startups y empresas para diseñar, construir y evolucionar productos digitales que generen impacto real.',
       tagMindset: 'Mentalidad de producto',
       tagArchitecture: 'Arquitectura limpia',
@@ -75,8 +76,6 @@ const copy = currentLang === 'en'
       waysLabel: 'CINCO FORMAS EN LAS QUE PUEDO AYUDAR',
       waysTitle: 'Soluciones para cada etapa del viaje de tu producto.',
       viewDetails: 'Ver detalles',
-      fromChaos: 'DEL CAOS',
-      toImpact: 'AL IMPACTO',
       ctaTitle: '¿Tienes un proyecto en mente?',
       ctaBody: 'Construyamos algo grande juntos.',
       seeWork: 'Ver cómo trabajo',
@@ -85,13 +84,15 @@ const copy = currentLang === 'en'
         {
           slug: 'webs',
           num: '01',
-          title: 'Aplicaciones web de alto rendimiento',
+          icon: 'code',
+          title: 'Webs de alto rendimiento',
           body: 'Aplicaciones web construidas para velocidad, escalabilidad y una gran experiencia de usuario. Stacks modernos, código limpio y buenas prácticas.',
           bullets: ['Next.js, React, TypeScript', 'Renderizado del lado del servidor e ISR', 'Optimización de rendimiento', 'Arquitecturas escalables', 'SEO y Core Web Vitals'],
         },
         {
           slug: 'apps',
           num: '02',
+          icon: 'mobile',
           title: 'Apps móviles nativas e híbridas',
           body: 'Experiencias móviles que a los usuarios les encantan. Nativas o multiplataforma, construidas pensando en rendimiento y calidad.',
           bullets: ['Android (Kotlin, Compose)', 'iOS (Swift, SwiftUI)', 'Flutter y KMP', 'Offline-first', 'Push y tiempo real'],
@@ -99,6 +100,7 @@ const copy = currentLang === 'en'
         {
           slug: 'ecosistema',
           num: '03',
+          icon: 'cube',
           title: 'Ecosistema completo de producto',
           body: 'Diseño y construyo todo el ecosistema: apps, backend, infraestructura cloud e integraciones.',
           bullets: ['Backend y APIs', 'Cloud y DevOps', 'Bases de datos y almacenamiento', 'Integraciones y terceros', 'Seguridad y observabilidad'],
@@ -106,6 +108,7 @@ const copy = currentLang === 'en'
         {
           slug: 'hot-fixes',
           num: '04',
+          icon: 'wrench',
           title: 'Hot fixes y mejoras',
           body: 'Soluciones rápidas y efectivas para corregir problemas, mejorar rendimiento y potenciar funcionalidades existentes.',
           bullets: ['Corrección de bugs', 'Ajuste de rendimiento', 'Refactorización de código', 'Nuevas funcionalidades', 'Reducción de deuda técnica'],
@@ -113,57 +116,133 @@ const copy = currentLang === 'en'
         {
           slug: 'ai-rescue',
           num: '05',
+          icon: 'sparkles',
           title: 'Rescate de proyectos IA / Vibe Coding',
           body: 'Rescato proyectos estancados o en riesgo. Aprovecho la IA y flujos de trabajo modernos para avanzar rápido y entregar resultados.',
           bullets: ['Auditoría del proyecto', 'Rediseño de arquitectura', 'Desarrollo asistido por IA', 'Entrega rápida', 'Habilitación del equipo'],
         },
       ],
     };
+
+// SVG paths para cada icono (se renderizan inline en el template)
+const iconPaths: Record<string, string> = {
+  code: '<path d="M8 9l-3 3 3 3"/><path d="M16 9l3 3-3 3"/><path d="M14 5l-4 14"/>',
+  mobile: '<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/>',
+  cube: '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 18l9 5 9-5"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 00-5.4 5.4l-6 6a2 2 0 102.8 2.8l6-6a4 4 0 005.4-5.4l-2.5 2.5-2.8-2.8z"/>',
+  sparkles: '<path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 14l.8 2.4L22 17l-2.2.6L19 20l-.8-2.4L16 17l2.2-.6z"/>',
+};
 ---
 
 <BaseLayout title={`${copy.eyebrow} · Yahyr Paredes`} description={copy.subheadline}>
-  <article class="container-page py-12 sm:py-16 max-w-6xl">
-    <header class="text-center mb-12 max-w-3xl mx-auto">
-      <p class="eyebrow mb-3">{copy.eyebrow}</p>
-      <h1 class="text-balance">
-        {copy.titleStart}{' '}
-        <span class="text-blue-200 font-display italic font-medium">{copy.titleStrong}</span>
-        {copy.titleEnd}
-      </h1>
-      <p class="mt-4 text-lg text-ink-200 text-pretty">{copy.subheadline}</p>
-    </header>
+  <article>
+    <!-- HERO -->
+    <section class="bg-hero py-12 sm:py-20">
+      <div class="container-page grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <p class="eyebrow mb-5">{copy.eyebrow}</p>
+          <h1 class="text-balance mb-6">
+            {copy.titleStart}{' '}
+            <span class="text-blue-200 font-display italic font-medium">{copy.titleStrong}</span>.
+          </h1>
+          <p class="text-ink-100 text-lg max-w-2xl leading-relaxed mb-8">{copy.subheadline}</p>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-      {copy.services.map((s) => (
-        <a href={currentLang === 'en' ? `/en/services/${s.slug}` : `/es/servicios/${s.slug}`} class="group card p-6 sm:p-8 flex flex-col">
-          <div class="w-14 h-14 rounded-2xl bg-blue/10 border border-blue/20 flex items-center justify-center mb-5 group-hover:bg-blue/20 transition-colors">
-            <span class="text-blue-200 font-display font-bold">{s.num}</span>
+          <!-- Pills de capabilities -->
+          <div class="flex flex-wrap gap-x-6 gap-y-3">
+            <span class="inline-flex items-center gap-2 text-sm text-ink-200">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/></svg>
+              {copy.tagMindset}
+            </span>
+            <span class="inline-flex items-center gap-2 text-sm text-ink-200">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              {copy.tagArchitecture}
+            </span>
+            <span class="inline-flex items-center gap-2 text-sm text-ink-200">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+              {copy.tagResults}
+            </span>
           </div>
-          <h2 class="font-display font-bold text-lg text-ink mb-2">{s.title}</h2>
-          <p class="text-sm text-ink-200 leading-relaxed flex-1">{s.body}</p>
-          <p class="mt-5 text-sm font-semibold text-blue-200 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1.5">
-            {copy.viewDetails}
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </p>
-        </a>
-      ))}
-    </div>
+        </div>
 
-    <div class="mt-16 card p-8 sm:p-12 text-center relative overflow-hidden">
-      <div class="absolute inset-0 -z-10">
-        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-blue/10 blur-3xl"></div>
+        <div class="lg:col-span-5">
+          <div class="relative aspect-[4/3] w-full max-w-md mx-auto lg:ml-auto">
+            <img src="/images/personal-2.png" alt="Code on screen" class="relative w-full h-full object-cover rounded-2xl ring-1 ring-border shadow-soft" loading="eager" />
+          </div>
+        </div>
       </div>
-      <h2 class="text-2xl sm:text-3xl text-balance">{copy.ctaTitle}</h2>
-      <p class="mt-3 text-ink-200 max-w-xl mx-auto">{copy.ctaBody}</p>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <a href={currentLang === 'en' ? '/en/experience' : '/es/experience'} class="text-sm font-semibold text-blue-200 hover:text-blue transition-colors">
-          {copy.seeWork} →
-        </a>
-        <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
-          {copy.letsTalk}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+    </section>
+
+    <!-- FIVE WAYS I CAN HELP -->
+    <section class="container-page py-12 sm:py-16">
+      <div class="text-center mb-12">
+        <p class="eyebrow mb-2">{copy.waysLabel}</p>
+        <h2 class="text-balance max-w-2xl mx-auto">{copy.waysTitle}</h2>
       </div>
-    </div>
+
+      <div class="space-y-4">
+        {copy.services.map((s) => (
+          <article class="card overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+              <!-- Left: num + icon + title + body + link -->
+              <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border">
+                <div class="flex items-center gap-4 mb-4">
+                  <span class="font-display font-bold text-2xl text-blue-200">{s.num}</span>
+                  <div class="w-10 h-10 rounded-lg bg-blue/10 border border-blue/20 flex items-center justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="text-blue-200" aria-hidden="true" set:html={iconPaths[s.icon]} />
+                  </div>
+                </div>
+                <h3 class="font-display font-bold text-lg text-ink mb-3 leading-snug">{s.title}</h3>
+                <p class="text-sm text-ink-200 leading-relaxed mb-4">{s.body}</p>
+                <a href={currentLang === 'en' ? `/en/services/${s.slug}` : `/es/servicios/${s.slug}`} class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200 hover:text-blue transition-colors">
+                  {copy.viewDetails}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+
+              <!-- Middle: visual placeholder -->
+              <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border flex items-center justify-center bg-midnight-200/30 min-h-[200px]">
+                <div class="w-full max-w-[200px] aspect-video rounded-lg bg-gradient-to-br from-midnight-200 to-midnight-100 ring-1 ring-border flex items-center justify-center">
+                  <span class="text-xs font-mono text-ink-300">{s.num} visual</span>
+                </div>
+              </div>
+
+              <!-- Right: bullets -->
+              <div class="lg:col-span-4 p-6 sm:p-8">
+                <p class="text-xs text-ink-300 uppercase tracking-wider mb-3">{currentLang === 'en' ? 'Includes' : 'Incluye'}</p>
+                <ul class="space-y-2">
+                  {s.bullets.map((b) => (
+                    <li class="flex items-start gap-2 text-sm text-ink-200">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-blue-200 flex-shrink-0 mt-1" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="border-t border-border">
+      <div class="container-page py-12 sm:py-16">
+        <div class="card p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div class="text-center sm:text-left">
+            <h2 class="text-2xl sm:text-3xl text-balance">{copy.ctaTitle}</h2>
+            <p class="text-ink-200 mt-2 text-sm">{copy.ctaBody}</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 flex-shrink-0">
+            <a href={currentLang === 'en' ? '/en/experience' : '/es/experience'} class="text-sm font-semibold text-blue-200 hover:text-blue transition-colors">
+              {copy.seeWork} →
+            </a>
+            <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
+              {copy.letsTalk}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </article>
 </BaseLayout>

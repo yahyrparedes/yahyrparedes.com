@@ -43,11 +43,15 @@ const inspirations = [
         <p class="text-ink-100 text-lg sm:text-xl max-w-2xl leading-relaxed mb-6">{t(Astro.url, 'about.subheadline')}</p>
         <div class="flex flex-wrap gap-4 text-sm text-ink-200">
           <div class="flex items-center gap-2">
-            <span>📍</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
             <span>{t(Astro.url, 'about.location')}</span>
           </div>
           <div class="flex items-center gap-2">
-            <span>🌍</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+            </svg>
             <span>{t(Astro.url, 'about.remote')}</span>
           </div>
         </div>
@@ -83,12 +87,12 @@ const inspirations = [
               <div class="text-center md:text-left">
                 <p class="font-display font-bold text-2xl text-blue-200 mb-1">{t(Astro.url, 'about.journey_step1_year')}</p>
                 <p class="font-display font-bold text-base text-ink">{t(Astro.url, 'about.journey_step1_label')}</p>
-                <p class="text-xs text-ink-300 mt-1">🇵🇪 {t(Astro.url, 'about.journey_peru')}</p>
+                <p class="text-xs text-ink-300 mt-1">Perú</p>
               </div>
               <div class="text-center md:text-left">
                 <p class="font-display font-bold text-2xl text-blue-200 mb-1">{t(Astro.url, 'about.journey_step2_year')}</p>
                 <p class="font-display font-bold text-base text-ink">{t(Astro.url, 'about.journey_step2_label')}</p>
-                <p class="text-xs text-ink-300 mt-1">🇪🇸 {t(Astro.url, 'about.journey_spain')}</p>
+                <p class="text-xs text-ink-300 mt-1">España</p>
               </div>
             </div>
           </div>
@@ -157,13 +161,15 @@ const inspirations = [
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
       {inspirations.map((item) => (
         <div class="card aspect-square flex flex-col items-center justify-center p-4 group hover:border-blue/30">
-          <div class="text-3xl mb-3 text-blue-200 group-hover:text-blue transition-colors" aria-hidden="true">
-            {item.icon === 'travel' && '✈️'}
-            {item.icon === 'photography' && '📷'}
-            {item.icon === 'security' && '🔐'}
-            {item.icon === 'coffee' && '☕'}
-            {item.icon === 'family' && '👨‍👩‍👧'}
-            {item.icon === 'open_source' && '💻'}
+          <div class="w-10 h-10 mb-3 text-blue-200 group-hover:text-blue transition-colors" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              {item.icon === 'travel' && <><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></>}
+              {item.icon === 'photography' && <><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></>}
+              {item.icon === 'security' && <><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></>}
+              {item.icon === 'coffee' && <><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4z"/><path d="M6 1v3M10 1v3M14 1v3"/></>}
+              {item.icon === 'family' && <><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></>}
+              {item.icon === 'open_source' && <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>}
+            </svg>
           </div>
           <p class="font-display font-semibold text-sm text-ink text-center">{t(Astro.url, item.nameKey)}</p>
         </div>
