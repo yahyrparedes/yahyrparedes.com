@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { site } from '@data/site';
-import { productJsonLd } from '@lib/seo';
+import { site } from '@data/site.ts';
+import { productJsonLd } from '@lib/seo.ts';
 
 export async function getStaticPaths() {
   return site.plugins.map((p) => ({
@@ -24,9 +24,9 @@ const jsonLd = productJsonLd({
 
   <article class="container-page py-12 sm:py-16 max-w-4xl">
     <nav class="text-sm text-ink-100 mb-6 fade-in-up" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-ink-300">Inicio</a>
+      <a href="/es/" class="hover:text-ink-300">Inicio</a>
       <span class="mx-2">/</span>
-      <a href="/plugins" class="hover:text-ink-300">Plugins</a>
+      <a href="/es/plugins" class="hover:text-ink-300">Plugins</a>
       <span class="mx-2">/</span>
       <span class="text-ink-300">{plugin.name}</span>
     </nav>

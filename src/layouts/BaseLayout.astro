@@ -2,8 +2,9 @@
 import '@styles/global.css';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
-import { buildMeta, personJsonLd, webSiteJsonLd, type SeoMeta } from '@lib/seo';
-import { site } from '@data/site';
+import { buildMeta, personJsonLd, webSiteJsonLd, type SeoMeta } from '@lib/seo.ts';
+import { site } from '@data/site.ts';
+import { getLangFromUrl, getPathWithoutLang, getAlternateUrl } from '@i18n/ui.ts';
 
 export interface Props {
   title?: string;
@@ -44,15 +45,21 @@ const personLd = personJsonLd({
 
 const siteLd = webSiteJsonLd();
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const currentLang = getLangFromUrl(Astro.url);
+const path = getPathWithoutLang(Astro.url.pathname);
+const alternateEs = getAlternateUrl(Astro.url.pathname, 'es');
+const alternateEn = getAlternateUrl(Astro.url.pathname, 'en');
+const alternateEsUrl = new URL(alternateEs, Astro.site).toString();
+const alternateEnUrl = new URL(alternateEn, Astro.site).toString();
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={currentLang === 'en' ? 'en' : 'es'}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#5C6B5A" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#0B1220" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="format-detection" content="telephone=no" />
     {meta.noindex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -60,12 +67,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="keywords" content="Yahyr Paredes, software developer, Android, Kotlin, Java, Spring Boot, freelance, Jaén, Andalucía, plugins PrestaShop, SEO" />
+    <meta name="keywords" content="Yahyr Paredes, Product Engineer, Android, Kotlin, Java, Spring Boot, freelance, Jaén, Andalucía, plugins PrestaShop, AI Native, open source" />
     <link rel="canonical" href={canonical} />
 
-    <meta http-equiv="content-language" content="es-ES" />
-    <link rel="alternate" hreflang="es" href={canonical} />
-    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <meta http-equiv="content-language" content={currentLang === 'en' ? 'en-US' : 'es-ES'} />
+    <link rel="alternate" hreflang="es" href={alternateEsUrl} />
+    <link rel="alternate" hreflang="en" href={alternateEnUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL(getAlternateUrl(Astro.url.pathname, 'es'), Astro.site).toString()} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
@@ -77,7 +85,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta property="og:url" content={meta.fullUrl} />
     <meta property="og:image" content={meta.ogImage} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={currentLang === 'en' ? 'en_US' : 'es_ES'} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={meta.fullTitle} />
@@ -85,7 +93,30 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="twitter:image" content={meta.ogImage} />
 
     <link rel="preload" href="/fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/jakarta-variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Fonts: Space Grotesk (headings) + Inter (body) + JetBrains Mono (code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Init theme antes del primer paint para evitar FOUC -->
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          document.documentElement.classList.add('theme-' + theme);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', theme === 'light' ? '#F8FAFC' : '#0B1220');
+        } catch (e) {
+          document.documentElement.classList.add('theme-dark');
+        }
+      })();
+    </script>
 
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly content" />

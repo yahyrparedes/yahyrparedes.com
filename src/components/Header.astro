@@ -1,76 +1,92 @@
 ---
-import { site } from '@data/site';
+import { site } from '@data/site.ts';
+import { t, getLangFromUrl } from '@i18n/ui.ts';
+import LanguageToggle from './LanguageToggle.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import '@styles/global.css';
+
 const currentPath = Astro.url.pathname;
-const isActive = (path: string) => currentPath === path || currentPath.startsWith(path + '/');
+const currentLang = getLangFromUrl(Astro.url);
+const normalizePath = (value: string) => (value.endsWith('/') && value !== '/' ? value.slice(0, -1) : value);
+const isActive = (path: string) => {
+  const normalizedCurrentPath = normalizePath(currentPath);
+  const normalizedPath = normalizePath(path);
+  if (normalizedPath === '/') return normalizedCurrentPath === `/${currentLang}` || normalizedCurrentPath === '/';
+  return normalizedCurrentPath.startsWith(`/${currentLang}${normalizedPath}`) || normalizedCurrentPath === normalizedPath;
+};
+
+const navItems = [
+  { key: 'nav.home', href: currentLang === 'en' ? '/en/' : '/es/' },
+  { key: 'nav.about', href: currentLang === 'en' ? '/en/behind-the-engineer' : '/es/sobre-mi' },
+  { key: 'nav.experience', href: currentLang === 'en' ? '/en/experience' : '/es/experience' },
+  { key: 'nav.services', href: currentLang === 'en' ? '/en/services' : '/es/servicios' },
+  { key: 'nav.open_source', href: currentLang === 'en' ? '/en/open-source' : '/es/plugins' },
+  { key: 'nav.blog', href: '/blog/' },
+  { key: 'nav.contact', href: currentLang === 'en' ? '/en/contact' : '/es/contacto' },
+];
 ---
 
-<header class="sticky top-0 z-50 bg-cream/85 backdrop-blur-md border-b border-cream-200/60">
+<header class="sticky top-0 z-50 bg-midnight/95 backdrop-blur-md border-b border-blue/30 shadow-sm shadow-midnight/50">
   <div class="container-page flex items-center justify-between h-16 sm:h-18">
-    <!-- Logo serif italic estilo "Ali Abdaal" -->
-    <a href="/" class="flex items-center gap-2.5 group">
-      <span class="font-display font-medium italic text-xl sm:text-2xl text-ink-300 tracking-tight">
-        Yahyr Paredes
-      </span>
+    <!-- Logo -->
+    <a href={`/${currentLang}/`} class="flex items-center gap-2.5 group">
+      <img
+        src="/images/logo.png"
+        alt={site.name}
+        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover ring-1 ring-border group-hover:ring-blue-200 transition-all"
+        width="40"
+        height="40"
+        loading="eager"
+      />
+      <div class="hidden sm:block leading-tight">
+        <p class="font-display font-bold text-sm tracking-tight text-ink">
+          {site.name.toUpperCase()}
+        </p>
+        <p class="text-xs text-blue-200 font-medium">
+          {t(Astro.url, 'hero.eyebrow')}
+        </p>
+      </div>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-1" aria-label="Navegación principal">
-      <a
-        href="/sobre-mi"
-        class:list={[
-          'px-3.5 py-2 text-sm font-medium rounded-full transition-all',
-          isActive('/sobre-mi') ? 'text-ink-300 bg-cream-200' : 'text-ink-200 hover:text-ink-300 hover:bg-cream-200/60',
-        ]}
-      >
-        Sobre mí
-      </a>
-      <a
-        href="/perfil"
-        class:list={[
-          'px-3.5 py-2 text-sm font-medium rounded-full transition-all',
-          isActive('/perfil') ? 'text-ink-300 bg-cream-200' : 'text-ink-200 hover:text-ink-300 hover:bg-cream-200/60',
-        ]}
-      >
-        Perfil
-      </a>
-      <a
-        href="/servicios"
-        class:list={[
-          'px-3.5 py-2 text-sm font-medium rounded-full transition-all',
-          isActive('/servicios') ? 'text-ink-300 bg-cream-200' : 'text-ink-200 hover:text-ink-300 hover:bg-cream-200/60',
-        ]}
-      >
-        Servicios
-      </a>
-      <a
-        href="/plugins"
-        class:list={[
-          'px-3.5 py-2 text-sm font-medium rounded-full transition-all',
-          isActive('/plugins') ? 'text-ink-300 bg-cream-200' : 'text-ink-200 hover:text-ink-300 hover:bg-cream-200/60',
-        ]}
-      >
-        Plugins
-      </a>
-      <a
-        href="/blog"
-        class:list={[
-          'px-3.5 py-2 text-sm font-medium rounded-full transition-all',
-          isActive('/blog') ? 'text-ink-300 bg-cream-200' : 'text-ink-200 hover:text-ink-300 hover:bg-cream-200/60',
-        ]}
-      >
-        Blog
-      </a>
+    <nav class="hidden lg:flex items-center gap-0.5" aria-label="Navegación principal">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'nav-link',
+            isActive(item.href) ? 'active' : '',
+          ]}
+        >
+          {t(Astro.url, item.key)}
+        </a>
+      ))}
     </nav>
 
-    <!-- CTA: pill rounded-full estilo Subscribe -->
-    <a
-      href="/contacto"
-      class="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold rounded-full bg-coral text-cream-100 hover:bg-coral-300 transition-all shadow-sm"
-    >
-      Hablemos
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </a>
+    <!-- Right: theme + language toggle + CTA -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <LanguageToggle />
+      <ThemeToggle />
+      <a
+        href={currentLang === 'en' ? '/en/contact' : '/es/contacto'}
+        class="hidden sm:inline-flex btn btn-outline"
+      >
+        {t(Astro.url, 'nav.cta')}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <!-- Mobile menu button -->
+      <button
+        type="button"
+        class="lg:hidden p-2 -mr-2 text-ink-200 hover:text-ink"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </header>

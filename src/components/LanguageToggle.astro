@@ -1,0 +1,44 @@
+---
+import { languages, getLangFromUrl, getAlternateUrl } from '@i18n/ui.ts';
+import '@styles/global.css';
+
+const currentLang = getLangFromUrl(Astro.url);
+---
+
+<div class="lang-toggle inline-flex items-center gap-1 text-xs font-medium">
+  {Object.entries(languages).map(([lang, label]) => {
+    const isActive = lang === currentLang;
+    return (
+      <a
+        data-lang-toggle
+        data-lang={lang}
+        href={getAlternateUrl(Astro.url.pathname, lang as 'es' | 'en')}
+        class:list={[
+          'px-2.5 py-1 rounded-full transition-colors',
+          isActive
+            ? 'text-ink bg-midnight-200'
+            : 'text-ink-200 hover:text-ink hover:bg-midnight-200/60',
+        ]}
+        aria-label={`Switch to ${label}`}
+        aria-current={isActive ? 'true' : undefined}
+        hreflang={lang}
+      >
+        {label}
+      </a>
+    );
+  })}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-toggle]').forEach((link) => {
+    if (link.dataset.bound === 'true') return;
+    link.dataset.bound = 'true';
+    link.addEventListener('click', () => {
+      const lang = link.dataset.lang;
+      if (!lang) return;
+      try {
+        localStorage.setItem('site-lang', lang);
+      } catch {}
+    });
+  });
+</script>

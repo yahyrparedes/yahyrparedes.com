@@ -11,6 +11,14 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'ignore',
   build: { format: 'directory' },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: true, // /es/ y /en/, no /about
+      redirectToDefaultLocale: true,
+    },
+  },
   integrations: [
     sitemap({
       entryLimit: 45000,
@@ -51,6 +59,7 @@ export default defineConfig({
         '@styles': `${srcDir}/styles`,
         '@data': `${srcDir}/data`,
         '@content': `${srcDir}/content`,
+        '@i18n': `${srcDir}/i18n`,
       },
     },
   },

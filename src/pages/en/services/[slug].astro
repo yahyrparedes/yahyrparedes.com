@@ -1,0 +1,13 @@
+---
+// Página placeholder para /en/services/[slug].
+// El contenido detallado solo existe en español por ahora,
+// así que cada ruta EN redirige a su equivalente ES.
+import { site } from '@data/site.ts';
+
+export async function getStaticPaths() {
+  return site.services.map((s) => ({
+    params: { slug: s.slug },
+    redirect: `/es/servicios/${s.slug}/`,
+  }));
+}
+---

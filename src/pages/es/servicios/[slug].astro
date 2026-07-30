@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { site } from '@data/site';
-import { serviceJsonLd } from '@lib/seo';
+import { site } from '@data/site.ts';
+import { serviceJsonLd } from '@lib/seo.ts';
 
 export async function getStaticPaths() {
   return site.services.map((s) => ({
@@ -23,9 +23,9 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
   <article class="container-page py-12 sm:py-16 max-w-4xl">
     <!-- Breadcrumb -->
     <nav class="text-sm text-ink-100 mb-6 fade-in-up" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-ink-300">Inicio</a>
+      <a href="/es/" class="hover:text-ink-300">Inicio</a>
       <span class="mx-2">/</span>
-      <a href="/servicios" class="hover:text-ink-300">Servicios</a>
+      <a href="/es/servicios" class="hover:text-ink-300">Servicios</a>
       <span class="mx-2">/</span>
       <span class="text-ink-300">{service.name}</span>
     </nav>
@@ -125,7 +125,7 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
 
       <div class="pt-8 text-center">
         <a
-          href="/contacto"
+          href="/es/contacto"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-300 text-ink-300 font-semibold hover:bg-amber-400 transition-all shadow-md shadow-amber-300/30"
         >
           Empezar un proyecto de {service.name.toLowerCase()}

@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { t, getLangFromUrl } from '@i18n/ui.ts';
+
+const currentLang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout
+  title="Legal Notice · Yahyr Paredes"
+  description="Legal information about yahyrparedes.com under Spanish LSSI (Law 34/2002)."
+>
+  <article class="container-page py-12 sm:py-16 max-w-3xl">
+    <header class="mb-10">
+      <p class="eyebrow mb-3">LEGAL</p>
+      <h1 class="text-balance">Legal Notice</h1>
+      <p class="mt-3 text-ink-200 text-sm">Last updated: July 2026</p>
+    </header>
+
+    <div class="prose prose-invert max-w-none space-y-6 text-ink-100 leading-relaxed">
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">1. Identification</h2>
+        <p>
+          In compliance with Article 10 of Spanish Law 34/2002 (LSSI — Services of the Information Society and Electronic Commerce), I inform you that this website, yahyrparedes.com, is owned by:
+        </p>
+        <ul class="list-none space-y-1 mt-3 text-ink-200">
+          <li><strong>Yahyr Paredes</strong></li>
+          <li>Email: <a href="mailto:hola@yahyrparedes.com" class="text-blue-200 hover:text-blue transition-colors">hola@yahyrparedes.com</a></li>
+          <li>Location: Jaén, Andalusia, Spain</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">2. Purpose</h2>
+        <p>
+          The purpose of this website is to showcase the professional services of Yahyr Paredes as a freelance Product Engineer (mobile development, backend, cloud, technical consulting).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">3. Intellectual property</h2>
+        <p>
+          The contents of this site (texts, images, code, designs) are owned by Yahyr Paredes or the mentioned rights holders, and are protected by intellectual property law. Total or partial reproduction without authorisation is prohibited.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">4. Limitation of liability</h2>
+        <p>
+          Yahyr Paredes is not responsible for damages arising from the use of the information published on this site, nor for the contents of linked third-party sites.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">5. Applicable law</h2>
+        <p>
+          The relationship between Yahyr Paredes and the user is governed by current Spanish law. For any dispute, the parties submit to the Courts of Jaén.
+        </p>
+      </section>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-border">
+      <a href={currentLang === 'en' ? '/en/' : '/es/'} class="text-blue-200 hover:text-blue transition-colors inline-flex items-center gap-1.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to home
+      </a>
+    </div>
+  </article>
+</BaseLayout>

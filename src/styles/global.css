@@ -1,138 +1,422 @@
-/* Tipografía: Fraunces (serif) + Inter (sans) via Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&display=swap');
+/* ═══════════════════════════════════════════════════════════════════════
+   Yahyr Paredes · Design System v3
+   Brand: "Engineering Trust" — Mavila v1.0
+   Identity: elegancia Apple · claridad Linear · credibilidad Vercel
+   ═══════════════════════════════════════════════════════════════════════ */
 @import "tailwindcss";
 @import "./fonts.css";
 
-/* ─────────────────────────────────────────────────────────
-   Yahyr Paredes · Ali Abdaal-inspired design system
-   Paleta cálida: cream (beige), ink, coral, sky, lilac, butter
-   ───────────────────────────────────────────────────────── */
-@theme {
-  /* Backgrounds: beige cálido (estilo Ali Abdaal) */
-  --color-cream: #F8F2EA;        /* background principal */
-  --color-cream-100: #F2EBE0;    /* cards */
-  --color-cream-200: #EBE3D5;    /* cards más oscuras / borders suaves */
-  --color-cream-300: #E0D6C2;    /* hover de cards */
+/* ─────────────────────────────────────────────────────────────────────
+   THEME TOKENS — Dark (default) + Light
+   Switched via .theme-dark / .theme-light on <html>
+   ───────────────────────────────────────────────────────────────────── */
+:root,
+:root.theme-dark {
+  /* Primary (dark) */
+  --color-midnight: #0B1220;          /* background principal */
+  --color-carbon: #111827;            /* tarjetas, navegación */
+  --color-slate: #1F2937;             /* superficies secundarias */
 
-  /* Texto: negro casi puro */
-  --color-ink: #1A1A1A;
-  --color-ink-100: #6B6B6B;
-  --color-ink-200: #4A4A4A;
-  --color-ink-300: #2A2A2A;
+  /* Brand */
+  --color-blue: #3B82F6;              /* electric blue */
+  --color-blue-hover: #2563EB;
+  --color-blue-soft: #60A5FA;         /* hover state */
+  --color-blue-glow: rgba(59, 130, 246, .25);
 
-  /* Acentos vibrantes planos */
-  --color-coral: #F08060;        /* badges principales (estilo "Join 230k+") */
-  --color-coral-100: #FBE2D7;    /* hover de coral */
-  --color-coral-300: #E66B4A;    /* coral oscuro */
-  --color-sky: #A8D5E5;          /* CTAs (botones Subscribe-style) */
-  --color-sky-100: #D4EBF3;      /* hover de sky */
-  --color-sky-300: #7FB8CC;      /* sky oscuro */
-  --color-lilac: #C8B6E0;        /* detalles (blobs, swoops, acentos) */
-  --color-lilac-100: #EBE3F2;    /* lilac claro */
-  --color-butter: #F5D547;       /* highlight (badges, emphasis) */
+  /* Accent */
+  --color-accent: #06B6D4;            /* cian (parecido al avatar) */
+  --color-accent-glow: rgba(6, 182, 212, .20);
 
-  /* Mantenemos sage/amber como alias para retro-compatibilidad con código existente */
-  --color-sage: #475744;
-  --color-sage-50: #F0F2EF;
-  --color-sage-100: #DDE2D9;
-  --color-sage-200: #B5BFB1;
-  --color-sage-300: #8B9986;
-  --color-sage-400: #5C6B5A;
-  --color-sage-500: #475744;
-  --color-sage-600: #364433;
-  --color-amber: #F08060;
-  --color-amber-100: #FBE2D7;
-  --color-amber-200: #E8CFA8;
-  --color-amber-300: #F08060;
-  --color-amber-400: #E66B4A;
-  --color-amber-500: #8A5F2F;
+  /* Semantic */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
 
-  /* Tipografía: Fraunces (serif) para display, Inter para body */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Fraunces", "Plus Jakarta Sans", ui-serif, Georgia, "Times New Roman", serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  /* Text */
+  --color-ink: #F9FAFB;               /* principal */
+  --color-ink-100: #CBD5E1;           /* secundario */
+  --color-ink-200: #94A3B8;           /* muted */
+  --color-ink-300: #64748B;           /* más muted */
+
+  /* Borders & glass */
+  --color-border: #1E293B;
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-glass: rgba(255, 255, 255, .06);
+  --color-glass-strong: rgba(255, 255, 255, .10);
+
+  /* Hero gradient */
+  --hero-grad-from: #0B1220;
+  --hero-grad-via: #111827;
+  --hero-grad-to: #0F172A;
+  --hero-glow-from: #3B82F6;
+  --hero-glow-to: #06B6D4;
+
+  /* Shadow (dark) */
+  --shadow-md: 0 10px 40px rgba(0, 0, 0, .25);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, .35);
+  --shadow-glow: 0 0 30px var(--color-blue-glow);
+
+  /* Theme-color (meta tag) */
+  color-scheme: dark;
+  --theme-meta: #0B1220;
 }
 
+:root.theme-light {
+  /* Primary (light) */
+  --color-midnight: #F8FAFC;          /* background */
+  --color-carbon: #FFFFFF;            /* tarjetas, navegación */
+  --color-slate: #F1F5F9;             /* superficies secundarias */
+
+  /* Brand — blue más intenso en light para mantener contraste */
+  --color-blue: #2563EB;
+  --color-blue-hover: #1D4ED8;
+  --color-blue-soft: #3B82F6;
+  --color-blue-glow: rgba(37, 99, 235, .18);
+
+  /* Accent */
+  --color-accent: #0891B2;
+  --color-accent-glow: rgba(8, 145, 178, .18);
+
+  /* Semantic */
+  --color-success: #16A34A;
+  --color-warning: #D97706;
+  --color-error: #DC2626;
+
+  /* Text */
+  --color-ink: #0F172A;               /* principal */
+  --color-ink-100: #475569;           /* secundario */
+  --color-ink-200: #64748B;           /* muted */
+  --color-ink-300: #94A3B8;
+
+  /* Borders & glass */
+  --color-border: #E2E8F0;
+  --color-border-strong: rgba(15, 23, 42, 0.10);
+  --color-glass: rgba(15, 23, 42, .04);
+  --color-glass-strong: rgba(15, 23, 42, .08);
+
+  /* Hero gradient (light) */
+  --hero-grad-from: #F8FAFC;
+  --hero-grad-via: #FFFFFF;
+  --hero-grad-to: #F1F5F9;
+  --hero-glow-from: #2563EB;
+  --hero-glow-to: #0891B2;
+
+  /* Shadow (light) */
+  --shadow-md: 0 10px 40px rgba(15, 23, 42, .08);
+  --shadow-lg: 0 20px 60px rgba(15, 23, 42, .12);
+  --shadow-glow: 0 0 30px var(--color-blue-glow);
+
+  color-scheme: light;
+  --theme-meta: #F8FAFC;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   TAILWIND THEME BRIDGE — expone CSS vars a Tailwind
+   ───────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Backgrounds (mapped) */
+  --color-midnight: var(--color-midnight);
+  --color-carbon: var(--color-carbon);
+  --color-slate: var(--color-slate);
+
+  /* Borders */
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+
+  /* Text */
+  --color-ink: var(--color-ink);
+  --color-ink-100: var(--color-ink-100);
+  --color-ink-200: var(--color-ink-200);
+  --color-ink-300: var(--color-ink-300);
+
+  /* Brand */
+  --color-blue: var(--color-blue);
+  --color-blue-100: var(--color-blue-soft);
+  --color-blue-200: var(--color-blue-soft);
+  --color-blue-300: var(--color-blue-soft);
+
+  /* Accent */
+  --color-accent: var(--color-accent);
+  --color-cyan: var(--color-accent);
+
+  /* Semantic */
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-error: var(--color-error);
+
+  /* Tipografía — Mavila v1.0 */
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Compatibilidad retroactiva */
+  --color-cream: var(--color-midnight);
+  --color-cream-100: var(--color-carbon);
+  --color-cream-200: var(--color-slate);
+  --color-sage: var(--color-blue);
+  --color-sage-50: var(--color-slate);
+  --color-sage-100: var(--color-slate);
+  --color-sage-200: var(--color-border);
+  --color-sage-300: var(--color-border-strong);
+  --color-sage-400: var(--color-ink-200);
+  --color-sage-500: var(--color-blue);
+  --color-sage-600: var(--color-blue-soft);
+  --color-amber: var(--color-blue);
+  --color-amber-100: var(--color-slate);
+  --color-amber-200: var(--color-slate);
+  --color-amber-300: var(--color-warning);
+  --color-amber-400: var(--color-warning);
+  --color-amber-500: var(--color-warning);
+  --color-green: var(--color-success);
+  --color-orange: var(--color-warning);
+  --color-coral: var(--color-warning);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────────────────────────────────── */
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
+    background-color: var(--color-midnight);
   }
   body {
-    background-color: var(--color-cream);
+    background-color: var(--color-midnight);
     color: var(--color-ink);
     font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 18px;             /* Body (escala Mavila) */
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+
+  /* Headings → Space Grotesk (Mavila v1.0) */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.025em;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.03em;
     line-height: 1.1;
-    color: var(--color-ink-300);
-    font-feature-settings: "ss01", "ss02";  /* Fraunces stylistic alternates */
+    color: var(--color-ink);
   }
-  h1 { font-weight: 600; letter-spacing: -0.03em; }
-  h2 { font-weight: 500; }
+
+  /* Escala tipográfica Mavila v1.0 */
+  h1 { font-size: clamp(2.75rem, 5.5vw, 4.5rem); letter-spacing: -0.04em; line-height: 1.05; font-weight: 700; }   /* H1 ≈ 56 */
+  h2 { font-size: clamp(1.875rem, 3.5vw, 2.5rem); letter-spacing: -0.03em; font-weight: 700; }                   /* H2 ≈ 40 */
+  h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 600; line-height: 1.2; }                              /* H3 ≈ 32 */
+  h4 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; }                                                  /* H4 ≈ 24 */
+
+  /* Code / mono */
+  code, kbd, samp, pre {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+
+  p { color: var(--color-ink-100); }
   a { color: inherit; text-decoration: none; }
+  small { font-size: 16px; color: var(--color-ink-200); }    /* Small (escala Mavila) */
+
   :focus-visible {
-    outline: 2px solid var(--color-coral);
+    outline: 2px solid var(--color-blue);
     outline-offset: 3px;
     border-radius: 4px;
   }
+
   ::selection {
-    background-color: var(--color-butter);
-    color: var(--color-ink);
+    background-color: var(--color-blue);
+    color: #FFFFFF;
   }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-midnight); }
+  ::-webkit-scrollbar-thumb { background: var(--color-slate); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-border-strong); }
 }
 
+/* ─────────────────────────────────────────────────────────────────────
+   UTILITIES
+   ───────────────────────────────────────────────────────────────────── */
 @layer utilities {
   .container-page {
     width: 100%;
-    max-width: 72rem;
+    max-width: 1280px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: 1.5rem;
   }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
 
-  /* Pill CTA estilo Ali Abdaal (rounded-full, full width opcional) */
-  .pill-cta {
+  /* Heading helpers (por si alguna clase usa text-display) */
+  .font-display { font-family: var(--font-heading); }
+  .font-mono { font-family: var(--font-mono); }
+
+  /* Eyebrow (estilo "OPEN SOURCE" / "EXPERIENCE" en azul) */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-blue-soft);
+  }
+
+  /* Pill base */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* Card — Mavila radius 16 */
+  .card {
+    background-color: var(--color-carbon);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  .card-glass {
+    background-color: var(--color-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 16px;
+  }
+
+  /* Hero gradient (3 stops) */
+  .bg-hero {
+    background: linear-gradient(180deg, var(--hero-grad-from) 0%, var(--hero-grad-via) 50%, var(--hero-grad-to) 100%);
+  }
+  .bg-hero-glow {
+    background: linear-gradient(135deg, var(--hero-glow-from) 0%, var(--hero-glow-to) 100%);
+  }
+
+  /* Glow ambient */
+  .glow-blue { box-shadow: 0 0 40px var(--color-blue-glow); }
+  .glow-accent { box-shadow: 0 0 40px var(--color-accent-glow); }
+
+  /* Botones — Mavila v1.0 */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background-color: var(--color-blue);
+    color: #FFFFFF;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-blue-hover);
+  }
+  .btn-outline {
+    background-color: transparent;
+    color: #E2E8F0;        /* spec Mavila: #E2E8F0 */
+    border: 1px solid #334155;
+  }
+  .btn-outline:hover {
+    background-color: var(--color-glass);
+  }
+  :root.theme-light .btn-outline {
+    color: #0F172A;
+    border-color: #CBD5E1;
+  }
+  :root.theme-light .btn-outline:hover {
+    background-color: var(--color-slate);
+  }
+
+  /* Nav links del header */
+  .nav-link {
+    position: relative;
+    padding: 0.5rem 0.75rem 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink-100);
+    border-radius: 0;
+    transition: color 0.2s ease;
+  }
+  .nav-link:hover {
+    color: var(--color-ink);
+  }
+  .nav-link.active {
+    color: var(--color-ink);
+  }
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0.35rem;
+    width: 1.35rem;
+    height: 2px;
+    border-radius: 9999px;
+    background-color: var(--color-blue);
+    transform: translateX(-50%);
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
+    min-width: 5rem;
+    height: 36px;
+    padding-inline: 0.75rem;
     border-radius: 9999px;
-    background-color: var(--color-sky);
-    color: var(--color-ink-300);
-    font-weight: 600;
-    transition: all 0.2s ease;
+    color: var(--color-ink-100);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-glass);
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    cursor: pointer;
   }
-  .pill-cta:hover {
-    background-color: var(--color-sky-300);
-    color: var(--color-cream-100);
+  .theme-toggle:hover {
+    color: var(--color-ink);
+    background-color: var(--color-glass-strong);
+    border-color: var(--color-border-strong);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .fade-in-up { animation: fadeInUp 0.6s var(--ease-out-quart) both; }
+  /* Hero text highlight (la palabra "trust" subrayada) */
+  .text-highlight {
+    color: var(--color-blue);
+    position: relative;
   }
-  @keyframes fadeInUp {
+
+  /* Sombras sutiles para cards */
+  .shadow-soft { box-shadow: var(--shadow-md); }
+  .shadow-soft-lg { box-shadow: var(--shadow-lg); }
+
+  /* Animaciones */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .fade-up { animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeUp {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .stagger-1 { animation-delay: 0.05s; }
-  .stagger-2 { animation-delay: 0.1s; }
-  .stagger-3 { animation-delay: 0.15s; }
-  .stagger-4 { animation-delay: 0.2s; }
-  .stagger-5 { animation-delay: 0.25s; }
-  .stagger-6 { animation-delay: 0.3s; }
-  .stagger-7 { animation-delay: 0.35s; }
-  .stagger-8 { animation-delay: 0.4s; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,95 @@
+---
+/**
+ * ThemeToggle — sol/luna. Mavila v1.0
+ * Persiste en localStorage. Init inline en BaseLayout evita FOUC.
+ */
+---
+<button
+  type="button"
+  class="theme-toggle"
+  aria-label="Cambiar tema"
+  data-theme-toggle
+  title="Cambiar tema"
+>
+  <svg
+    class="icon-sun"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+  </svg>
+  <svg
+    class="icon-moon"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-width: 5rem;
+  }
+
+  .theme-toggle .icon-sun,
+  .theme-toggle .icon-moon {
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    opacity: 0.65;
+  }
+
+  :root.theme-dark .theme-toggle .icon-sun {
+    opacity: 1;
+    color: var(--color-ink);
+  }
+
+  :root.theme-light .theme-toggle .icon-moon {
+    opacity: 1;
+    color: var(--color-ink);
+  }
+
+  :root:not(.theme-dark):not(.theme-light) .theme-toggle .icon-sun {
+    opacity: 1;
+    color: var(--color-ink);
+  }
+</style>
+
+<script>
+  // Bind una sola vez por toggle
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+    if (btn.dataset.bound === 'true') return;
+    btn.dataset.bound = 'true';
+    btn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.classList.contains('theme-light') ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      html.classList.remove('theme-dark', 'theme-light');
+      html.classList.add('theme-' + next);
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      // Sync meta theme-color
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', next === 'light' ? '#F8FAFC' : '#0B1220');
+    });
+  });
+</script>

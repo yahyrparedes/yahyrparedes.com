@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { t, getLangFromUrl } from '@i18n/ui.ts';
+
+const currentLang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout
+  title="Privacy Policy · Yahyr Paredes"
+  description="How I collect, use and protect your personal data on yahyrparedes.com."
+>
+  <article class="container-page py-12 sm:py-16 max-w-3xl">
+    <header class="mb-10">
+      <p class="eyebrow mb-3">LEGAL</p>
+      <h1 class="text-balance">Privacy Policy</h1>
+      <p class="mt-3 text-ink-200 text-sm">Last updated: July 2026</p>
+    </header>
+
+    <div class="prose prose-invert max-w-none space-y-6 text-ink-100 leading-relaxed">
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">1. Data controller</h2>
+        <p>
+          Yahyr Paredes, contact email <a href="mailto:hola@yahyrparedes.com" class="text-blue-200 hover:text-blue transition-colors">hola@yahyrparedes.com</a>,
+          is the data controller for the personal data collected on this website.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">2. What data I collect</h2>
+        <p>Through the contact form I collect:</p>
+        <ul class="list-disc list-inside space-y-1 mt-2 text-ink-200">
+          <li>Name</li>
+          <li>Email</li>
+          <li>Company (optional)</li>
+          <li>Free-form message</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">3. Purpose</h2>
+        <p>
+          The data is used exclusively to respond to your inquiry or proposal. I do not sell it, share it with third parties, or use it for newsletters or marketing without your explicit consent.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">4. Retention</h2>
+        <p>
+          I keep the data for as long as necessary to respond to your inquiry, and — if a professional relationship follows — for the duration of that relationship. After that, I delete it.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">5. Your rights</h2>
+        <p>
+          You can exercise your rights of access, rectification, erasure, objection, restriction and portability by writing to <a href="mailto:hola@yahyrparedes.com" class="text-blue-200 hover:text-blue transition-colors">hola@yahyrparedes.com</a>.
+          You can also file a complaint with the Spanish Data Protection Agency (www.aepd.es).
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-display font-bold text-2xl text-ink mb-3">6. Cookies</h2>
+        <p>
+          This site does not use tracking or invasive analytics cookies. If I ever add any, I will update this policy and notify you with a banner.
+        </p>
+      </section>
+    </div>
+
+    <div class="mt-12 pt-6 border-t border-border">
+      <a href={currentLang === 'en' ? '/en/' : '/es/'} class="text-blue-200 hover:text-blue transition-colors inline-flex items-center gap-1.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to home
+      </a>
+    </div>
+  </article>
+</BaseLayout>

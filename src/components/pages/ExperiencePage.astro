@@ -1,0 +1,165 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getLangFromUrl } from '@i18n/ui.ts';
+
+const currentLang = getLangFromUrl(Astro.url);
+
+const copy = currentLang === 'en'
+  ? {
+      title: 'Experience · Yahyr Paredes',
+      description: 'Building products that matter. Case studies from my career.',
+      eyebrow: 'EXPERIENCE',
+      hero: ['Building products.', 'Solving problems.', 'Delivering'],
+      intro: "Over the years I've partnered with startups and companies to build digital products that solve real problems and generate meaningful impact.",
+      impact: 'Impact',
+      technologies: 'Technologies',
+      recommended: 'Recommended by',
+      placeholder: 'Recommendation placeholder — to be added when available',
+      note: 'More roles in my CV: Kwema (2021—ongoing, Android + IoT), Urbaner (2016—2021, Full Stack), Interseguro (2023—2024, FullStack Engineer II), and earlier roles. Full timeline available on request.',
+      finalTitle: "Every project has a story. Let's build the next one.",
+      finalBody: "I'm always open to new challenges and meaningful collaborations.",
+      cta: "Let's build together",
+      entries: [
+        {
+          year: '2024 — 2026',
+          company: 'DELOSI · Starbucks Perú',
+          role: 'Backend / Mobile Software Engineer',
+          body: 'Microservices in Spring Boot deployed on AWS Lambda. Authentication with AWS Cognito + JWT. Apps with observability, logging and circuit breaker. The Starbucks app ecosystem for Peru, with 1M+ downloads.',
+          impact: ['Spring Boot microservices in AWS Lambda', 'AWS Cognito authentication + JWT', 'Apps with 1M+ downloads in production'],
+          technologies: ['Kotlin', 'KMP', 'Compose', 'Java', 'Spring Boot', 'AWS Lambda', 'Cognito', 'Docker'],
+          roleTag: 'Mobile + Backend',
+        },
+        {
+          year: '2023 — 2024',
+          company: 'Interseguro Compañía de Seguros',
+          role: 'FullStack Engineer II',
+          body: 'Migration, new features and performance improvements for one of the most critical insurance products in Peru. Java + Spring Boot on AWS, pipelines, observability, security best practices.',
+          impact: ['Migration to microservices architecture', 'Performance improvements (40% faster)', 'New system reliability and observability'],
+          technologies: ['Java', 'Spring Boot', 'Kafka', 'AWS', 'MySQL'],
+          roleTag: 'Backend',
+        },
+        {
+          year: '2019 — 2020',
+          company: 'Calzado Atlas',
+          role: 'Tech Lead · FullStack',
+          body: 'e-commerce platform in Magento + WordPress, .NET Core 2 + SQL Server, electronic invoicing, performance improvements. First time as Tech Lead.',
+          impact: ['e-commerce platform modernization', 'Electronic invoicing integration', 'Performance and stability improvements'],
+          technologies: ['C#', '.NET Core 2', 'SQL Server', 'Magento', 'WordPress'],
+          roleTag: 'Tech Lead',
+        },
+      ],
+    }
+  : {
+      title: 'Experiencia · Yahyr Paredes',
+      description: 'Construyendo productos que importan. Casos de estudio de mi carrera.',
+      eyebrow: 'EXPERIENCIA',
+      hero: ['Construyendo productos.', 'Resolviendo problemas.', 'Entregando'],
+      intro: 'A lo largo de los años he trabajado con startups y empresas para construir productos digitales que resuelven problemas reales y generan impacto significativo.',
+      impact: 'Impacto',
+      technologies: 'Tecnologías',
+      recommended: 'Recomendado por',
+      placeholder: 'Espacio para un testimonio real — añadir cuando esté disponible',
+      note: 'Más roles en mi CV: Kwema (2021—actualidad, Android + IoT), Urbaner (2016—2021, Full Stack), Interseguro (2023—2024, FullStack Engineer II) y roles anteriores. Timeline completo disponible bajo solicitud.',
+      finalTitle: 'Cada proyecto tiene una historia. Construyamos la siguiente.',
+      finalBody: 'Siempre estoy abierto a nuevos retos y colaboraciones con sentido.',
+      cta: 'Construyamos juntos',
+      entries: [
+        {
+          year: '2024 — 2026',
+          company: 'DELOSI · Starbucks Perú',
+          role: 'Backend / Mobile Software Engineer',
+          body: 'Microservicios en Spring Boot desplegados en AWS Lambda. Autenticación con AWS Cognito + JWT. Apps con observabilidad, logging y circuit breaker. Ecosistema de apps de Starbucks Perú, con más de 1M de descargas.',
+          impact: ['Microservicios Spring Boot en AWS Lambda', 'Autenticación AWS Cognito + JWT', 'Apps con más de 1M de descargas en producción'],
+          technologies: ['Kotlin', 'KMP', 'Compose', 'Java', 'Spring Boot', 'AWS Lambda', 'Cognito', 'Docker'],
+          roleTag: 'Mobile + Backend',
+        },
+        {
+          year: '2023 — 2024',
+          company: 'Interseguro Compañía de Seguros',
+          role: 'FullStack Engineer II',
+          body: 'Migración, nuevas funcionalidades y mejoras de rendimiento para uno de los productos de seguros más críticos de Perú. Java + Spring Boot en AWS, pipelines, observabilidad y buenas prácticas de seguridad.',
+          impact: ['Migración a microservicios', 'Mejoras de rendimiento (40% más rápido)', 'Nueva fiabilidad y observabilidad del sistema'],
+          technologies: ['Java', 'Spring Boot', 'Kafka', 'AWS', 'MySQL'],
+          roleTag: 'Backend',
+        },
+        {
+          year: '2019 — 2020',
+          company: 'Calzado Atlas',
+          role: 'Tech Lead · FullStack',
+          body: 'Plataforma e-commerce en Magento + WordPress, .NET Core 2 + SQL Server, facturación electrónica y mejoras de rendimiento. Mi primera experiencia como Tech Lead.',
+          impact: ['Modernización de plataforma e-commerce', 'Integración de facturación electrónica', 'Mejoras de rendimiento y estabilidad'],
+          technologies: ['C#', '.NET Core 2', 'SQL Server', 'Magento', 'WordPress'],
+          roleTag: 'Tech Lead',
+        },
+      ],
+    };
+---
+
+<BaseLayout title={copy.title} description={copy.description}>
+  <section class="container-page pt-16 sm:pt-20 pb-12">
+    <p class="eyebrow mb-5">{copy.eyebrow}</p>
+    <h1 class="text-balance max-w-3xl mb-6">
+      {copy.hero[0]}<br />
+      {copy.hero[1]}<br />
+    {copy.hero[2]} <span class="text-blue-200 font-display italic font-medium">{currentLang === 'en' ? 'impact' : 'impacto'}</span>.
+    </h1>
+    <p class="text-ink-100 text-lg max-w-2xl leading-relaxed">{copy.intro}</p>
+  </section>
+
+  <section class="container-page pb-16 sm:pb-24">
+    <div class="space-y-8">
+      {copy.entries.map((exp) => (
+        <article class="card p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-3 lg:border-r lg:border-border lg:pr-6">
+            <p class="font-display font-bold text-2xl text-blue-200 mb-2">{exp.year}</p>
+            <p class="font-display font-bold text-base text-ink mb-1">{exp.company}</p>
+            <p class="text-sm text-blue-200 font-medium mb-3">{exp.role}</p>
+            <span class="inline-block text-xs px-2 py-0.5 rounded-full bg-blue/10 text-blue-200 border border-blue/30">{exp.roleTag}</span>
+          </div>
+
+          <div class="lg:col-span-6">
+            <p class="text-ink-100 leading-relaxed mb-4">{exp.body}</p>
+            <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.impact}</p>
+            <ul class="space-y-1.5">
+              {exp.impact.map((point) => (
+                <li class="flex items-start gap-2 text-sm text-ink-200">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-blue-200 flex-shrink-0 mt-1" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="lg:col-span-3">
+            <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.technologies}</p>
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              {exp.technologies.map((tech) => (
+                <span class="text-xs px-2 py-0.5 rounded-full bg-midnight-200 text-ink-200">{tech}</span>
+              ))}
+            </div>
+            <div class="border-t border-border pt-4">
+              <p class="text-xs text-ink-300 italic">{copy.placeholder}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 card p-6 text-center">
+      <p class="text-ink-200 text-sm">{copy.note}</p>
+    </div>
+  </section>
+
+  <section class="border-t border-border">
+    <div class="container-page py-12 sm:py-16">
+      <div class="card p-8 sm:p-10 text-center">
+        <p class="font-display italic text-2xl sm:text-3xl text-ink mb-3">{copy.finalTitle}</p>
+        <p class="text-ink-200 mb-6">{copy.finalBody}</p>
+        <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
+          {copy.cta}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

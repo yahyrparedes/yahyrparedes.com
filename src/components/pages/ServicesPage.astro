@@ -1,0 +1,169 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getLangFromUrl } from '@i18n/ui.ts';
+
+const currentLang = getLangFromUrl(Astro.url);
+
+const copy = currentLang === 'en'
+  ? {
+      title: 'Services · Yahyr Paredes',
+      eyebrow: 'SERVICES',
+      titleStart: 'How I can help build',
+      titleStrong: 'your product',
+      titleEnd: '.',
+      subheadline: 'From idea to scale and beyond. I partner with startups and companies to design, build and evolve digital products that create real impact.',
+      tagMindset: 'Product mindset',
+      tagArchitecture: 'Clean architecture',
+      tagResults: 'Results that matter',
+      waysLabel: 'FIVE WAYS I CAN HELP',
+      waysTitle: 'Solutions for every stage of your product journey.',
+      viewDetails: 'View details',
+      fromChaos: 'FROM CHAOS',
+      toImpact: 'TO IMPACT',
+      ctaTitle: 'Have a project in mind?',
+      ctaBody: "Let's build something great together.",
+      seeWork: 'See how I work',
+      letsTalk: "Let's talk",
+      services: [
+        {
+          slug: 'webs',
+          num: '01',
+          title: 'High-performance Web Applications',
+          body: 'Web applications built for speed, scalability and great user experience. Modern stacks, clean code and best practices.',
+          bullets: ['Next.js, React, TypeScript', 'Server-side rendering & ISR', 'Performance optimization', 'Scalable architectures', 'SEO & Core Web Vitals'],
+        },
+        {
+          slug: 'apps',
+          num: '02',
+          title: 'Native & Hybrid Mobile Apps',
+          body: 'Mobile experiences that users love. Native or cross-platform, built with performance and quality in mind.',
+          bullets: ['Android (Kotlin, Compose)', 'iOS (Swift, SwiftUI)', 'Flutter & KMP', 'Offline-first', 'Push & real-time'],
+        },
+        {
+          slug: 'ecosistema',
+          num: '03',
+          title: 'End-to-End Product Ecosystem',
+          body: 'I design and build the whole ecosystem: apps, backend, cloud infrastructure and integrations.',
+          bullets: ['Backend & APIs', 'Cloud & DevOps', 'Databases & Storage', 'Integrations & 3rd parties', 'Security & Observability'],
+        },
+        {
+          slug: 'hot-fixes',
+          num: '04',
+          title: 'Hot Fixes & Improvements',
+          body: 'Quick, effective solutions to fix issues, improve performance and enhance existing features.',
+          bullets: ['Bug fixing', 'Performance tuning', 'Code refactoring', 'New features', 'Technical debt reduction'],
+        },
+        {
+          slug: 'ai-rescue',
+          num: '05',
+          title: 'Project Rescue & AI / Vibe Coding',
+          body: 'Rescue projects stuck or at risk. I leverage AI and modern workflows to move fast and deliver results.',
+          bullets: ['Project audit', 'Architecture redesign', 'AI-assisted development', 'Rapid delivery', 'Team enablement'],
+        },
+      ],
+    }
+  : {
+      title: 'Servicios · Yahyr Paredes',
+      eyebrow: 'SERVICIOS',
+      titleStart: 'Cómo puedo ayudarte a construir',
+      titleStrong: 'tu producto',
+      titleEnd: '.',
+      subheadline: 'De la idea al crecimiento y más allá. Me asocio con startups y empresas para diseñar, construir y evolucionar productos digitales que generen impacto real.',
+      tagMindset: 'Mentalidad de producto',
+      tagArchitecture: 'Arquitectura limpia',
+      tagResults: 'Resultados que importan',
+      waysLabel: 'CINCO FORMAS EN LAS QUE PUEDO AYUDAR',
+      waysTitle: 'Soluciones para cada etapa del viaje de tu producto.',
+      viewDetails: 'Ver detalles',
+      fromChaos: 'DEL CAOS',
+      toImpact: 'AL IMPACTO',
+      ctaTitle: '¿Tienes un proyecto en mente?',
+      ctaBody: 'Construyamos algo grande juntos.',
+      seeWork: 'Ver cómo trabajo',
+      letsTalk: 'Hablemos',
+      services: [
+        {
+          slug: 'webs',
+          num: '01',
+          title: 'Aplicaciones web de alto rendimiento',
+          body: 'Aplicaciones web construidas para velocidad, escalabilidad y una gran experiencia de usuario. Stacks modernos, código limpio y buenas prácticas.',
+          bullets: ['Next.js, React, TypeScript', 'Renderizado del lado del servidor e ISR', 'Optimización de rendimiento', 'Arquitecturas escalables', 'SEO y Core Web Vitals'],
+        },
+        {
+          slug: 'apps',
+          num: '02',
+          title: 'Apps móviles nativas e híbridas',
+          body: 'Experiencias móviles que a los usuarios les encantan. Nativas o multiplataforma, construidas pensando en rendimiento y calidad.',
+          bullets: ['Android (Kotlin, Compose)', 'iOS (Swift, SwiftUI)', 'Flutter y KMP', 'Offline-first', 'Push y tiempo real'],
+        },
+        {
+          slug: 'ecosistema',
+          num: '03',
+          title: 'Ecosistema completo de producto',
+          body: 'Diseño y construyo todo el ecosistema: apps, backend, infraestructura cloud e integraciones.',
+          bullets: ['Backend y APIs', 'Cloud y DevOps', 'Bases de datos y almacenamiento', 'Integraciones y terceros', 'Seguridad y observabilidad'],
+        },
+        {
+          slug: 'hot-fixes',
+          num: '04',
+          title: 'Hot fixes y mejoras',
+          body: 'Soluciones rápidas y efectivas para corregir problemas, mejorar rendimiento y potenciar funcionalidades existentes.',
+          bullets: ['Corrección de bugs', 'Ajuste de rendimiento', 'Refactorización de código', 'Nuevas funcionalidades', 'Reducción de deuda técnica'],
+        },
+        {
+          slug: 'ai-rescue',
+          num: '05',
+          title: 'Rescate de proyectos IA / Vibe Coding',
+          body: 'Rescato proyectos estancados o en riesgo. Aprovecho la IA y flujos de trabajo modernos para avanzar rápido y entregar resultados.',
+          bullets: ['Auditoría del proyecto', 'Rediseño de arquitectura', 'Desarrollo asistido por IA', 'Entrega rápida', 'Habilitación del equipo'],
+        },
+      ],
+    };
+---
+
+<BaseLayout title={`${copy.eyebrow} · Yahyr Paredes`} description={copy.subheadline}>
+  <article class="container-page py-12 sm:py-16 max-w-6xl">
+    <header class="text-center mb-12 max-w-3xl mx-auto">
+      <p class="eyebrow mb-3">{copy.eyebrow}</p>
+      <h1 class="text-balance">
+        {copy.titleStart}{' '}
+        <span class="text-blue-200 font-display italic font-medium">{copy.titleStrong}</span>
+        {copy.titleEnd}
+      </h1>
+      <p class="mt-4 text-lg text-ink-200 text-pretty">{copy.subheadline}</p>
+    </header>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      {copy.services.map((s) => (
+        <a href={currentLang === 'en' ? `/en/services/${s.slug}` : `/es/servicios/${s.slug}`} class="group card p-6 sm:p-8 flex flex-col">
+          <div class="w-14 h-14 rounded-2xl bg-blue/10 border border-blue/20 flex items-center justify-center mb-5 group-hover:bg-blue/20 transition-colors">
+            <span class="text-blue-200 font-display font-bold">{s.num}</span>
+          </div>
+          <h2 class="font-display font-bold text-lg text-ink mb-2">{s.title}</h2>
+          <p class="text-sm text-ink-200 leading-relaxed flex-1">{s.body}</p>
+          <p class="mt-5 text-sm font-semibold text-blue-200 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1.5">
+            {copy.viewDetails}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <div class="mt-16 card p-8 sm:p-12 text-center relative overflow-hidden">
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-blue/10 blur-3xl"></div>
+      </div>
+      <h2 class="text-2xl sm:text-3xl text-balance">{copy.ctaTitle}</h2>
+      <p class="mt-3 text-ink-200 max-w-xl mx-auto">{copy.ctaBody}</p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <a href={currentLang === 'en' ? '/en/experience' : '/es/experience'} class="text-sm font-semibold text-blue-200 hover:text-blue transition-colors">
+          {copy.seeWork} →
+        </a>
+        <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
+          {copy.letsTalk}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
