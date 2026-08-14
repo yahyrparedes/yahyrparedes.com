@@ -5,25 +5,25 @@ const capabilities = [
   {
     icon: 'mobile',
     title: 'Mobile',
-    description: 'Native Android with Kotlin and Jetpack Compose. iOS with Swift. Cross-platform with Flutter and Kotlin Multiplatform when it makes sense.',
+    description: 'Android nativo con Kotlin y Jetpack Compose. iOS con Swift. Multiplataforma con Flutter y Kotlin Multiplatform cuando tiene sentido para el producto.',
     technologies: ['Kotlin', 'Jetpack Compose', 'Swift', 'SwiftUI', 'Flutter', 'KMP', 'Coroutines', 'Room', 'Retrofit'],
   },
   {
     icon: 'backend',
     title: 'Backend',
-    description: 'Java + Spring Boot is my main stack. I also work with Node.js, Python/Django, and PHP/Laravel. PostgreSQL, MySQL, MongoDB.',
+    description: 'Java + Spring Boot es mi stack principal. También trabajo con Node.js, Python/Django y PHP/Laravel. PostgreSQL, MySQL y MongoDB.',
     technologies: ['Java', 'Spring Boot', 'Node.js', 'Python', 'PHP', 'Laravel', 'PostgreSQL', 'MySQL', 'MongoDB'],
   },
   {
     icon: 'cloud',
     title: 'Cloud & DevOps',
-    description: 'AWS (Lambda, Cognito, CDK, S3) and GCP (Cloud Run, Firebase). Docker, GitHub Actions, Nginx. Self-hosted with Coolify + Cloudflare.',
+    description: 'AWS (Lambda, Cognito, CDK, S3) y GCP (Cloud Run, Firebase). Docker, GitHub Actions, Nginx. Self-hosted con Coolify + Cloudflare.',
     technologies: ['AWS Lambda', 'GCP Cloud Run', 'Docker', 'GitHub Actions', 'Nginx', 'Coolify', 'Cloudflare'],
   },
   {
     icon: 'architecture',
-    title: 'Architecture',
-    description: 'Clean architecture, DDD, Hexagonal, CQRS. I design systems that scale and survive team changes.',
+    title: 'Arquitectura',
+    description: 'Clean Architecture, DDD, Hexagonal, CQRS. Diseño sistemas que escalan y sobreviven a cambios de equipo.',
     technologies: ['Clean Architecture', 'DDD', 'Hexagonal', 'CQRS', 'Event-Driven', 'Microservices', 'MVI'],
   },
 ];
@@ -31,17 +31,17 @@ const capabilities = [
 
 <BaseLayout
   title="Stack · Yahyr Paredes"
-  description="The technologies and patterns I use to build products that scale."
+  description="Tecnologías y patrones que uso para construir productos escalables."
 >
   <!-- HERO -->
   <section class="container-page pt-16 sm:pt-20 pb-12">
     <p class="eyebrow mb-5">STACK</p>
     <h1 class="text-balance max-w-3xl mb-6">
-      The technologies and patterns<br />
-      I use to build <span class="text-blue-200 font-display italic font-medium">products that scale</span>.
+      Tecnologías y patrones<br />
+      para construir <span class="text-blue-200 font-display italic font-medium">productos que escalan</span>.
     </h1>
     <p class="text-ink-100 text-lg max-w-2xl leading-relaxed">
-      I don't chase trends. I choose tools that solve real problems and survive team changes. Here's what I work with daily.
+      No persigo tendencias. Elijo herramientas que resuelven problemas reales y sobreviven a cambios de equipo. Esto es lo que uso en el día a día.
     </p>
   </section>
 
@@ -49,7 +49,7 @@ const capabilities = [
   <section class="container-page pb-16 sm:pb-24">
     <div class="grid sm:grid-cols-2 gap-5 sm:gap-6">
       {capabilities.map((cap) => (
-        <article class="card p-6 sm:p-8 group hover:border-blue/30">
+        <article class="card-glass p-6 sm:p-8 group hover:border-blue/30">
           <!-- Icon -->
           <div class="w-14 h-14 rounded-2xl bg-blue/10 border border-blue/20 flex items-center justify-center mb-5 group-hover:bg-blue/20 transition-colors">
             {cap.icon === 'mobile' && (
@@ -77,7 +77,7 @@ const capabilities = [
           <h2 class="font-display font-bold text-2xl text-ink mb-3">{cap.title}</h2>
           <p class="text-ink-200 leading-relaxed mb-5">{cap.description}</p>
 
-          <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">Technologies</p>
+          <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">Tecnologías</p>
           <div class="flex flex-wrap gap-1.5">
             {cap.technologies.map((tech) => (
               <span class="text-xs px-2 py-0.5 rounded-full bg-midnight-200 text-ink-200 border border-border">
@@ -93,18 +93,18 @@ const capabilities = [
   <!-- CTA -->
   <section class="border-t border-border">
     <div class="container-page py-12 sm:py-16">
-      <div class="card p-8 sm:p-10 text-center">
+      <div class="closing-panel card-glass p-8 sm:p-10 text-center">
         <p class="font-display italic text-2xl text-ink mb-3">
-          Tools are means. Products are ends.
+          Las herramientas son medios. El producto es el fin.
         </p>
         <p class="text-ink-200 mb-6 max-w-xl mx-auto">
-          I pick the right tool for the problem. If your project needs something outside my stack, I'll learn it.
+          Elijo la herramienta adecuada para el problema. Si tu proyecto necesita algo fuera de mi stack, lo aprendo.
         </p>
         <a
           href={Astro.url.pathname.startsWith('/en/') ? '/en/contact' : '/es/contacto'}
           class="btn btn-primary"
         >
-          Discuss your project
+          Hablemos de tu proyecto
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>

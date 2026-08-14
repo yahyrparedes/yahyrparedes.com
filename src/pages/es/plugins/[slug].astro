@@ -31,17 +31,17 @@ const jsonLd = productJsonLd({
       <span class="text-ink-300">{plugin.name}</span>
     </nav>
 
-    <header class="mb-10 fade-in-up stagger-1">
+    <header class="hero-editorial relative overflow-hidden -mx-6 sm:-mx-8 mb-10 rounded-2xl border border-border p-6 sm:p-10 fade-in-up stagger-1">
       <div class="flex items-center gap-2 mb-3">
-        <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-sage-100 text-sage-600 uppercase tracking-wide">
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-blue/10 text-blue-200 uppercase tracking-wide border border-blue/30">
           {plugin.platform}
         </span>
         <span class="text-xs text-ink-100">v{plugin.version}</span>
-        <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-amber-100 text-amber-500">
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-orange/10 text-orange border border-orange/30">
           {plugin.status === 'available' ? '✓ Disponible' : plugin.status === 'beta' ? '🧪 Beta' : '🔜 Roadmap'}
         </span>
       </div>
-      <h1 class="font-display font-bold text-4xl sm:text-5xl text-ink-300 text-balance">
+      <h1 class="font-display font-bold text-4xl sm:text-5xl text-ink text-balance">
         {plugin.name}
       </h1>
       <p class="mt-3 text-xl text-ink-200 text-pretty">{plugin.tagline}</p>
@@ -54,23 +54,23 @@ const jsonLd = productJsonLd({
       </section>
 
       <!-- Pricing card -->
-      <section id="buy" class="p-6 sm:p-8 bg-gradient-to-br from-amber-100 to-cream-200 rounded-2xl border-2 border-amber-200">
+      <section id="buy" class="p-6 sm:p-8 closing-panel card-glass">
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p class="text-sm font-medium text-ink-100 mb-1">Licencia anual</p>
-            <p class="text-4xl font-display font-bold text-ink-300">{plugin.price}€</p>
+            <p class="text-4xl font-display font-bold text-ink">{plugin.price}€</p>
             <p class="text-sm text-ink-200 mt-1">{plugin.priceUnit}</p>
           </div>
           <a
             href={plugin.buyUrl}
-            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-ink-300 text-cream-100 font-semibold hover:bg-ink-400 transition-all shadow-md"
+            class="btn btn-primary"
           >
             Comprar ahora
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
         {plugin.demoUrl && (
-          <a href={plugin.demoUrl} class="inline-block mt-4 text-sm text-sage-500 hover:text-sage-600">
+          <a href={plugin.demoUrl} class="inline-block mt-4 text-sm text-blue-200 hover:text-blue">
             Ver demo en vivo →
           </a>
         )}
@@ -82,7 +82,7 @@ const jsonLd = productJsonLd({
         <ul class="space-y-2.5">
           {plugin.features.map((f) => (
             <li class="flex items-start gap-3">
-              <span class="text-sage-500 mt-0.5">✓</span>
+              <span class="text-blue-200 mt-0.5">✓</span>
               <span class="text-ink-200">{f}</span>
             </li>
           ))}
@@ -94,8 +94,8 @@ const jsonLd = productJsonLd({
         <h2 class="font-display font-bold text-2xl text-ink-300 mb-4">Por qué lo necesitas</h2>
         <ul class="space-y-2.5">
           {plugin.benefits.map((b) => (
-            <li class="flex items-start gap-3 p-3 bg-sage-50 rounded-lg">
-              <span class="text-amber-500 mt-0.5">→</span>
+            <li class="flex items-start gap-3 p-3 rounded-lg border border-border bg-white/5">
+              <span class="text-blue-200 mt-0.5">→</span>
               <span class="text-ink-200">{b}</span>
             </li>
           ))}
@@ -107,7 +107,7 @@ const jsonLd = productJsonLd({
         <h2 class="font-display font-bold text-2xl text-ink-300 mb-4">Casos de uso</h2>
         <div class="grid sm:grid-cols-2 gap-3">
           {plugin.useCases.map((uc) => (
-            <div class="p-4 bg-cream-100 rounded-lg border border-sage-100">
+            <div class="p-4 card-glass">
               <p class="text-ink-200 text-pretty">{uc}</p>
             </div>
           ))}
@@ -120,7 +120,7 @@ const jsonLd = productJsonLd({
         <ol class="space-y-3">
           {plugin.installSteps.map((step, i) => (
             <li class="flex items-start gap-3">
-              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-sage-400 text-cream-100 text-sm font-bold flex items-center justify-center">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-blue text-white text-sm font-bold flex items-center justify-center">
                 {i + 1}
               </span>
               <span class="text-ink-200 flex-1 pt-0.5">{step}</span>
@@ -134,8 +134,8 @@ const jsonLd = productJsonLd({
         <h2 class="font-display font-bold text-2xl text-ink-300 mb-6">FAQ</h2>
         <div class="space-y-4">
           {plugin.faq.map((q) => (
-            <details class="group p-5 bg-cream-100 rounded-xl border border-sage-100">
-              <summary class="font-semibold text-ink-300 cursor-pointer flex items-center justify-between">
+            <details class="group p-5 card-glass">
+              <summary class="font-semibold text-ink cursor-pointer flex items-center justify-between">
                 {q.question}
                 <svg class="w-5 h-5 text-ink-100 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
               </summary>
@@ -148,7 +148,7 @@ const jsonLd = productJsonLd({
       <div class="pt-8 text-center">
         <a
           href={plugin.buyUrl}
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-300 text-ink-300 font-semibold hover:bg-amber-400 transition-all shadow-md shadow-amber-300/30"
+          class="btn btn-primary"
         >
           Comprar {plugin.name} por {plugin.price}€
         </a>

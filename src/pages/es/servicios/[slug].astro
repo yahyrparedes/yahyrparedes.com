@@ -30,11 +30,11 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
       <span class="text-ink-300">{service.name}</span>
     </nav>
 
-    <header class="mb-12 fade-in-up stagger-1">
+    <header class="hero-editorial relative overflow-hidden -mx-6 sm:-mx-8 mb-12 rounded-2xl border border-border p-6 sm:p-10 fade-in-up stagger-1">
       <div class="text-5xl mb-4">
         {service.icon === 'web' ? '🌐' : service.icon === 'mobile' ? '📱' : service.icon === 'stack' ? '🏗️' : service.icon === 'wrench' ? '🔧' : '✨'}
       </div>
-      <h1 class="font-display font-bold text-4xl sm:text-5xl text-ink-300 text-balance">
+      <h1 class="font-display font-bold text-4xl sm:text-5xl text-ink text-balance">
         {service.name}
       </h1>
       <p class="mt-3 text-xl text-ink-200 text-pretty">{service.tagline}</p>
@@ -52,7 +52,7 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
         <ul class="space-y-2.5">
           {service.features.map((f) => (
             <li class="flex items-start gap-3">
-              <span class="text-sage-500 mt-0.5">✓</span>
+              <span class="text-blue-200 mt-0.5">✓</span>
               <span class="text-ink-200">{f}</span>
             </li>
           ))}
@@ -64,12 +64,12 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
         <h2 class="font-display font-bold text-2xl text-ink-300 mb-4">Cómo trabajo</h2>
         <ol class="space-y-3">
           {service.process.map((step, i) => (
-            <li class="flex items-start gap-4 p-4 bg-cream-100 rounded-xl border border-sage-100">
-              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-sage-400 text-cream-100 font-bold text-sm flex items-center justify-center">
+            <li class="flex items-start gap-4 p-4 card-glass">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-blue text-white font-bold text-sm flex items-center justify-center">
                 {i + 1}
               </span>
               <div class="flex-1">
-                <h3 class="font-semibold text-ink-300">{step.title}</h3>
+                <h3 class="font-semibold text-ink">{step.title}</h3>
                 <p class="mt-1 text-sm text-ink-200">{step.description}</p>
               </div>
             </li>
@@ -82,7 +82,7 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
         <h2 class="font-display font-bold text-2xl text-ink-300 mb-4">Stack típico</h2>
         <div class="flex flex-wrap gap-2">
           {service.stack.map((tech) => (
-            <span class="px-3 py-1.5 text-sm bg-sage-50 text-ink-300 rounded-full border border-sage-100 font-medium">
+            <span class="px-3 py-1.5 text-sm bg-white/5 text-ink-200 rounded-full border border-border font-medium">
               {tech}
             </span>
           ))}
@@ -91,20 +91,20 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
 
       <!-- Ideal / No ideal -->
       <section class="grid sm:grid-cols-2 gap-4">
-        <div class="p-5 bg-sage-50 rounded-xl border-2 border-sage-200">
-          <h3 class="text-sm font-semibold text-sage-600 mb-2">✓ Ideal para</h3>
+        <div class="p-5 card-glass">
+          <h3 class="text-sm font-semibold text-blue-200 mb-2">✓ Ideal para</h3>
           <p class="text-ink-200 text-pretty">{service.idealFor}</p>
         </div>
-        <div class="p-5 bg-cream-200 rounded-xl border border-sage-100">
+        <div class="p-5 card-glass">
           <h3 class="text-sm font-semibold text-ink-100 mb-2">✗ No es para</h3>
           <p class="text-ink-200 text-pretty">{service.notFor}</p>
         </div>
       </section>
 
       <!-- Pricing -->
-      <section class="p-6 sm:p-8 bg-gradient-to-br from-amber-100 to-cream-200 rounded-2xl border-2 border-amber-200">
-        <h2 class="font-display font-bold text-2xl text-ink-300 mb-2">Inversión</h2>
-        <p class="text-2xl font-display font-bold text-amber-500">{service.pricing}</p>
+      <section class="p-6 sm:p-8 closing-panel card-glass">
+        <h2 class="font-display font-bold text-2xl text-ink mb-2">Inversión</h2>
+        <p class="text-2xl font-display font-bold text-blue-200">{service.pricing}</p>
       </section>
 
       <!-- FAQ -->
@@ -112,8 +112,8 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
         <h2 class="font-display font-bold text-2xl text-ink-300 mb-6">Preguntas frecuentes</h2>
         <div class="space-y-4">
           {service.faq.map((q) => (
-            <details class="group p-5 bg-cream-100 rounded-xl border border-sage-100">
-              <summary class="font-semibold text-ink-300 cursor-pointer flex items-center justify-between">
+            <details class="group p-5 card-glass">
+              <summary class="font-semibold text-ink cursor-pointer flex items-center justify-between">
                 {q.question}
                 <svg class="w-5 h-5 text-ink-100 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
               </summary>
@@ -126,7 +126,7 @@ const jsonLd = serviceJsonLd({ name: service.name, description: service.descript
       <div class="pt-8 text-center">
         <a
           href="/es/contacto"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-300 text-ink-300 font-semibold hover:bg-amber-400 transition-all shadow-md shadow-amber-300/30"
+          class="btn btn-primary"
         >
           Empezar un proyecto de {service.name.toLowerCase()}
         </a>

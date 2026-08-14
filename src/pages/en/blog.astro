@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Writing · Yahyr Paredes"
+  description="Technical notes about product engineering, mobile, backend and production systems."
+>
+  <section class="hero-editorial relative overflow-hidden">
+    <div class="container-page relative py-20 sm:py-28">
+      <p class="eyebrow mb-5">WRITING</p>
+      <h1 class="text-balance max-w-3xl mb-6">
+        Ideas about product, engineering and systems that last.
+      </h1>
+      <p class="text-ink-100 text-lg max-w-2xl leading-relaxed">
+        I am preparing practical writing about mobile, backend, architecture, remote work and building products in production.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page py-16 sm:py-20">
+    <div class="card-glass p-8 sm:p-10">
+      <p class="eyebrow mb-4">COMING SOON</p>
+      <div class="grid lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5">
+          <h2 class="text-balance mb-4">Writing, not a blog for noise.</h2>
+          <p class="text-ink-200 leading-relaxed">
+            This section will start with useful, grounded pieces: technical decisions, product lessons and real production cases.
+          </p>
+        </div>
+        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-3">
+          {['Mobile architecture that scales', 'Pragmatic backend in production', 'Product lessons from startups', 'Working with AI without losing judgment'].map((topic) => (
+            <div class="rounded-xl border border-border bg-white/5 p-4">
+              <p class="text-sm font-semibold text-ink">{topic}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

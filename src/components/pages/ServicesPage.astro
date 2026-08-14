@@ -137,7 +137,7 @@ const iconPaths: Record<string, string> = {
 <BaseLayout title={`${copy.eyebrow} · Yahyr Paredes`} description={copy.subheadline}>
   <article>
     <!-- HERO -->
-    <section class="bg-hero py-12 sm:py-20">
+    <section class="hero-editorial relative overflow-hidden py-16 sm:py-24">
       <div class="container-page grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
           <p class="eyebrow mb-5">{copy.eyebrow}</p>
@@ -165,8 +165,23 @@ const iconPaths: Record<string, string> = {
         </div>
 
         <div class="lg:col-span-5">
-          <div class="relative aspect-[4/3] w-full max-w-md mx-auto lg:ml-auto">
-            <img src="/images/personal-2.png" alt="Code on screen" class="relative w-full h-full object-cover rounded-2xl ring-1 ring-border shadow-soft" loading="eager" />
+          <div class="card-glass relative aspect-[4/3] w-full max-w-md mx-auto lg:ml-auto overflow-hidden p-5">
+            <div class="rounded-xl border border-border bg-midnight h-full p-4 font-mono text-xs text-ink-200">
+              <div class="mb-4 flex gap-1.5">
+                <span class="h-2.5 w-2.5 rounded-full bg-error"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-warning"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-success"></span>
+              </div>
+              <div class="space-y-2">
+                <p><span class="text-blue-200">product</span>.discover()</p>
+                <p><span class="text-blue-200">architecture</span>.design()</p>
+                <p><span class="text-blue-200">platform</span>.ship()</p>
+                <p><span class="text-blue-200">metrics</span>.measure()</p>
+              </div>
+              <div class="absolute inset-x-5 bottom-5 rounded-xl border border-blue/20 bg-blue/10 p-4">
+                <p class="font-sans text-sm font-semibold text-ink">{currentLang === 'en' ? 'Built for products that must last.' : 'Construido para productos que deben durar.'}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -181,7 +196,7 @@ const iconPaths: Record<string, string> = {
 
       <div class="space-y-4">
         {copy.services.map((s) => (
-          <article class="card overflow-hidden">
+          <article class="card-glass overflow-hidden">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
               <!-- Left: num + icon + title + body + link -->
               <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border">
@@ -199,10 +214,67 @@ const iconPaths: Record<string, string> = {
                 </a>
               </div>
 
-              <!-- Middle: visual placeholder -->
+              <!-- Middle: service visual -->
               <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border flex items-center justify-center bg-midnight-200/30 min-h-[200px]">
-                <div class="w-full max-w-[200px] aspect-video rounded-lg bg-gradient-to-br from-midnight-200 to-midnight-100 ring-1 ring-border flex items-center justify-center">
-                  <span class="text-xs font-mono text-ink-300">{s.num} visual</span>
+                <div class="service-visual w-full max-w-[280px] rounded-xl border border-border bg-midnight p-4">
+                  {s.slug === 'webs' && (
+                    <div>
+                      <div class="mb-4 flex items-center justify-between border-b border-border pb-3">
+                        <span class="text-xs font-mono text-blue-200">Performance</span>
+                        <span class="text-xs text-success">98</span>
+                      </div>
+                      <div class="grid grid-cols-4 gap-2 text-center">
+                        {['LCP', 'SEO', 'A11Y', 'CWV'].map((item) => (
+                          <div class="rounded-lg bg-white/5 p-2">
+                            <p class="text-[10px] text-ink-300">{item}</p>
+                            <p class="text-sm font-bold text-ink">✓</p>
+                          </div>
+                        ))}
+                      </div>
+                      <div class="mt-4 h-14 rounded-lg border border-blue/20 bg-[linear-gradient(135deg,rgba(59,130,246,.12),transparent)]"></div>
+                    </div>
+                  )}
+                  {s.slug === 'apps' && (
+                    <div class="flex justify-center gap-3">
+                      {[1, 2, 3].map((phone) => (
+                        <div class="h-32 w-16 rounded-2xl border border-border bg-carbon p-1">
+                          <div class={`h-full rounded-xl ${phone === 1 ? 'bg-green/20' : phone === 2 ? 'bg-blue/20' : 'bg-orange/20'}`}></div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {s.slug === 'ecosistema' && (
+                    <div class="grid grid-cols-3 gap-3 text-center text-xs text-ink-200">
+                      {['Mobile', 'API', 'DB', 'Web', 'Cloud', 'Jobs'].map((item) => (
+                        <div class="rounded-lg border border-border bg-white/5 p-3">{item}</div>
+                      ))}
+                    </div>
+                  )}
+                  {s.slug === 'hot-fixes' && (
+                    <div class="space-y-3">
+                      {['Critical bug resolved', 'Performance improved', 'Feature deployed'].map((item, index) => (
+                        <div class="flex items-center justify-between rounded-lg border border-border bg-white/5 p-3">
+                          <span class="text-xs text-ink-200">{item}</span>
+                          <span class={`text-[10px] font-semibold ${index === 0 ? 'text-success' : 'text-blue-200'}`}>{index === 0 ? 'Fixed' : 'Improved'}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {s.slug === 'ai-rescue' && (
+                    <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+                      <div class="rounded-lg border border-error/30 bg-error/10 p-3 text-[11px] text-ink-200">
+                        <p class="mb-2 text-error">Chaos</p>
+                        <p>Unclear architecture</p>
+                        <p>Slow delivery</p>
+                      </div>
+                      <span class="text-blue-200">→</span>
+                      <div class="rounded-lg border border-success/30 bg-success/10 p-3 text-[11px] text-ink-200">
+                        <p class="mb-2 text-success">Impact</p>
+                        <p>Clear roadmap</p>
+                        <p>Stable release</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -227,7 +299,7 @@ const iconPaths: Record<string, string> = {
     <!-- CTA FINAL -->
     <section class="border-t border-border">
       <div class="container-page py-12 sm:py-16">
-        <div class="card p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="closing-panel card-glass p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div class="text-center sm:text-left">
             <h2 class="text-2xl sm:text-3xl text-balance">{copy.ctaTitle}</h2>
             <p class="text-ink-200 mt-2 text-sm">{copy.ctaBody}</p>

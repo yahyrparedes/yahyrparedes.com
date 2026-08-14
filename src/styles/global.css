@@ -303,6 +303,151 @@
     background: linear-gradient(135deg, var(--hero-glow-from) 0%, var(--hero-glow-to) 100%);
   }
 
+  .hero-editorial {
+    background:
+      radial-gradient(circle at 70% 18%, rgba(59, 130, 246, .20), transparent 34%),
+      linear-gradient(180deg, #050A12 0%, var(--color-midnight) 62%, var(--color-midnight) 100%);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hero-editorial::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+    background-size: 96px 96px;
+    mask-image: linear-gradient(180deg, transparent 0%, black 20%, black 75%, transparent 100%);
+    opacity: .18;
+  }
+
+  .stats-panel > .grid > * {
+    border-color: var(--color-border);
+  }
+
+  .trust-logo-card {
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    border: 1px solid var(--color-border);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02)),
+      rgba(255, 255, 255, .035);
+    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+  }
+
+  .trust-logo-card:hover {
+    border-color: rgba(96, 165, 250, .45);
+    background-color: rgba(255, 255, 255, .06);
+    transform: translateY(-1px);
+  }
+
+  .trust-logo-card-light {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .88));
+  }
+
+  .trust-logo-card-light:hover {
+    background-color: rgba(255, 255, 255, .96);
+  }
+
+  .stats-panel > .grid > *:nth-child(odd) {
+    border-right: 1px solid var(--color-border);
+  }
+  .stats-panel > .grid > *:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--color-border);
+  }
+  @media (min-width: 1024px) {
+    .stats-panel > .grid > * {
+      border-bottom: 0 !important;
+    }
+    .stats-panel > .grid > *:not(:last-child) {
+      border-right: 1px solid var(--color-border);
+    }
+  }
+
+  .work-card {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .025)),
+      var(--color-glass);
+  }
+
+  .work-card-brand {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+  }
+
+  .work-card-brand:hover {
+    transform: translateY(-2px);
+  }
+
+  .work-logo-tile {
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, .10);
+    background-color: rgba(11, 18, 32, .72);
+    padding: .75rem;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .work-logo-tile-light {
+    background-color: rgba(255, 255, 255, .94);
+  }
+
+  .work-visual-green,
+  .work-visual-blue,
+  .work-visual-orange,
+  .work-visual-cyan,
+  .work-visual-red {
+    background-color: #070C16;
+  }
+
+  .work-visual-green {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(34, 197, 94, .28), transparent 30%),
+      linear-gradient(135deg, rgba(0, 112, 74, .34), rgba(7, 12, 22, .94) 58%);
+  }
+
+  .work-visual-blue {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(59, 130, 246, .28), transparent 32%),
+      linear-gradient(135deg, rgba(30, 64, 175, .34), rgba(7, 12, 22, .94) 58%);
+  }
+
+  .work-visual-orange {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(245, 158, 11, .28), transparent 32%),
+      linear-gradient(135deg, rgba(194, 65, 12, .34), rgba(7, 12, 22, .94) 58%);
+  }
+
+  .work-visual-cyan {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(6, 182, 212, .28), transparent 32%),
+      linear-gradient(135deg, rgba(8, 145, 178, .34), rgba(7, 12, 22, .94) 58%);
+  }
+
+  .work-visual-red {
+    background:
+      radial-gradient(circle at 18% 20%, rgba(239, 68, 68, .30), transparent 32%),
+      linear-gradient(135deg, rgba(153, 27, 27, .38), rgba(7, 12, 22, .94) 58%);
+  }
+
+  .closing-panel {
+    background:
+      radial-gradient(circle at 0% 50%, rgba(59, 130, 246, .22), transparent 34%),
+      linear-gradient(135deg, rgba(17, 24, 39, .98), rgba(8, 17, 31, .92));
+  }
+
   /* Glow ambient */
   .glow-blue { box-shadow: 0 0 40px var(--color-blue-glow); }
   .glow-accent { box-shadow: 0 0 40px var(--color-accent-glow); }

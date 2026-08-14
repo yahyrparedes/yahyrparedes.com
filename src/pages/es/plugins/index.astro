@@ -14,7 +14,7 @@ const jsonLd = site.plugins.map((p) => productJsonLd({
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-  <article class="bg-hero container-page py-12 sm:py-16 max-w-6xl">
+  <article class="container-page py-12 sm:py-16 max-w-6xl">
     <!-- Hero suite -->
     <header class="text-center mb-16 max-w-3xl mx-auto">
       <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue/10 border border-blue/30 text-blue-200 text-xs font-semibold mb-4">
@@ -49,7 +49,7 @@ const jsonLd = site.plugins.map((p) => productJsonLd({
       {site.plugins.map((p, i) => (
         <a
           href={`/es/plugins/${p.slug}`}
-          class="group card p-6 sm:p-7 flex flex-col hover:border-blue/30"
+          class="group card-glass p-6 sm:p-7 flex flex-col hover:border-blue/30"
         >
           <div class="flex items-start justify-between mb-4">
             <span class="text-4xl" aria-hidden="true">{p.icon}</span>
@@ -77,21 +77,21 @@ const jsonLd = site.plugins.map((p) => productJsonLd({
         Por qué Tiger
       </h2>
       <div class="grid sm:grid-cols-3 gap-4 sm:gap-6">
-        <div class="card p-6">
+        <div class="card-glass p-6">
           <div class="text-3xl mb-3">💸</div>
           <h3 class="font-display font-bold text-lg text-ink mb-2">0€ vs 200€/mes</h3>
           <p class="text-ink-200 text-pretty">
             Los módulos europeos cuestan entre 150€ y 300€ al mes. Para una tienda LATAM con 200 a 2000 productos, es inviable. Tiger es open source y no tiene costes ocultos.
           </p>
         </div>
-        <div class="card p-6">
+        <div class="card-glass p-6">
           <div class="text-3xl mb-3">🔌</div>
           <h3 class="font-display font-bold text-lg text-ink mb-2">Independientes</h3>
           <p class="text-ink-200 text-pretty">
             5 módulos independientes. Instala solo lo que necesitas. Funcionan por separado, sin dependencias entre sí.
           </p>
         </div>
-        <div class="card p-6">
+        <div class="card-glass p-6">
           <div class="text-3xl mb-3">🌎</div>
           <h3 class="font-display font-bold text-lg text-ink mb-2">LATAM primero</h3>
           <p class="text-ink-200 text-pretty">
@@ -102,7 +102,7 @@ const jsonLd = site.plugins.map((p) => productJsonLd({
     </section>
 
     <!-- Open source vs Pro -->
-    <section class="mt-20 card p-6 sm:p-10">
+    <section class="mt-20 card-glass p-6 sm:p-10">
       <h2 class="font-display font-bold text-2xl sm:text-3xl text-ink text-balance mb-2 text-center">
         Hoy gratis. Pronto, Pro para quienes quieran soporte.
       </h2>
@@ -110,7 +110,7 @@ const jsonLd = site.plugins.map((p) => productJsonLd({
         Todos los módulos son open source con licencia MIT y siempre lo serán. Lo que viene es opcional, para quien quiera soporte profesional.
       </p>
       <div class="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
-        <div class="p-5 bg-midnight-100 rounded-xl border-2 border-border">
+        <div class="p-5 bg-white/5 rounded-xl border border-border">
           <div class="text-xs font-bold text-blue-200 uppercase tracking-wider mb-2">Open Source</div>
           <p class="text-2xl font-display font-bold text-ink mb-3">Gratis</p>
           <ul class="space-y-2 text-sm text-ink-200">
@@ -119,7 +119,7 @@ const jsonLd = site.plugins.map((p) => productJsonLd({
             <li class="flex items-start gap-2"><span class="text-blue-200">✓</span> Soporte de la comunidad</li>
           </ul>
         </div>
-        <div class="p-5 bg-orange/10 rounded-xl border-2 border-orange/30 relative">
+        <div class="p-5 bg-orange/10 rounded-xl border border-orange/30 relative">
           <span class="absolute top-2 right-2 text-xs font-bold text-orange bg-midnight px-2 py-0.5 rounded-full border border-orange/30">PRONTO</span>
           <div class="text-xs font-bold text-orange uppercase tracking-wider mb-2">Pro</div>
           <p class="text-2xl font-display font-bold text-ink mb-3">29€<span class="text-sm text-ink-200 font-normal">/mes por tienda</span></p>

@@ -107,8 +107,7 @@ const alternateEnUrl = new URL(alternateEn, Astro.site).toString();
       (function () {
         try {
           var saved = localStorage.getItem('theme');
-          var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-          var theme = saved || (prefersLight ? 'light' : 'dark');
+          var theme = saved || 'dark';
           document.documentElement.classList.add('theme-' + theme);
           var meta = document.querySelector('meta[name="theme-color"]');
           if (meta) meta.setAttribute('content', theme === 'light' ? '#F8FAFC' : '#0B1220');

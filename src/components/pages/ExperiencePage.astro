@@ -208,7 +208,7 @@ const copy = currentLang === 'en'
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
-  <section class="bg-hero py-12 sm:py-20">
+  <section class="hero-editorial relative overflow-hidden py-16 sm:py-24">
     <div class="container-page">
       <p class="eyebrow mb-5">{copy.eyebrow}</p>
       <h1 class="text-balance max-w-3xl mb-6">
@@ -223,7 +223,7 @@ const copy = currentLang === 'en'
   <section class="container-page py-12 sm:py-16">
     <div class="space-y-6">
       {copy.entries.map((exp) => (
-        <article class="card overflow-hidden">
+        <article class="card-glass overflow-hidden">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
             <!-- Left: logo + company + year + body -->
             <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border flex flex-col">
@@ -269,7 +269,10 @@ const copy = currentLang === 'en'
 
             <!-- Right: product screenshot -->
             <div class="lg:col-span-4 p-6 sm:p-8 flex items-center justify-center bg-midnight-200/30">
-              <img src={exp.image} alt={exp.company} class="max-w-full max-h-48 rounded-lg ring-1 ring-border shadow-soft object-contain" loading="lazy" />
+              <div class="relative w-full overflow-hidden rounded-xl border border-border bg-midnight p-4">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(59,130,246,.18),transparent_55%)]" aria-hidden="true"></div>
+                <img src={exp.image} alt={exp.company} class="relative mx-auto max-w-full max-h-52 rounded-lg object-contain drop-shadow-2xl" loading="lazy" />
+              </div>
             </div>
           </div>
 
@@ -293,7 +296,7 @@ const copy = currentLang === 'en'
 
   <section class="border-t border-border">
     <div class="container-page py-12 sm:py-16">
-      <div class="card p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="closing-panel card-glass p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div class="text-center sm:text-left">
           <p class="font-display italic text-2xl sm:text-3xl text-ink mb-2">
             {copy.finalTitle} <span class="text-blue-200">{copy.finalStrong}</span>
