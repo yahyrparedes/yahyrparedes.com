@@ -55,6 +55,8 @@
   --shadow-md: 0 10px 40px rgba(0, 0, 0, .25);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, .35);
   --shadow-glow: 0 0 30px var(--color-blue-glow);
+  --ease-ui-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-ui-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* Theme-color (meta tag) */
   color-scheme: dark;
@@ -338,13 +340,17 @@
     background:
       linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .02)),
       rgba(255, 255, 255, .035);
-    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+    transition: border-color 180ms var(--ease-ui-out), background-color 180ms var(--ease-ui-out), transform 180ms var(--ease-ui-out);
   }
 
   .trust-logo-card:hover {
     border-color: rgba(96, 165, 250, .45);
     background-color: rgba(255, 255, 255, .06);
     transform: translateY(-1px);
+  }
+
+  .trust-logo-card:active {
+    transform: translateY(0) scale(.985);
   }
 
   .trust-logo-card-light {
@@ -383,6 +389,20 @@
 
   .work-card-brand:hover {
     transform: translateY(-2px);
+  }
+
+  .work-card-brand:active {
+    transform: translateY(0) scale(.992);
+  }
+
+  @media (min-width: 1280px) {
+    .work-card-primary {
+      grid-column: span 2 / span 2;
+    }
+
+    .work-card-secondary {
+      grid-column: span 3 / span 3;
+    }
   }
 
   .work-logo-tile {
@@ -463,9 +483,13 @@
     font-weight: 600;
     font-size: 0.95rem;
     line-height: 1;
-    transition: all 0.2s ease;
+    transition: background-color 180ms var(--ease-ui-out), border-color 180ms var(--ease-ui-out), color 180ms var(--ease-ui-out), transform 140ms var(--ease-ui-out), box-shadow 180ms var(--ease-ui-out);
     cursor: pointer;
     border: 1px solid transparent;
+  }
+
+  .btn:active {
+    transform: scale(.975);
   }
   .btn-primary {
     background-color: var(--color-blue);
@@ -488,6 +512,19 @@
   }
   :root.theme-light .btn-outline:hover {
     background-color: var(--color-slate);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .card-glass,
+    .trust-logo-card,
+    .work-logo-tile {
+      background-color: rgba(17, 24, 39, .96);
+    }
+
+    .trust-logo-card-light,
+    .work-logo-tile-light {
+      background-color: rgba(255, 255, 255, .96);
+    }
   }
 
   /* Nav links del header */

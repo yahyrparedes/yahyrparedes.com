@@ -10,7 +10,7 @@ const selectedWork = currentLang === 'en'
       {
         name: 'Starbucks Perú',
         logo: '/images/logos/starbucks.png',
-        tag: 'MOBILE COMMERCE · DEL OSI',
+        tag: 'MOBILE COMMERCE · DELOSI',
         accent: 'green',
         title: 'Starbucks Perú Android app',
         body: 'Android ownership for the Starbucks Perú customer app: rewards, commerce flows and production mobile evolution.',
@@ -39,7 +39,7 @@ const selectedWork = currentLang === 'en'
       },
       {
         name: 'Interseguro',
-        logo: '/images/logos/interseguro.png',
+        logo: '/images/logos/interseguro.svg',
         tag: 'INSURANCE · FINTECH',
         accent: 'orange',
         title: 'Insurance products and digital flows',
@@ -114,7 +114,7 @@ const selectedWork = currentLang === 'en'
       },
       {
         name: 'Interseguro',
-        logo: '/images/logos/interseguro.png',
+        logo: '/images/logos/interseguro.svg',
         tag: 'SEGUROS · FINTECH',
         accent: 'orange',
         title: 'Productos digitales de seguros',
@@ -238,7 +238,7 @@ const howSteps = [
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_22%,rgba(59,130,246,.22),transparent_34%),linear-gradient(90deg,var(--color-midnight)_0%,rgba(11,18,32,.96)_34%,rgba(11,18,32,.68)_58%,rgba(11,18,32,.36)_100%)]" aria-hidden="true"></div>
     <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-midnight to-transparent" aria-hidden="true"></div>
 
-    <div class="container-page relative min-h-[780px] pt-20 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 flex items-center">
+    <div class="container-page relative min-h-[680px] pt-20 sm:pt-24 lg:pt-24 pb-12 sm:pb-16 flex items-center">
       <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end w-full">
         <div class="lg:col-span-7 xl:col-span-6">
           <p class="eyebrow mb-6">{t(Astro.url, 'hero.eyebrow')}</p>
@@ -255,7 +255,7 @@ const howSteps = [
             {t(Astro.url, 'hero.subheadline')}
           </p>
 
-          <div class="flex flex-wrap gap-3 mb-10">
+          <div class="flex flex-wrap gap-3">
             <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
               {t(Astro.url, 'hero.cta_primary')}
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -265,14 +265,6 @@ const howSteps = [
             </a>
           </div>
 
-          <div class="flex flex-wrap gap-x-6 gap-y-3">
-            {['hero.pill_mobile', 'hero.pill_backend', 'hero.pill_cloud', 'hero.pill_ai', 'hero.pill_architecture', 'hero.pill_product'].map((key) => (
-              <span class="inline-flex items-center gap-2 text-sm text-ink-200">
-                <span class="h-1.5 w-1.5 rounded-full bg-blue-200 shadow-[0_0_14px_var(--color-blue-glow)]" aria-hidden="true"></span>
-                {t(Astro.url, key)}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div class="hidden lg:block lg:col-span-5 xl:col-span-4 xl:col-start-9 relative min-h-[440px]">
@@ -323,6 +315,19 @@ const howSteps = [
         <a href="https://zapatillastigre.com/" target="_blank" rel="noopener noreferrer" class="trust-logo-card trust-logo-card-light" aria-label="Zapatillas Tigre">
           <img src="/images/logos/zapatillas-tigre.png" alt="Zapatillas Tigre" class="max-h-14 w-auto object-contain" loading="lazy" />
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-border bg-midnight">
+    <div class="container-page py-6">
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-3">
+        {['hero.pill_mobile', 'hero.pill_backend', 'hero.pill_cloud', 'hero.pill_ai', 'hero.pill_architecture', 'hero.pill_product'].map((key) => (
+          <span class="inline-flex items-center gap-2 text-sm text-ink-200">
+            <span class="h-1.5 w-1.5 rounded-full bg-blue-200 shadow-[0_0_14px_var(--color-blue-glow)]" aria-hidden="true"></span>
+            {t(Astro.url, key)}
+          </span>
+        ))}
       </div>
     </div>
   </section>
@@ -381,9 +386,9 @@ const howSteps = [
       </a>
     </div>
 
-    <div class="grid sm:grid-cols-2 xl:grid-cols-5 gap-4 sm:gap-5">
-      {selectedWork.map((work) => (
-        <article class={`work-card work-card-brand card-glass overflow-hidden group flex min-h-[500px] flex-col transition-colors ${work.accent === 'green' ? 'hover:border-green/50' : work.accent === 'orange' ? 'hover:border-orange/50' : work.accent === 'cyan' ? 'hover:border-accent/50' : work.accent === 'red' ? 'hover:border-error/50' : 'hover:border-blue-200/50'}`}>
+    <div class="grid md:grid-cols-2 xl:grid-cols-6 gap-4 sm:gap-5">
+      {selectedWork.map((work, index) => (
+        <article class={`work-card work-card-brand ${index < 3 ? 'work-card-primary' : 'work-card-secondary'} card-glass overflow-hidden group flex min-h-[430px] flex-col transition-colors ${work.accent === 'green' ? 'hover:border-green/50' : work.accent === 'orange' ? 'hover:border-orange/50' : work.accent === 'cyan' ? 'hover:border-accent/50' : work.accent === 'red' ? 'hover:border-error/50' : 'hover:border-blue-200/50'}`}>
           <div class={`relative overflow-hidden border-b border-border p-6 min-h-[210px] flex flex-col justify-between ${work.accent === 'green' ? 'work-visual-green' : work.accent === 'orange' ? 'work-visual-orange' : work.accent === 'cyan' ? 'work-visual-cyan' : work.accent === 'red' ? 'work-visual-red' : 'work-visual-blue'}`}>
             <div class="flex items-start justify-between gap-4">
               <div class={`work-logo-tile ${work.accent === 'cyan' || work.accent === 'red' ? 'work-logo-tile-light' : ''}`}>
