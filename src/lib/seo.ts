@@ -86,7 +86,7 @@ export function productJsonLd(plugin: {
     name: plugin.name,
     description: plugin.description,
     brand: { '@type': 'Brand', name: 'Yahyr Paredes' },
-    category: `Plugin SEO para ${plugin.platform}`,
+    category: `Módulo SEO para ${plugin.platform}`,
     offers: {
       '@type': 'Offer',
       price: plugin.price,

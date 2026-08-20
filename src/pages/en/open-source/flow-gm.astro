@@ -1,0 +1,192 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const features = [
+  {
+    title: 'Collaboration CRM',
+    text: 'Track brands, products, links, SKU or ASIN, platform, status, contact, price, cost, notes, and follow-up dates.',
+  },
+  {
+    title: 'Duplicate prevention',
+    text: 'Compares brand, product, link, name, SKU or ASIN, and platform before saving to avoid repeated outreach.',
+  },
+  {
+    title: 'Conversation history',
+    text: 'Stores sent and received messages with direction, date, and time. Each entry can be edited or deleted later.',
+  },
+  {
+    title: 'Message templates',
+    text: 'Create reusable messages by channel and category with variables such as {{brand}}, {{product}}, and {{contact}}.',
+  },
+  {
+    title: 'Content calendar',
+    text: 'Organize ideas, drafts, and published content with dates, platform, notes, links, and attachments.',
+  },
+  {
+    title: 'Assisted capture',
+    text: 'The Chrome extension can send data from Amazon or Gmail into the local CRM when the app is open.',
+  },
+];
+
+const flow = [
+  ['Capture', 'Collect data from a collaboration, Amazon, or Gmail.'],
+  ['Check', 'Flow-GM warns you when a similar contact already exists.'],
+  ['Talk', 'Keep sent messages and replies in the conversation history.'],
+  ['Plan', 'Turn opportunities into scheduled content.'],
+];
+
+const softwareJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Flow-GM',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'macOS',
+  description:
+    'Flow-GM is a local CRM for creators who organize brand collaborations, messages, products, and content calendars from their Mac.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+};
+---
+
+<BaseLayout
+  title="Flow-GM · Local CRM for creators"
+  description="Flow-GM is a local CRM for creators who organize brand collaborations, messages, products, and content calendars from their Mac."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(softwareJsonLd)} />
+
+  <article class="container-page py-10 sm:py-16 max-w-6xl">
+    <nav class="mb-8 text-sm text-ink-300">
+      <a href="/en/" class="hover:text-blue-200">Home</a>
+      <span class="mx-2">/</span>
+      <a href="/en/open-source/" class="hover:text-blue-200">Open Source</a>
+      <span class="mx-2">/</span>
+      <span class="text-ink-100">Flow-GM</span>
+    </nav>
+
+    <header class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-center">
+      <div>
+        <p class="section-kicker">FLOW-GM</p>
+        <h1 class="mt-4 font-display font-bold text-4xl sm:text-5xl md:text-6xl text-ink text-balance">
+          Your collaborations, organized and under your control.
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-ink-200 leading-relaxed text-pretty">
+          Flow-GM replaces scattered spreadsheets with a private workspace for organizing brands,
+          products, conversations, and content without depending on a cloud platform.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#release" class="btn btn-primary">Download for macOS</a>
+          <a href="#flow" class="btn btn-secondary">See how it works</a>
+          <a href="mailto:hola@yahyrparedes.com?subject=I%20want%20to%20try%20Flow-GM" class="btn btn-ghost">
+            Try Flow-GM
+          </a>
+        </div>
+      </div>
+
+      <div class="card-glass p-5 sm:p-6">
+        <div class="rounded-xl border border-border bg-midnight-200/80 p-4">
+          <div class="flex items-center justify-between border-b border-border pb-3">
+            <div>
+              <p class="text-xs font-mono uppercase tracking-[0.2em] text-blue-200">Local CRM</p>
+              <p class="mt-1 font-display text-xl font-bold text-ink">New collaboration</p>
+            </div>
+            <span class="rounded-full bg-blue/10 px-3 py-1 text-xs font-semibold text-blue-200">Following up</span>
+          </div>
+          <dl class="mt-4 grid gap-3 text-sm">
+            {[
+              ['Brand', 'North Ridge Coffee'],
+              ['Product', 'Cold brew kit'],
+              ['Platform', 'Amazon + Gmail'],
+              ['Status', 'Message sent'],
+              ['Next step', 'Reply on Thursday'],
+            ].map(([label, value]) => (
+              <div class="grid grid-cols-[110px_1fr] gap-3 rounded-lg border border-border bg-white/5 px-3 py-2">
+                <dt class="text-ink-300">{label}</dt>
+                <dd class="font-medium text-ink">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <p class="mt-4 text-xs leading-relaxed text-ink-300">
+          Real interface screenshots will be added when the public release is ready.
+        </p>
+      </div>
+    </header>
+
+    <section class="mt-20 grid lg:grid-cols-[0.8fr_1.2fr] gap-8">
+      <div>
+        <p class="section-kicker">PROBLEM</p>
+        <h2 class="mt-4 font-display text-3xl sm:text-4xl font-bold text-ink text-balance">
+          The hard part is not contacting brands. It is remembering what happened.
+        </h2>
+      </div>
+      <p class="text-lg leading-relaxed text-ink-200 text-pretty">
+        When brand outreach lives in a spreadsheet, it is easy to contact the same lead twice,
+        lose replies, or forget which product and message were used. Filtering rows and comparing
+        cells takes time that could be spent creating content.
+      </p>
+    </section>
+
+    <section id="flow" class="mt-20">
+      <p class="section-kicker">FLOW</p>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {flow.map(([title, text], index) => (
+          <div class="card-glass p-5">
+            <p class="font-mono text-xs text-blue-200">0{index + 1}</p>
+            <h3 class="mt-4 font-display text-xl font-bold text-ink">{title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-200">{text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-20">
+      <p class="section-kicker">FEATURES</p>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((feature) => (
+          <div class="rounded-xl border border-border bg-midnight-100/70 p-5">
+            <h3 class="font-display text-lg font-bold text-ink">{feature.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-200">{feature.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-20 grid lg:grid-cols-2 gap-6">
+      <div class="card-glass p-6 sm:p-8">
+        <p class="section-kicker">PRIVACY</p>
+        <h2 class="mt-4 font-display text-3xl font-bold text-ink">Local data, real control.</h2>
+        <ul class="mt-6 space-y-3 text-ink-200">
+          <li>Data is stored locally in SQLite.</li>
+          <li>There is no mandatory account and no automatic third-party sync.</li>
+          <li>The extension only saves information when you confirm the capture.</li>
+          <li>JSON export makes backups and data preservation possible during updates.</li>
+        </ul>
+      </div>
+
+      <div id="release" class="card-glass p-6 sm:p-8">
+        <p class="section-kicker">RELEASE</p>
+        <h2 class="mt-4 font-display text-3xl font-bold text-ink">Initial version for macOS.</h2>
+        <p class="mt-4 leading-relaxed text-ink-200">
+          Flow-GM is oriented to one-person, local use. The extension works as manual assisted
+          capture. Automatic integrations with Gmail, Amazon, ChatGPT, or MCP are possible future
+          evolution, not a promise of the current release.
+        </p>
+        <ol class="mt-6 space-y-3 text-sm text-ink-200">
+          <li>1. Download the universal DMG for Intel or Apple Silicon Macs.</li>
+          <li>2. Move <code>Flow-GM.app</code> to the Applications folder.</li>
+          <li>3. Open it from Finder using right click and <strong>Open</strong> if macOS shows a warning.</li>
+          <li>4. Install the Chrome extension if you want assisted capture.</li>
+        </ol>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="mailto:hola@yahyrparedes.com?subject=I%20want%20to%20try%20Flow-GM" class="btn btn-primary">
+            Try Flow-GM
+          </a>
+          <a href="/en/privacy/" class="btn btn-secondary">Privacy policy</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

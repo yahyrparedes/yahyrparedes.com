@@ -1,6 +1,6 @@
 ---
 import { site } from '@data/site.ts';
-import { t, getLangFromUrl } from '@i18n/ui.ts';
+import { t, getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
 import LanguageToggle from './LanguageToggle.astro';
 import '@styles/global.css';
 
@@ -8,26 +8,26 @@ const currentLang = getLangFromUrl(Astro.url);
 const year = new Date().getFullYear();
 
 const navItems = [
-  { key: 'nav.home', href: currentLang === 'en' ? '/en/' : '/es/' },
-  { key: 'nav.about', href: currentLang === 'en' ? '/en/behind-the-engineer' : '/es/sobre-mi' },
-  { key: 'nav.experience', href: currentLang === 'en' ? '/en/experience' : '/es/experience' },
-  { key: 'nav.services', href: currentLang === 'en' ? '/en/services' : '/es/servicios' },
-  { key: 'nav.open_source', href: currentLang === 'en' ? '/en/open-source' : '/es/plugins' },
-  { key: 'nav.contact', href: currentLang === 'en' ? '/en/contact' : '/es/contacto' },
+  { key: 'nav.home', href: getLocalizedPath('home', currentLang) },
+  { key: 'nav.about', href: getLocalizedPath('about', currentLang) },
+  { key: 'nav.experience', href: getLocalizedPath('experience', currentLang) },
+  { key: 'nav.services', href: getLocalizedPath('services', currentLang) },
+  { key: 'nav.open_source', href: getLocalizedPath('openSource', currentLang) },
+  { key: 'nav.contact', href: getLocalizedPath('contact', currentLang) },
 ];
 
 const serviceItems = [
-  { key: 'footer.service_web', href: currentLang === 'en' ? '/en/services/webs' : '/es/servicios/webs' },
-  { key: 'footer.service_apps', href: currentLang === 'en' ? '/en/services/apps' : '/es/servicios/apps' },
-  { key: 'footer.service_ecosystem', href: currentLang === 'en' ? '/en/services/ecosistema' : '/es/servicios/ecosistema' },
-  { key: 'footer.service_hotfixes', href: currentLang === 'en' ? '/en/services/hot-fixes' : '/es/servicios/hot-fixes' },
-  { key: 'footer.service_rescue', href: currentLang === 'en' ? '/en/services/ai-rescue' : '/es/servicios/ai-rescue' },
+  { key: 'footer.service_web', href: getLocalizedPath('serviceDetail', currentLang, { slug: 'webs' }) },
+  { key: 'footer.service_apps', href: getLocalizedPath('serviceDetail', currentLang, { slug: 'apps' }) },
+  { key: 'footer.service_ecosystem', href: getLocalizedPath('serviceDetail', currentLang, { slug: 'ecosistema' }) },
+  { key: 'footer.service_hotfixes', href: getLocalizedPath('serviceDetail', currentLang, { slug: 'hot-fixes' }) },
+  { key: 'footer.service_rescue', href: getLocalizedPath('serviceDetail', currentLang, { slug: 'ai-rescue' }) },
 ];
 
 const legalItems = [
-  { key: 'footer.legal_privacy', href: currentLang === 'en' ? '/en/privacy' : '/es/privacidad' },
-  { key: 'footer.legal_terms', href: currentLang === 'en' ? '/en/terms' : '/es/aviso-legal' },
-  { key: 'footer.legal_cookies', href: currentLang === 'en' ? '/en/cookies' : '/es/cookies' },
+  { key: 'footer.legal_privacy', href: getLocalizedPath('privacy', currentLang) },
+  { key: 'footer.legal_terms', href: getLocalizedPath('terms', currentLang) },
+  { key: 'footer.legal_cookies', href: getLocalizedPath('cookies', currentLang) },
 ];
 
 const socials = [

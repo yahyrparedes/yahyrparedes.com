@@ -20,9 +20,9 @@
 - Hot fixes / mejoras a proyectos existentes.
 - Rescate de proyectos AI / Vibe Coding mal desplegados.
 
-## Plugins
-- Plugins SEO para PrestaShop (próximamente para WooCommerce).
-- Catálogo en /plugins/
+## Open Source
+- Herramientas, extensiones y módulos de libre uso.
+- Catálogo en /open-source/
 
 ## Trayectoria
 - Delosi (Starbucks Perú) — backend / mobile

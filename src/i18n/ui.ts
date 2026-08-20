@@ -8,6 +8,50 @@ export const languages = {
 
 export const defaultLanguage = 'es';
 
+export type Language = keyof typeof languages;
+
+export type RouteId =
+  | 'home'
+  | 'about'
+  | 'profile'
+  | 'experience'
+  | 'services'
+  | 'serviceDetail'
+  | 'openSource'
+  | 'flowGm'
+  | 'openSourceItem'
+  | 'blog'
+  | 'stack'
+  | 'contact'
+  | 'privacy'
+  | 'terms'
+  | 'cookies';
+
+type RouteParams = Record<string, string>;
+type LocalizedRoute = {
+  id: RouteId;
+  paths: Partial<Record<Language, string>>;
+  fallbackId?: RouteId;
+};
+
+export const routeMap: LocalizedRoute[] = [
+  { id: 'home', paths: { es: '/', en: '/' } },
+  { id: 'about', paths: { es: '/sobre-mi', en: '/behind-the-engineer' } },
+  { id: 'profile', paths: { es: '/perfil' }, fallbackId: 'about' },
+  { id: 'experience', paths: { es: '/experience', en: '/experience' } },
+  { id: 'services', paths: { es: '/servicios', en: '/services' } },
+  { id: 'serviceDetail', paths: { es: '/servicios/:slug', en: '/services/:slug' }, fallbackId: 'services' },
+  { id: 'openSource', paths: { es: '/open-source', en: '/open-source' } },
+  { id: 'flowGm', paths: { es: '/open-source/flow-gm', en: '/open-source/flow-gm' }, fallbackId: 'openSource' },
+  { id: 'openSourceItem', paths: { es: '/open-source/:slug', en: '/open-source/:slug' }, fallbackId: 'openSource' },
+  { id: 'blog', paths: { es: '/blog', en: '/blog' } },
+  { id: 'stack', paths: { es: '/stack', en: '/stack' } },
+  { id: 'contact', paths: { es: '/contacto', en: '/contact' } },
+  { id: 'privacy', paths: { es: '/privacidad', en: '/privacy' } },
+  { id: 'terms', paths: { es: '/aviso-legal', en: '/terms' } },
+  { id: 'cookies', paths: { es: '/cookies', en: '/cookies' } },
+];
+
 export const ui = {
   es: {
     // Nav
@@ -610,27 +654,80 @@ export function getPathWithoutLang(pathname: string): string {
   return pathname.replace(/^\/(es|en)/, '') || '/';
 }
 
-// Mapping EN path → ES path (and reverse)
-// Keyed by the ES path (canonical). Used to swap to the equivalent in the other locale.
-const pathMappings: Record<string, string> = {
-  '/sobre-mi': '/behind-the-engineer',
-  '/servicios': '/services',
-  '/contacto': '/contact',
-  '/plugins': '/open-source',
-};
-
-function applyPathMapping(path: string, targetLang: 'es' | 'en'): string {
-  // Find the mapping that matches `path` (in any locale) and return the target locale's equivalent.
-  for (const [esPath, enPath] of Object.entries(pathMappings)) {
-    if (path === esPath || path === enPath) {
-      return targetLang === 'en' ? enPath : esPath;
-    }
-  }
-  return path;
+function normalizeRoutePath(path: string): string {
+  if (!path || path === '/') return '/';
+  return path.endsWith('/') ? path.slice(0, -1) : path;
 }
 
-export function getAlternateUrl(pathname: string, targetLang: 'es' | 'en'): string {
+function patternToRegex(pattern: string) {
+  const keys: string[] = [];
+  const source = normalizeRoutePath(pattern)
+    .replace(/:[^/]+/g, (match) => {
+      keys.push(match.slice(1));
+      return '([^/]+)';
+    });
+
+  return {
+    keys,
+    regex: new RegExp(`^${source}$`),
+  };
+}
+
+function matchRoute(pathname: string): { route: LocalizedRoute; params: RouteParams } | undefined {
+  const path = normalizeRoutePath(pathname);
+
+  for (const route of routeMap) {
+    for (const pattern of Object.values(route.paths)) {
+      if (pattern && !pattern.includes(':') && normalizeRoutePath(pattern) === path) {
+        return { route, params: {} };
+      }
+    }
+  }
+
+  for (const route of routeMap) {
+    for (const pattern of Object.values(route.paths)) {
+      if (!pattern || !pattern.includes(':')) continue;
+      const { keys, regex } = patternToRegex(pattern);
+      const match = path.match(regex);
+      if (!match) continue;
+
+      return {
+        route,
+        params: Object.fromEntries(keys.map((key, index) => [key, match[index + 1]])),
+      };
+    }
+  }
+
+  return undefined;
+}
+
+function fillRouteParams(path: string, params: RouteParams): string {
+  return path.replace(/:([^/]+)/g, (_, key: string) => params[key] || '');
+}
+
+export function getLocalizedPath(routeId: RouteId, targetLang: Language, params: RouteParams = {}): string {
+  const route = routeMap.find((item) => item.id === routeId);
+  const path = route?.paths[targetLang];
+
+  if (path) {
+    const localizedPath = fillRouteParams(path, params);
+    return localizedPath === '/' ? `/${targetLang}/` : `/${targetLang}${localizedPath}/`;
+  }
+
+  if (route?.fallbackId && route.fallbackId !== routeId) {
+    return getLocalizedPath(route.fallbackId, targetLang);
+  }
+
+  return `/${targetLang}/`;
+}
+
+export function getAlternateUrl(pathname: string, targetLang: Language): string {
   const path = getPathWithoutLang(pathname);
-  const mapped = applyPathMapping(path, targetLang);
-  return `/${targetLang}${mapped === '/' ? '' : mapped}`;
+  const match = matchRoute(path);
+
+  if (!match) {
+    return getLocalizedPath('home', targetLang);
+  }
+
+  return getLocalizedPath(match.route.id, targetLang, match.params);
 }

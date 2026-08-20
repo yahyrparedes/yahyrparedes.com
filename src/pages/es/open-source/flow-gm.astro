@@ -1,0 +1,192 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const features = [
+  {
+    title: 'CRM de colaboraciones',
+    text: 'Registra marcas, productos, enlaces, SKU o ASIN, plataforma, estado, contacto, precio, costo, notas y fechas de seguimiento.',
+  },
+  {
+    title: 'Prevención de duplicados',
+    text: 'Compara marca, producto, enlace, nombre, SKU o ASIN y plataforma antes de guardar para evitar contactos repetidos.',
+  },
+  {
+    title: 'Historial de conversación',
+    text: 'Guarda mensajes enviados y recibidos con dirección, fecha y hora. Cada entrada puede editarse o eliminarse.',
+  },
+  {
+    title: 'Plantillas de mensajes',
+    text: 'Crea mensajes reutilizables por canal y categoría con variables como {{marca}}, {{producto}} y {{contacto}}.',
+  },
+  {
+    title: 'Calendario de contenido',
+    text: 'Organiza ideas, borradores y publicaciones con fecha, plataforma, notas, enlaces y archivos adjuntos.',
+  },
+  {
+    title: 'Captura asistida',
+    text: 'La extensión de Chrome puede enviar datos desde Amazon o Gmail al CRM local cuando la app está abierta.',
+  },
+];
+
+const flow = [
+  ['Capturar', 'Toma datos desde una colaboración, Amazon o Gmail.'],
+  ['Comprobar', 'Flow-GM avisa si ya existe un contacto similar.'],
+  ['Conversar', 'Guarda mensajes enviados y respuestas en historial.'],
+  ['Planificar', 'Convierte oportunidades en contenido calendarizado.'],
+];
+
+const softwareJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Flow-GM',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'macOS',
+  description:
+    'Flow-GM es un CRM local para creadores que organizan colaboraciones con marcas, mensajes, productos y calendario de contenido desde su Mac.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+};
+---
+
+<BaseLayout
+  title="Flow-GM · CRM local para creadores"
+  description="Flow-GM es un CRM local para creadores que organizan colaboraciones con marcas, mensajes, productos y calendario de contenido desde su Mac."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(softwareJsonLd)} />
+
+  <article class="container-page py-10 sm:py-16 max-w-6xl">
+    <nav class="mb-8 text-sm text-ink-300">
+      <a href="/es/" class="hover:text-blue-200">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="/es/open-source/" class="hover:text-blue-200">Open Source</a>
+      <span class="mx-2">/</span>
+      <span class="text-ink-100">Flow-GM</span>
+    </nav>
+
+    <header class="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-center">
+      <div>
+        <p class="section-kicker">FLOW-GM</p>
+        <h1 class="mt-4 font-display font-bold text-4xl sm:text-5xl md:text-6xl text-ink text-balance">
+          Tus colaboraciones, ordenadas y bajo tu control.
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-ink-200 leading-relaxed text-pretty">
+          Flow-GM reemplaza hojas de cálculo dispersas por un workspace privado para organizar
+          marcas, productos, conversaciones y contenido sin depender de una plataforma en la nube.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#release" class="btn btn-primary">Descargar para macOS</a>
+          <a href="#flow" class="btn btn-secondary">Ver cómo funciona</a>
+          <a href="mailto:hola@yahyrparedes.com?subject=Quiero%20probar%20Flow-GM" class="btn btn-ghost">
+            Probar Flow-GM
+          </a>
+        </div>
+      </div>
+
+      <div class="card-glass p-5 sm:p-6">
+        <div class="rounded-xl border border-border bg-midnight-200/80 p-4">
+          <div class="flex items-center justify-between border-b border-border pb-3">
+            <div>
+              <p class="text-xs font-mono uppercase tracking-[0.2em] text-blue-200">Local CRM</p>
+              <p class="mt-1 font-display text-xl font-bold text-ink">Nueva colaboración</p>
+            </div>
+            <span class="rounded-full bg-blue/10 px-3 py-1 text-xs font-semibold text-blue-200">En seguimiento</span>
+          </div>
+          <dl class="mt-4 grid gap-3 text-sm">
+            {[
+              ['Marca', 'North Ridge Coffee'],
+              ['Producto', 'Cold brew kit'],
+              ['Plataforma', 'Amazon + Gmail'],
+              ['Estado', 'Mensaje enviado'],
+              ['Próximo paso', 'Responder el jueves'],
+            ].map(([label, value]) => (
+              <div class="grid grid-cols-[110px_1fr] gap-3 rounded-lg border border-border bg-white/5 px-3 py-2">
+                <dt class="text-ink-300">{label}</dt>
+                <dd class="font-medium text-ink">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <p class="mt-4 text-xs leading-relaxed text-ink-300">
+          Las capturas reales de la interfaz se añadirán cuando el release público esté listo.
+        </p>
+      </div>
+    </header>
+
+    <section class="mt-20 grid lg:grid-cols-[0.8fr_1.2fr] gap-8">
+      <div>
+        <p class="section-kicker">PROBLEMA</p>
+        <h2 class="mt-4 font-display text-3xl sm:text-4xl font-bold text-ink text-balance">
+          El problema no es contactar marcas. Es recordar todo lo que pasó.
+        </h2>
+      </div>
+      <p class="text-lg leading-relaxed text-ink-200 text-pretty">
+        Cuando el contacto con marcas se gestiona desde una hoja de cálculo, es fácil escribir dos
+        veces al mismo lead, perder respuestas o no recordar qué producto y mensaje se utilizaron.
+        Revisar filtros y comparar filas consume tiempo que podría dedicarse a crear contenido.
+      </p>
+    </section>
+
+    <section id="flow" class="mt-20">
+      <p class="section-kicker">FLUJO</p>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {flow.map(([title, text], index) => (
+          <div class="card-glass p-5">
+            <p class="font-mono text-xs text-blue-200">0{index + 1}</p>
+            <h3 class="mt-4 font-display text-xl font-bold text-ink">{title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-200">{text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-20">
+      <p class="section-kicker">FUNCIONALIDADES</p>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((feature) => (
+          <div class="rounded-xl border border-border bg-midnight-100/70 p-5">
+            <h3 class="font-display text-lg font-bold text-ink">{feature.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-ink-200">{feature.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-20 grid lg:grid-cols-2 gap-6">
+      <div class="card-glass p-6 sm:p-8">
+        <p class="section-kicker">PRIVACIDAD</p>
+        <h2 class="mt-4 font-display text-3xl font-bold text-ink">Datos locales, control real.</h2>
+        <ul class="mt-6 space-y-3 text-ink-200">
+          <li>Los datos se guardan localmente en SQLite.</li>
+          <li>No hay cuenta obligatoria ni sincronización automática con terceros.</li>
+          <li>La extensión solo guarda información cuando confirmas la captura.</li>
+          <li>La exportación JSON permite backups y conservación de datos al actualizar.</li>
+        </ul>
+      </div>
+
+      <div id="release" class="card-glass p-6 sm:p-8">
+        <p class="section-kicker">RELEASE</p>
+        <h2 class="mt-4 font-display text-3xl font-bold text-ink">Primera versión para macOS.</h2>
+        <p class="mt-4 leading-relaxed text-ink-200">
+          Flow-GM está orientado a una sola persona y uso local. La extensión funciona como captura
+          asistida manual. Las integraciones automáticas con Gmail, Amazon, ChatGPT o MCP son una
+          posible evolución, no una promesa del release actual.
+        </p>
+        <ol class="mt-6 space-y-3 text-sm text-ink-200">
+          <li>1. Descargar el DMG universal para Mac Intel o Apple Silicon.</li>
+          <li>2. Mover <code>Flow-GM.app</code> a la carpeta Aplicaciones.</li>
+          <li>3. Abrir desde Finder usando clic derecho y <strong>Abrir</strong> si macOS muestra una advertencia.</li>
+          <li>4. Instalar la extensión de Chrome para usar captura asistida.</li>
+        </ol>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="mailto:hola@yahyrparedes.com?subject=Quiero%20probar%20Flow-GM" class="btn btn-primary">
+            Probar Flow-GM
+          </a>
+          <a href="/es/privacidad/" class="btn btn-secondary">Política de privacidad</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

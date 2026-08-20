@@ -8,7 +8,7 @@ const softwareJsonLd = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'macOS',
   description:
-    'Flow-GM is a local CRM for creators who organize brand collaborations, messages, products, and content calendars from their Mac.',
+    'Flow-GM es un CRM local para creadores que organizan colaboraciones con marcas, mensajes, productos y calendario de contenido desde su Mac.',
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -18,8 +18,8 @@ const softwareJsonLd = {
 ---
 
 <BaseLayout
-  title="Open Source and tools · Yahyr Paredes"
-  description="Free-use tools, extensions, and products created by Yahyr Paredes. Flow-GM is a local CRM for managing collaborations between creators and brands."
+  title="Open Source y herramientas · Yahyr Paredes"
+  description="Herramientas, extensiones y productos de libre uso creados por Yahyr Paredes. Flow-GM es un CRM local para gestionar colaboraciones entre creadores y marcas."
 >
   <script type="application/ld+json" set:html={JSON.stringify(softwareJsonLd)} />
 
@@ -27,24 +27,24 @@ const softwareJsonLd = {
     <header class="mb-12 sm:mb-16 max-w-3xl">
       <p class="section-kicker">OPEN SOURCE</p>
       <h1 class="mt-4 font-display font-bold text-4xl sm:text-5xl md:text-6xl text-ink text-balance">
-        Small tools for real problems.
+        Herramientas pequeñas para problemas reales.
       </h1>
       <p class="mt-5 text-lg sm:text-xl text-ink-200 text-pretty">
-        Products, extensions, and modules built from concrete needs: organizing work,
-        reducing friction, and keeping control over data.
+        Productos, extensiones y módulos creados desde necesidades concretas: ordenar trabajo,
+        reducir fricción y mantener control sobre los datos.
       </p>
     </header>
 
     <div class="grid lg:grid-cols-[1.35fr_0.65fr] gap-6">
-      <a href="/en/open-source/flow-gm/" class="group card-glass p-6 sm:p-8 overflow-hidden hover:border-blue/35">
+      <a href="/es/open-source/flow-gm/" class="group card-glass p-6 sm:p-8 overflow-hidden hover:border-blue/35">
         <div class="flex flex-wrap items-start justify-between gap-4">
           <div>
             <span class="inline-flex items-center rounded-full border border-blue/30 bg-blue/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-200">
-              New product
+              Nuevo producto
             </span>
             <h2 class="mt-5 font-display text-3xl sm:text-4xl font-bold text-ink">Flow-GM</h2>
             <p class="mt-3 text-xl text-ink text-balance">
-              Your collaborations, organized and under your control.
+              Tus colaboraciones, ordenadas y bajo tu control.
             </p>
           </div>
           <span class="rounded-full border border-border bg-white/5 px-3 py-1 text-xs font-mono text-ink-200">
@@ -53,12 +53,13 @@ const softwareJsonLd = {
         </div>
 
         <p class="mt-6 max-w-2xl text-ink-200 leading-relaxed text-pretty">
-          A local mini CRM for creators, Amazon Influencers, and small teams that need to track
-          brands, products, conversations, and content without depending on a cloud platform.
+          Mini CRM local para creadores, Amazon Influencers y pequeños equipos que necesitan
+          registrar marcas, productos, conversaciones y contenido sin depender de una plataforma
+          en la nube.
         </p>
 
         <div class="mt-8 grid sm:grid-cols-3 gap-3">
-          {['Collaboration CRM', 'Duplicate prevention', 'Content calendar'].map((item) => (
+          {['CRM de colaboraciones', 'Prevención de duplicados', 'Calendario de contenido'].map((item) => (
             <div class="rounded-lg border border-border bg-midnight-100/70 px-4 py-3 text-sm font-semibold text-ink">
               {item}
             </div>
@@ -66,22 +67,22 @@ const softwareJsonLd = {
         </div>
 
         <p class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-blue-200 transition-transform group-hover:translate-x-1">
-          View Flow-GM
+          Ver Flow-GM
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </p>
       </a>
 
       <aside class="card-glass p-6 sm:p-7">
-        <p class="section-kicker">EXTRA TOOLS</p>
-        <h2 class="mt-4 font-display text-2xl font-bold text-ink">Open source without noise.</h2>
+        <p class="section-kicker">HERRAMIENTAS EXTRAS</p>
+        <h2 class="mt-4 font-display text-2xl font-bold text-ink">Open source sin ruido.</h2>
         <p class="mt-4 text-ink-200 leading-relaxed text-pretty">
-          This section groups free-use products and personal utilities. The Tiger modules for
-          PrestaShop are hidden from the index for now while the collection is reorganized.
+          Esta sección agrupa productos de libre uso y utilidades propias. Los módulos Tiger para
+          PrestaShop quedan ocultos del índice por ahora mientras reorganizo la colección.
         </p>
         <div class="mt-6 rounded-lg border border-border bg-white/5 p-4">
-          <p class="text-sm font-semibold text-ink">Privacy by default</p>
+          <p class="text-sm font-semibold text-ink">Privacidad por defecto</p>
           <p class="mt-2 text-sm text-ink-200 leading-relaxed">
-            Flow-GM prioritizes local data, JSON export, and use without a mandatory account.
+            Flow-GM prioriza datos locales, exportación JSON y uso sin cuenta obligatoria.
           </p>
         </div>
       </aside>

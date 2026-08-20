@@ -25,26 +25,67 @@ export default defineConfig({
       entryLimit: 45000,
       filter: (page) =>
         !page.includes('/404') &&
+        !page.includes('/500') &&
         !page.includes('/admin') &&
+        !page.includes('/plugins') &&
         !page.includes('/_astro'),
       serialize(item) {
         const url = item.url;
-        if (url.endsWith('yahyrparedes.com/') || url.endsWith('yahyrparedes.com')) {
+        const path = new URL(url).pathname;
+
+        if (path === '/' || path === '/es/' || path === '/en/') {
           return { ...item, changefreq: 'weekly', priority: 1.0 };
         }
-        if (url.includes('/sobre-mi')) return { ...item, changefreq: 'monthly', priority: 0.9 };
-        if (url.includes('/perfil')) return { ...item, changefreq: 'monthly', priority: 0.8 };
-        if (url.includes('/servicios/webs')) return { ...item, changefreq: 'monthly', priority: 0.8 };
-        if (url.includes('/servicios/apps')) return { ...item, changefreq: 'monthly', priority: 0.8 };
-        if (url.includes('/servicios/ecosistema')) return { ...item, changefreq: 'monthly', priority: 0.8 };
-        if (url.includes('/servicios/hot-fixes')) return { ...item, changefreq: 'monthly', priority: 0.7 };
-        if (url.includes('/servicios/ai-rescue')) return { ...item, changefreq: 'monthly', priority: 0.8 };
-        if (url.includes('/servicios')) return { ...item, changefreq: 'monthly', priority: 0.7 };
-        if (url.includes('/plugins/') && !url.endsWith('/plugins/')) return { ...item, changefreq: 'monthly', priority: 0.8 };
-        if (url.includes('/plugins')) return { ...item, changefreq: 'monthly', priority: 0.7 };
-        if (url.includes('/blog/') && !url.endsWith('/blog/')) return { ...item, changefreq: 'monthly', priority: 0.6 };
-        if (url.includes('/blog')) return { ...item, changefreq: 'monthly', priority: 0.5 };
-        if (url.includes('/contacto')) return { ...item, changefreq: 'monthly', priority: 0.6 };
+
+        if (path.includes('/sobre-mi') || path.includes('/behind-the-engineer')) {
+          return { ...item, changefreq: 'monthly', priority: 0.9 };
+        }
+        if (path.includes('/perfil')) return { ...item, changefreq: 'monthly', priority: 0.8 };
+
+        if (
+          path.includes('/servicios/webs') ||
+          path.includes('/services/webs') ||
+          path.includes('/servicios/apps') ||
+          path.includes('/services/apps') ||
+          path.includes('/servicios/ecosistema') ||
+          path.includes('/services/ecosistema') ||
+          path.includes('/servicios/ai-rescue') ||
+          path.includes('/services/ai-rescue')
+        ) {
+          return { ...item, changefreq: 'monthly', priority: 0.8 };
+        }
+        if (path.includes('/servicios/hot-fixes') || path.includes('/services/hot-fixes')) {
+          return { ...item, changefreq: 'monthly', priority: 0.7 };
+        }
+        if (path.includes('/servicios') || path.includes('/services')) {
+          return { ...item, changefreq: 'monthly', priority: 0.7 };
+        }
+
+        if (path.includes('/open-source/') && !path.endsWith('/open-source/')) {
+          return { ...item, changefreq: 'monthly', priority: 0.8 };
+        }
+        if (path.includes('/open-source')) {
+          return { ...item, changefreq: 'monthly', priority: 0.7 };
+        }
+
+        if (path.includes('/blog/') && !path.endsWith('/blog/')) {
+          return { ...item, changefreq: 'monthly', priority: 0.6 };
+        }
+        if (path.includes('/blog')) return { ...item, changefreq: 'monthly', priority: 0.5 };
+
+        if (path.includes('/contacto') || path.includes('/contact')) {
+          return { ...item, changefreq: 'monthly', priority: 0.6 };
+        }
+        if (
+          path.includes('/privacidad') ||
+          path.includes('/privacy') ||
+          path.includes('/aviso-legal') ||
+          path.includes('/terms') ||
+          path.includes('/cookies')
+        ) {
+          return { ...item, changefreq: 'yearly', priority: 0.3 };
+        }
+
         return { ...item, changefreq: 'monthly', priority: 0.5 };
       },
     }),

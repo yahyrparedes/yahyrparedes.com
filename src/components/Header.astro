@@ -1,6 +1,6 @@
 ---
 import { site } from '@data/site.ts';
-import { t, getLangFromUrl } from '@i18n/ui.ts';
+import { t, getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
 import LanguageToggle from './LanguageToggle.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import '@styles/global.css';
@@ -16,20 +16,20 @@ const isActive = (path: string) => {
 };
 
 const navItems = [
-  { key: 'nav.home', href: currentLang === 'en' ? '/en/' : '/es/' },
-  { key: 'nav.about', href: currentLang === 'en' ? '/en/behind-the-engineer' : '/es/sobre-mi' },
-  { key: 'nav.experience', href: currentLang === 'en' ? '/en/experience' : '/es/experience' },
-  { key: 'nav.services', href: currentLang === 'en' ? '/en/services' : '/es/servicios' },
-  { key: 'nav.open_source', href: currentLang === 'en' ? '/en/open-source' : '/es/plugins' },
-  { key: 'nav.blog', href: currentLang === 'en' ? '/en/blog' : '/es/blog' },
-  { key: 'nav.contact', href: currentLang === 'en' ? '/en/contact' : '/es/contacto' },
+  { key: 'nav.home', href: getLocalizedPath('home', currentLang) },
+  { key: 'nav.about', href: getLocalizedPath('about', currentLang) },
+  { key: 'nav.experience', href: getLocalizedPath('experience', currentLang) },
+  { key: 'nav.services', href: getLocalizedPath('services', currentLang) },
+  { key: 'nav.open_source', href: getLocalizedPath('openSource', currentLang) },
+  { key: 'nav.blog', href: getLocalizedPath('blog', currentLang) },
+  { key: 'nav.contact', href: getLocalizedPath('contact', currentLang) },
 ];
 ---
 
 <header class="sticky top-0 z-50 bg-midnight/95 backdrop-blur-md border-b border-blue/30 shadow-sm shadow-midnight/50">
   <div class="container-page flex items-center justify-between h-16 sm:h-18">
     <!-- Logo -->
-    <a href={`/${currentLang}/`} class="flex items-center gap-2.5 group">
+    <a href={getLocalizedPath('home', currentLang)} class="flex items-center gap-2.5 group">
       <img
         src="/images/logo.png"
         alt={site.name}
@@ -68,7 +68,7 @@ const navItems = [
       <LanguageToggle />
       <ThemeToggle />
       <a
-        href={currentLang === 'en' ? '/en/contact' : '/es/contacto'}
+        href={getLocalizedPath('contact', currentLang)}
         class="hidden sm:inline-flex btn btn-outline"
       >
         {t(Astro.url, 'nav.cta')}

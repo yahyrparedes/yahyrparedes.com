@@ -7,7 +7,7 @@ import { site } from '@data/site.ts';
 export async function getStaticPaths() {
   return site.plugins.map((p) => ({
     params: { slug: p.slug },
-    redirect: `/es/plugins/${p.slug}/`,
+    redirect: `/es/open-source/${p.slug}/`,
   }));
 }
 ---
