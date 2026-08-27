@@ -1,7 +1,7 @@
 /* TEAM */
 	Desarrollador: Yahyr Paredes
 	GitHub: https://github.com/yahyrparedes
-	LinkedIn: https://linkedin.com/in/yahyrparedes
+	LinkedIn: https://www.linkedin.com/in/yahyrparedes/
 
 /* SITE */
 	Last update: 2026/07/11

@@ -296,7 +296,6 @@ export const ui = {
     'contact.other_ways': 'Otras formas de conectar',
     'contact.linkedin': 'LinkedIn',
     'contact.github': 'GitHub',
-    'contact.twitter': 'Twitter / X',
     'contact.resume': 'CV',
     'contact.resume_action': 'Descargar PDF',
 
@@ -587,7 +586,6 @@ export const ui = {
     'contact.other_ways': 'Other ways to connect',
     'contact.linkedin': 'LinkedIn',
     'contact.github': 'GitHub',
-    'contact.twitter': 'Twitter / X',
     'contact.resume': 'Resume',
     'contact.resume_action': 'Download PDF',
 

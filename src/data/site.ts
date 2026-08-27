@@ -3,7 +3,7 @@
 export interface Social {
   label: string;
   url: string;
-  icon: 'linkedin' | 'github' | 'email' | 'twitter' | 'instagram' | 'youtube';
+  icon: 'linkedin' | 'github' | 'email' | 'instagram' | 'youtube';
 }
 
 export interface Experience {
@@ -112,7 +112,7 @@ Mi enfoque es pragmático: menos buzzwords, más producto funcionando. Disfruto 
 Ahora mismo estoy basado en Cortijos Nuevos (Jaén, Andalucía) y disponible para proyectos en remoto o presencial en España.`,
   origin: 'Perú → Jaén, España',
   socials: [
-    { label: 'LinkedIn', url: 'https://linkedin.com/in/yahyrparedes', icon: 'linkedin' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/yahyrparedes/', icon: 'linkedin' },
     { label: 'GitHub', url: 'https://github.com/yahyrparedes', icon: 'github' },
     { label: 'Email', url: 'mailto:hola@yahyrparedes.com', icon: 'email' },
   ],
