@@ -88,8 +88,7 @@ export const companies: Record<string, Company> = {
     name: 'Kwema Inc.',
     url: 'https://www.kwema.co/',
     mark: '/images/brands/kwema-isotipo.png',
-    wordmark: '/images/brands/kwema-wordmark-white.png',
-    wordmarkOnDark: true,
+    wordmark: '/images/brands/kwema-wordmark.png',
     color: '#CE0081',
     industry: { es: 'Workplace safety · IoT', en: 'Workplace safety · IoT' },
     about: {

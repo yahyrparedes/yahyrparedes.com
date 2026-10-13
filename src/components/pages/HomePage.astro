@@ -29,13 +29,6 @@ const copy = lang === 'en'
       nowLink: 'Contact me',
       nowLink2: 'See my CV',
       trust: 'Companies I have worked with',
-      proofTitle: 'Some numbers from my work',
-      proof: [
-        { value: `${years}+`, label: 'years in production', source: 'Since 2016, Android first, then backend and cloud' },
-        { value: '1M+', label: 'downloads', source: 'Starbucks Peru app, which I rewrote' },
-        { value: '50% → 10%', label: 'errors issuing policies', source: 'SOAT sales at Interseguro, after moving to Go' },
-        { value: '120+', label: 'stores with a synced menu', source: 'Starbucks Peru product-menu ETL' },
-      ],
       workTitle: 'Selected work',
       workIntro: 'Products in production for food & beverage, insurance, workplace safety, logistics and retail.',
       details: 'Read the case',
@@ -66,13 +59,6 @@ const copy = lang === 'en'
       nowLink: 'Escríbeme',
       nowLink2: 'Ver mi CV',
       trust: 'Empresas con las que he trabajado',
-      proofTitle: 'Algunos números de mi trabajo',
-      proof: [
-        { value: `${years}+`, label: 'años en producción', source: 'Desde 2016: primero Android, después backend y cloud' },
-        { value: '1M+', label: 'descargas', source: 'App de Starbucks Perú, que reescribí' },
-        { value: '50% → 10%', label: 'errores al emitir pólizas', source: 'Venta del SOAT en Interseguro, tras migrarla a Go' },
-        { value: '120+', label: 'tiendas con la carta sincronizada', source: 'ETL de la carta de Starbucks Perú' },
-      ],
       workTitle: 'Trabajo seleccionado',
       workIntro: 'Productos en producción para restauración, seguros, seguridad laboral, logística y retail.',
       details: 'Ver el caso',
@@ -155,7 +141,7 @@ const howSteps = [
           <li>
             <a href={`${experienceUrl}#${c.id}`} class="logo-chip" aria-label={c.name}>
               {c.id === 'starbucks' && (<><img src={c.mark} alt="" class="h-9 w-9" /><span class="logo-chip-text" style="color:#00704A">Starbucks<small>Perú</small></span></>)}
-              {c.id === 'kwema' && (<><img src={c.mark} alt="" class="h-7 w-auto" /><span class="logo-chip-text text-sm tracking-[0.14em]" style="color:#1f1f1f">KWEMA</span></>)}
+              {c.id === 'kwema' && <img src={c.wordmark} alt="" class="h-10 w-auto max-w-[85%]" />}
               {c.id === 'interseguro' && <img src={c.wordmark} alt="" class="h-7 w-auto max-w-[85%]" />}
               {c.id === 'urbaner' && <img src={c.wordmark} alt="" class="h-7 w-auto max-w-[85%]" />}
               {c.id === 'atlas' && (<><img src={c.mark} alt="" class="h-11 w-auto" /><span class="logo-chip-text" style="color:#383638">Calzado<small>Atlas</small></span></>)}
@@ -166,19 +152,6 @@ const howSteps = [
     </div>
   </section>
 
-  <!-- PRUEBAS -->
-  <section class="container-page py-14 sm:py-20" aria-labelledby="proof-title">
-    <h2 id="proof-title" class="sr-only">{copy.proofTitle}</h2>
-    <dl class="proof-grid">
-      {copy.proof.map((p) => (
-        <div class="proof-item">
-          <dt class="order-2 mt-1 text-[0.95rem] font-semibold text-ink">{p.label}</dt>
-          <dd class="order-1 font-display text-4xl font-bold tracking-tight text-ink sm:text-[2.75rem]">{p.value}</dd>
-          <dd class="order-3 mt-2 text-sm leading-relaxed text-ink-200">{p.source}</dd>
-        </div>
-      ))}
-    </dl>
-  </section>
 
   <!-- TRABAJO SELECCIONADO -->
   <section class="container-page py-8 sm:py-12" aria-labelledby="work-title">
@@ -324,27 +297,6 @@ const howSteps = [
   .logo-chip:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 3px; }
   .logo-chip-text { display: flex; flex-direction: column; font-family: var(--font-heading); font-weight: 700; font-size: 1rem; line-height: 1.05; }
   .logo-chip-text small { font-size: 0.72rem; font-weight: 600; opacity: 0.75; }
-
-  .proof-grid {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    border-top: 1px solid var(--color-border);
-  }
-  @media (min-width: 640px) { .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (min-width: 1024px) { .proof-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .proof-item {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid var(--color-border);
-    padding: 1.5rem 0;
-  }
-  @media (min-width: 640px) {
-    .proof-item { padding: 1.75rem 1.5rem 1.75rem 0; }
-  }
-  @media (min-width: 1024px) {
-    .proof-item { border-bottom: 0; padding: 2rem 1.75rem 0 0; }
-    .proof-item + .proof-item { border-left: 1px solid var(--color-border); padding-left: 1.75rem; }
-  }
 
   .work-tile { display: flex; }
   .work-tile-link {

@@ -74,7 +74,7 @@ export const site: SiteProfile = {
   tagline: 'Software developer disponible para proyectos',
   location: 'Cortijos Nuevos, Jaén, Andalucía',
   country: 'España',
-  email: 'hola@yahyrparedes.com',
+  email: 'yahyrparedesarteaga@gmail.com',
   bio: 'Software developer con background en mobile (Android nativo, Kotlin) y backend (Java/Spring). Disponible para proyectos freelance, consultoría y auditorías.',
   longBio: `Nacido en Perú, llegué a España con mi familia en busca de nuevas oportunidades. Llevo más de 10 años construyendo software: empecé en Android, sumé backend con Go, Java/Spring y Python, y ahora combino ambos mundos con infraestructura cloud (AWS, GCP) y desarrollo full-stack.
 
@@ -85,7 +85,7 @@ Ahora mismo estoy basado en Cortijos Nuevos (Jaén, Andalucía) y disponible par
   socials: [
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/yahyrparedes/', icon: 'linkedin' },
     { label: 'GitHub', url: 'https://github.com/yahyrparedes', icon: 'github' },
-    { label: 'Email', url: 'mailto:hola@yahyrparedes.com', icon: 'email' },
+    { label: 'Email', url: 'mailto:yahyrparedesarteaga@gmail.com', icon: 'email' },
   ],
   services: [
     {
