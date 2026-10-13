@@ -12,20 +12,22 @@ const experienceUrl = getLocalizedPath('experience', lang);
 const copy = lang === 'en'
   ? {
       title: 'Yahyr Paredes · Android & backend engineer',
-      description: `Android engineer at Starbucks Peru and backend developer (Go, Java, Python). ${years} years shipping apps and services to production. Based in Spain.`,
+      description: `Android & backend engineer (Kotlin, Go, Java, Python), open to new opportunities. ${years} years shipping apps and services to production; until August 2026, Android at Starbucks Peru. Based in Spain.`,
       headline: 'Building products people trust.',
-      sub: `Android engineer at Starbucks Peru and backend developer with Go, Java and Python. ${years} years taking apps and services to production, now from Jaén, Spain.`,
+      sub: `Android and backend engineer with Kotlin, Go, Java and Python. ${years} years taking apps and services to production; until August 2026 I owned the Starbucks Peru Android app. Based in Jaén, Spain.`,
+      status: 'Open to work · Android & backend',
       ctaPrimary: 'See my experience',
       ctaSecondary: "Let's talk",
-      nowLabel: 'Right now',
-      nowTitle: 'Android Engineer at Starbucks Peru',
+      nowLabel: 'Available now',
+      nowTitle: 'Looking for my next role',
       now: [
-        'Starbucks Rewards app rewritten in Kotlin + Compose',
-        '1M+ downloads on Google Play',
-        'Monthly releases, 4.0.0 → 4.0.19',
-        'In parallel: Android & backend for Kwema (part-time)',
+        'Android (Kotlin, Compose, KMP) or backend (Go, Java, Python)',
+        'Remote, hybrid or on-site in Spain',
+        'Authorized to work in Spain',
+        'Last role: Android Engineer at Starbucks Peru (Sep 2024 – Aug 2026)',
       ],
-      nowLink: 'See the role',
+      nowLink: 'Contact me',
+      nowLink2: 'See my CV',
       trust: 'Companies I have worked with',
       proofTitle: 'Some numbers from my work',
       proof: [
@@ -47,20 +49,22 @@ const copy = lang === 'en'
     }
   : {
       title: 'Yahyr Paredes · Ingeniero Android y backend',
-      description: `Android Engineer en Starbucks Perú y desarrollador backend (Go, Java, Python). ${years} años llevando apps y servicios a producción. Desde España.`,
+      description: `Ingeniero Android y backend (Kotlin, Go, Java, Python), disponible para nuevas oportunidades. ${years} años llevando apps y servicios a producción; hasta agosto de 2026, Android en Starbucks Perú. Desde España.`,
       headline: 'Construyendo productos en los que la gente confía.',
-      sub: `Android Engineer en Starbucks Perú y desarrollador backend con Go, Java y Python. ${years} años llevando apps y servicios a producción, ahora desde Jaén, España.`,
+      sub: `Ingeniero Android y backend con Kotlin, Go, Java y Python. ${years} años llevando apps y servicios a producción; hasta agosto de 2026 fui responsable de la app Android de Starbucks Perú. Desde Jaén, España.`,
+      status: 'Disponible para trabajar · Android y backend',
       ctaPrimary: 'Ver mi experiencia',
       ctaSecondary: 'Hablemos',
-      nowLabel: 'Ahora mismo',
-      nowTitle: 'Android Engineer en Starbucks Perú',
+      nowLabel: 'Disponible · incorporación inmediata',
+      nowTitle: 'Busco mi próximo reto',
       now: [
-        'App Starbucks Rewards reescrita en Kotlin + Compose',
-        'Más de 1M de descargas en Google Play',
-        'Releases mensuales, de la 4.0.0 a la 4.0.19',
-        'En paralelo: Android y backend para Kwema (part-time)',
+        'Android (Kotlin, Compose, KMP) o backend (Go, Java, Python)',
+        'En remoto, híbrido o presencial en España',
+        'Autorización para trabajar en España',
+        'Último rol: Android Engineer en Starbucks Perú (sep 2024 – ago 2026)',
       ],
-      nowLink: 'Ver el rol',
+      nowLink: 'Escríbeme',
+      nowLink2: 'Ver mi CV',
       trust: 'Empresas con las que he trabajado',
       proofTitle: 'Algunos números de mi trabajo',
       proof: [
@@ -102,7 +106,7 @@ const howSteps = [
     <div class="container-page relative flex min-h-[640px] items-center pt-20 pb-14 sm:pt-24 lg:min-h-[680px]">
       <div class="grid w-full items-end gap-10 lg:grid-cols-12">
         <div class="lg:col-span-7 xl:col-span-6">
-          <p class="mb-5 text-sm font-semibold text-blue-200">{site.name} · {t(Astro.url, 'hero.eyebrow')}</p>
+          <p class="hero-status mb-5"><span class="hero-status-dot" aria-hidden="true"></span>{copy.status}</p>
           <h1 class="mb-6 text-balance font-display text-[2.6rem] font-bold leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-7xl">
             {copy.headline}
           </h1>
@@ -116,10 +120,10 @@ const howSteps = [
         <aside class="lg:col-span-5 xl:col-span-4 xl:col-start-9" aria-label={copy.nowLabel}>
           <div class="now-card card-glass shadow-soft-lg">
             <div class="flex items-center gap-3">
-              <span class="now-logo"><img src={companies.starbucks.mark} alt="" width="28" height="28" /></span>
+              <span class="now-logo now-logo-status" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></span>
               <div>
                 <p class="flex items-center gap-2 text-xs font-semibold text-ink-200">
-                  <span class="h-1.5 w-1.5 rounded-full bg-green animate-pulse" aria-hidden="true"></span>{copy.nowLabel}
+                  {copy.nowLabel}
                 </p>
                 <p class="font-display text-base font-bold text-ink">{copy.nowTitle}</p>
               </div>
@@ -132,7 +136,10 @@ const howSteps = [
                 </li>
               ))}
             </ul>
-            <a href={`${experienceUrl}#starbucks`} class="mt-4 inline-flex text-sm font-semibold text-blue-200 hover:text-ink">{copy.nowLink}</a>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <a href={getLocalizedPath('contact', lang)} class="btn btn-primary">{copy.nowLink}</a>
+              <a href={getLocalizedPath('profile', lang)} class="btn btn-outline">{copy.nowLink2}</a>
+            </div>
           </div>
         </aside>
       </div>
@@ -294,6 +301,11 @@ const howSteps = [
     background: #fff;
     padding: 0.35rem;
   }
+  .now-logo-status { background: color-mix(in srgb, var(--color-success) 14%, transparent); color: var(--color-success); }
+  .hero-status { display: inline-flex; align-items: center; gap: 0.55rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-success) 40%, transparent); background: color-mix(in srgb, var(--color-success) 10%, transparent); padding: 0.35rem 0.9rem; font-size: 0.875rem; font-weight: 600; color: var(--color-success); }
+  .hero-status-dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: currentColor; box-shadow: 0 0 0 0 currentColor; animation: status-pulse 2s ease-out infinite; }
+  @keyframes status-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-success) 60%, transparent); } 100% { box-shadow: 0 0 0 8px transparent; } }
+  @media (prefers-reduced-motion: reduce) { .hero-status-dot { animation: none; } }
   .now-logo img, .work-tile-logo img { width: 100%; height: 100%; object-fit: contain; }
 
   .logo-chip {

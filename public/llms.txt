@@ -9,9 +9,10 @@
 - Base fuerte en Android: Kotlin, Java, Jetpack Compose, Kotlin Multiplatform.
 - Backend y cloud: Go, Java/Spring Boot, Python/Django, Node.js, AWS, GCP.
 - Idiomas: español (nativo), inglés (B1, MCER).
+- Disponible con incorporación inmediata para roles Android o backend (remoto, híbrido o presencial en España).
 
 ## Trayectoria (más reciente primero)
-- 09/2024 – actualidad · Android Engineer · Starbucks Perú (vía DELOSI). Reescritura de la app Starbucks Rewards Perú (1M+ descargas) en Kotlin, Compose y KMP.
+- 09/2024 – 08/2026 · Android Engineer · Starbucks Perú (vía DELOSI). Reescritura de la app Starbucks Rewards Perú (1M+ descargas) en Kotlin, Compose y KMP.
 - 01/2023 – 08/2024 · Full Stack Engineer II · Interseguro. Migración del SOAT de PHP a Go; errores de emisión del ~50% al ~10%.
 - 11/2022 – 01/2023 · Backend Developer (Django) · Silabuz.
 - 09/2021 – 02/2022 · Full Stack Developer y docente · Groway Studio.

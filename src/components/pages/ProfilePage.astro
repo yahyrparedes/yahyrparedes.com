@@ -24,7 +24,8 @@ const copy = lang === 'en'
       description: `CV of Yahyr Paredes: Android & backend engineer with ${years}+ years of experience. Kotlin, Go, Java, Python, AWS and GCP.`,
       headline: 'Senior Software Engineer · Android & backend',
       location: 'Jaén, Spain · Authorized to work in Spain',
-      summary: `Software engineer with ${years}+ years of experience and a strong Android base (Kotlin, Jetpack Compose, KMP), plus solid backend and cloud work (Go, Java/Spring, Python/Django, AWS, GCP). I have shipped products in food & beverage, insurance, logistics, e-commerce, IoT and retail. Today I own the Starbucks Peru Android app (1M+ downloads), working remotely from Spain.`,
+      summary: `Software engineer with ${years}+ years of experience and a strong Android base (Kotlin, Jetpack Compose, KMP), plus solid backend and cloud work (Go, Java/Spring, Python/Django, AWS, GCP). I have shipped products in food & beverage, insurance, logistics, e-commerce, IoT and retail. Until August 2026 I owned the Starbucks Peru Android app (1M+ downloads), working remotely from Spain. I am now looking for my next role as an Android or backend engineer.`,
+      available: 'Available now · remote, hybrid or on-site in Spain',
       print: 'Save as PDF',
       experience: 'Experience',
       skills: 'Skills',
@@ -40,7 +41,8 @@ const copy = lang === 'en'
       description: `CV de Yahyr Paredes: ingeniero Android y backend con más de ${years} años de experiencia. Kotlin, Go, Java, Python, AWS y GCP.`,
       headline: 'Senior Software Engineer · Android y backend',
       location: 'Jaén, España · Autorización para trabajar en España',
-      summary: `Ingeniero de software con más de ${years} años de experiencia, con base fuerte en Android (Kotlin, Jetpack Compose, KMP) y experiencia sólida en backend y cloud (Go, Java/Spring, Python/Django, AWS, GCP). He llevado productos a producción en restauración, seguros, logística, e-commerce, IoT y retail. Hoy soy responsable de la app Android de Starbucks Perú (más de 1M de descargas), en remoto desde España.`,
+      summary: `Ingeniero de software con más de ${years} años de experiencia, con base fuerte en Android (Kotlin, Jetpack Compose, KMP) y experiencia sólida en backend y cloud (Go, Java/Spring, Python/Django, AWS, GCP). He llevado productos a producción en restauración, seguros, logística, e-commerce, IoT y retail. Hasta agosto de 2026 fui responsable de la app Android de Starbucks Perú (más de 1M de descargas), en remoto desde España. Ahora busco mi próximo reto como ingeniero Android o backend.`,
+      available: 'Disponible · incorporación inmediata · remoto, híbrido o presencial en España',
       print: 'Guardar como PDF',
       experience: 'Experiencia',
       skills: 'Habilidades',
@@ -69,7 +71,8 @@ const copy = lang === 'en'
           {copy.print}
         </button>
       </div>
-      <ul class="cv-contact mt-6">
+      <p class="cv-available mt-5"><span aria-hidden="true"></span>{copy.available}</p>
+      <ul class="cv-contact mt-4">
         <li>{copy.location}</li>
         <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
         <li><a href={linkedin} target="_blank" rel="noopener noreferrer">linkedin.com/in/yahyrparedes</a></li>
@@ -162,6 +165,8 @@ const copy = lang === 'en'
 </BaseLayout>
 
 <style>
+  .cv-available { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--color-success) 40%, transparent); background: color-mix(in srgb, var(--color-success) 10%, transparent); padding: 0.3rem 0.85rem; font-size: 0.85rem; font-weight: 600; color: var(--color-success); }
+  .cv-available span { width: 0.45rem; height: 0.45rem; border-radius: 999px; background: currentColor; }
   .cv-contact { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; font-size: 0.9rem; color: var(--color-ink-200); }
   .cv-contact a { color: var(--color-ink-100); text-decoration: underline; text-decoration-color: var(--color-border); text-underline-offset: 3px; }
   .cv-contact a:hover { color: var(--color-ink); text-decoration-color: currentColor; }

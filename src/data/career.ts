@@ -79,8 +79,8 @@ export const companies: Record<string, Company> = {
     color: '#00704A',
     industry: { es: 'Food & beverage · Retail', en: 'Food & beverage · Retail' },
     about: {
-      es: 'DELOSI es el grupo peruano, fundado en 1981, que opera en Perú franquicias de restauración como Starbucks, KFC o Burger King. Trabajo en la app Starbucks Rewards Perú, con más de 1 millón de descargas en Google Play.',
-      en: 'DELOSI is the Peruvian group, founded in 1981, that operates restaurant franchises such as Starbucks, KFC and Burger King in Peru. I work on the Starbucks Rewards Peru app, with over 1 million downloads on Google Play.',
+      es: 'DELOSI es el grupo peruano, fundado en 1981, que opera en Perú franquicias de restauración como Starbucks, KFC o Burger King. Trabajé en la app Starbucks Rewards Perú, con más de 1 millón de descargas en Google Play.',
+      en: 'DELOSI is the Peruvian group, founded in 1981, that operates restaurant franchises such as Starbucks, KFC and Burger King in Peru. I worked on the Starbucks Rewards Peru app, with over 1 million downloads on Google Play.',
     },
   },
   kwema: {
@@ -191,12 +191,12 @@ export const roles: Role[] = [
     companyId: 'starbucks',
     title: { es: 'Android Engineer', en: 'Android Engineer' },
     start: '2024-09',
-    end: null,
+    end: '2026-08',
     location: { es: 'Lima, Perú · remoto desde España', en: 'Lima, Peru · remote from Spain' },
     employment: { es: 'Jornada completa', en: 'Full-time' },
     summary: {
-      es: 'Responsable de la app Android de Starbucks Rewards Perú. La reescribí por completo en Kotlin y Jetpack Compose dentro de la migración de toda la plataforma de Azure a AWS. Los tres primeros meses trabajé en el equipo backend.',
-      en: 'I own the Starbucks Rewards Peru Android app. I rewrote it from scratch in Kotlin and Jetpack Compose as part of the whole platform’s migration from Azure to AWS. I spent my first three months on the backend team.',
+      es: 'Fui responsable de la app Android de Starbucks Rewards Perú. La reescribí por completo en Kotlin y Jetpack Compose dentro de la migración de toda la plataforma de Azure a AWS. Los tres primeros meses trabajé en el equipo backend.',
+      en: 'I owned the Starbucks Rewards Peru Android app. I rewrote it from scratch in Kotlin and Jetpack Compose as part of the whole platform’s migration from Azure to AWS. I spent my first three months on the backend team.',
     },
     highlights: {
       es: [
@@ -206,7 +206,7 @@ export const roles: Role[] = [
         'Analítica y tracking de marketing con Firebase, GA4, Meta Pixel y TikTok.',
         'Etapa backend: sincronización de la carta de productos para más de 120 tiendas (ETL diario y bajo demanda, ~5 min por ejecución), que antes no existía.',
         'Módulo de pagos con Niubiz con datos MDD (Merchant Defined Data) para reducir el riesgo de fraude.',
-        'Coordino las reuniones del equipo mobile: viabilidad, alcance y tiempos de las funcionalidades para Android e iOS.',
+        'Coordinaba las reuniones del equipo mobile: viabilidad, alcance y tiempos de las funcionalidades para Android e iOS.',
       ],
       en: [
         'Full rewrite of the Android app (1M+ downloads) in Kotlin and Jetpack Compose, with KMP shared logic and a feature-modular MVVM architecture. Shipped in November 2025 after a one-year migration.',
@@ -215,7 +215,7 @@ export const roles: Role[] = [
         'Analytics and marketing tracking with Firebase, GA4, Meta Pixel and TikTok.',
         'Backend stint: product-menu sync for 120+ stores (daily and on-demand ETL, ~5 min per run), which did not exist before.',
         'Niubiz payments module with Merchant Defined Data (MDD) to reduce fraud risk.',
-        'I run the mobile team syncs: feasibility, scope and timelines for Android and iOS features.',
+        'I ran the mobile team syncs: feasibility, scope and timelines for Android and iOS features.',
       ],
     },
     stack: ['Kotlin', 'Jetpack Compose', 'KMP', 'Ktor', 'Dexguard', 'Firebase', 'GA4', 'Google Maps', 'Node.js', 'TypeScript', 'AWS CDK', 'Cognito', 'Lambda', '.NET 8 AOT', 'GitHub Actions'],
