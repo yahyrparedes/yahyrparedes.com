@@ -344,24 +344,24 @@ export const roles: Role[] = [
     employment: { es: 'Contractor part-time', en: 'Part-time contractor' },
     partTime: true,
     summary: {
-      es: 'App Android y backend de una plataforma de seguridad laboral: wearables BLE con botón de pánico, alertas en tiempo real y dashboard.',
-      en: 'Android app and backend for a workplace-safety platform: BLE wearable panic buttons, real-time alerts and a dashboard.',
+      es: 'App móvil y backend de una plataforma de seguridad laboral: wearables BLE con botón de pánico, alertas en tiempo real y dashboard. Ahora estoy modernizando la app por segunda vez, esta vez para Android e iOS con Kotlin Multiplatform.',
+      en: 'Mobile app and backend for a workplace-safety platform: BLE wearable panic buttons, real-time alerts and a dashboard. I am now modernizing the app for the second time, this time for Android and iOS with Kotlin Multiplatform.',
     },
     highlights: {
       es: [
         'Modernicé la app heredada: de Java, XML y Volley con lógica en la UI a Kotlin, Retrofit y Clean Architecture, con soporte de Android 6 a 11+. Esa versión sigue en producción.',
+        'Segunda modernización en curso: una sola app para Android e iOS con KMP, Jetpack Compose y SwiftUI. La lógica de negocio es compartida y cada plataforma conserva su interfaz nativa, para mejorar el servicio.',
         'Flujo de alertas de pánico desde wearables BLE/iBeacon con servicios en primer y segundo plano, que garantiza la alerta incluso tras reiniciar el teléfono.',
-        'Reescritura en Jetpack Compose y MVVM, actualmente en fase de QA.',
         'AWS IoT Core (device shadows, MQTT) y APIs en Python/Django para el dashboard, la app e integraciones, documentadas con OpenAPI.',
       ],
       en: [
         'Modernized the legacy app from Java, XML and Volley with UI-bound logic to Kotlin, Retrofit and Clean Architecture, supporting Android 6 to 11+. That version is still in production.',
+        'Second modernization in progress: one app for Android and iOS with KMP, Jetpack Compose and SwiftUI. Business logic is shared while each platform keeps its native UI, to improve the service.',
         'Panic-alert flow from BLE/iBeacon wearables with foreground and background services, guaranteeing delivery even after a phone reboot.',
-        'Rewrite in Jetpack Compose and MVVM, currently in QA.',
         'AWS IoT Core (device shadows, MQTT) and Python/Django APIs for the dashboard, app and integrations, documented with OpenAPI.',
       ],
     },
-    stack: ['Kotlin', 'Java', 'Jetpack Compose', 'BLE', 'iBeacon', 'AWS IoT Core', 'MQTT', 'gRPC', 'Python', 'Django', 'DRF', 'OpenAPI', 'Firebase'],
+    stack: ['Kotlin', 'KMP', 'Jetpack Compose', 'SwiftUI', 'Java', 'BLE', 'iBeacon', 'AWS IoT Core', 'MQTT', 'gRPC', 'Python', 'Django', 'DRF', 'OpenAPI', 'Firebase'],
     tracks: ['mobile', 'backend'],
     featured: true,
     links: [

@@ -16,7 +16,7 @@
 - 01/2023 – 08/2024 · Full Stack Engineer II · Interseguro. Migración del SOAT de PHP a Go; errores de emisión del ~50% al ~10%.
 - 11/2022 – 01/2023 · Backend Developer (Django) · Silabuz.
 - 09/2021 – 02/2022 · Full Stack Developer y docente · Groway Studio.
-- 08/2021 – actualidad · Android & Python Backend Engineer (part-time) · Kwema Inc. (EE. UU.).
+- 08/2021 – actualidad · Android & Python Backend Engineer (part-time) · Kwema Inc. (EE. UU.). Segunda modernización en curso: app Android e iOS con KMP, Jetpack Compose y SwiftUI.
 - 09/2019 – 08/2021 · Software Engineer Android & Go · Urbaner.
 - 02/2019 – 08/2020 · Líder técnico e-commerce y mobile · Calzado Atlas (Zapatillas Tigre).
 - 08/2016 – 02/2019 · Android y mobile: ESAN, Force Close, Avances Tecnológicos, Sistemas Integrales 7A, MAP Salud, Intercorp (Clínica Aviva), Urbaner.

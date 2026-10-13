@@ -474,6 +474,19 @@
       linear-gradient(135deg, rgba(17, 24, 39, .98), rgba(8, 17, 31, .92));
   }
 
+  :root.theme-light .closing-panel {
+    background:
+      radial-gradient(circle at 0% 50%, rgba(37, 99, 235, .10), transparent 40%),
+      linear-gradient(135deg, #FFFFFF, #F1F5F9);
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  :root.theme-light .card-glass {
+    background-color: rgba(255, 255, 255, .85);
+    border-color: var(--color-border);
+  }
+
   /* Glow ambient */
   .glow-blue { box-shadow: 0 0 40px var(--color-blue-glow); }
   .glow-accent { box-shadow: 0 0 40px var(--color-accent-glow); }
