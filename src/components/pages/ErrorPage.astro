@@ -1,0 +1,54 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { t, getLangFromUrl, getLocalizedPath, type Language } from '@i18n/ui.ts';
+
+interface Props {
+  code: 404 | 500;
+  lang?: Language;
+}
+
+const { code } = Astro.props;
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const k = (key: string) => t(new URL(`/${lang}/`, Astro.site ?? 'https://yahyrparedes.com'), `${code}.${key}`);
+
+const shortcuts = [
+  { label: lang === 'en' ? 'Home' : 'Inicio', href: getLocalizedPath('home', lang) },
+  { label: lang === 'en' ? 'Experience' : 'Experiencia', href: getLocalizedPath('experience', lang) },
+  { label: lang === 'en' ? 'Profile & CV' : 'Perfil y CV', href: getLocalizedPath('profile', lang) },
+  { label: lang === 'en' ? 'Services' : 'Servicios', href: getLocalizedPath('services', lang) },
+  { label: lang === 'en' ? 'Contact' : 'Contacto', href: getLocalizedPath('contact', lang) },
+];
+---
+
+<BaseLayout title={`${code} · Yahyr Paredes`} description={k('body')} noindex={true} lang={lang}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_35%,var(--color-blue-glow),transparent_55%)]" aria-hidden="true"></div>
+    <div class="container-page min-h-[70vh] py-20 flex flex-col items-center justify-center text-center">
+      <p class="eyebrow mb-4">{code === 404 ? (lang === 'en' ? 'ERROR 404' : 'ERROR 404') : 'ERROR 500'}</p>
+      <p class="font-display font-bold text-[7rem] sm:text-[11rem] leading-none tracking-tighter text-ink/90 select-none" aria-hidden="true">
+        {code}
+      </p>
+      <h1 class="font-display font-bold text-3xl sm:text-4xl text-ink mt-2 text-balance">{k('title')}</h1>
+      <p class="text-ink-200 text-lg mt-4 max-w-md">{k('body')}</p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a href={getLocalizedPath('home', lang)} class="btn btn-primary">
+          {k('cta')}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={getLocalizedPath('contact', lang)} class="btn btn-outline">
+          {lang === 'en' ? 'Contact me' : 'Escríbeme'}
+        </a>
+      </div>
+
+      <nav class="mt-14" aria-label={lang === 'en' ? 'Useful pages' : 'Páginas útiles'}>
+        <p class="text-sm text-ink-300 mb-3">{lang === 'en' ? 'Or jump to:' : 'O ve directo a:'}</p>
+        <ul class="flex flex-wrap justify-center gap-2">
+          {shortcuts.map((s) => (
+            <li><a href={s.href} class="inline-flex rounded-full border border-border bg-white/5 px-4 py-2 text-sm text-ink-200 hover:text-ink hover:border-blue/40 transition-colors">{s.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+</BaseLayout>

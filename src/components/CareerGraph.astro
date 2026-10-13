@@ -1,0 +1,195 @@
+---
+/**
+ * CareerGraph — trayectoria como carriles en el tiempo.
+ * Cada barra es un rol (posición = fechas reales). Los roles que se solapan
+ * (p. ej. Kwema part-time) bajan a un segundo carril.
+ * Las barras enlazan al detalle (#id) en la página de experiencia.
+ */
+import { roles, companies, formatPeriod, type Locale, type Role } from '@data/career.ts';
+import { getLocalizedPath } from '@i18n/ui.ts';
+
+interface Props {
+  lang: Locale;
+  /** Enlaces relativos (#id) si estamos en la propia página de experiencia */
+  inPage?: boolean;
+  compact?: boolean;
+}
+
+const { lang, inPage = false, compact = false } = Astro.props;
+
+const toNum = (ym: string | null) => {
+  if (!ym) {
+    const now = new Date();
+    return now.getFullYear() + now.getMonth() / 12;
+  }
+  const [y, m] = ym.split('-').map(Number);
+  return y + (m - 1) / 12;
+};
+
+const startYear = 2015;
+const now = new Date();
+const endYear = now.getFullYear() + 1;
+const span = endYear - startYear;
+const pct = (v: number) => ((v - startYear) / span) * 100;
+
+// Carriles: primero roles principales, después part-time.
+const ordered = [...roles].sort((a, b) => Number(!!a.partTime) - Number(!!b.partTime) || a.start.localeCompare(b.start));
+const laneEnds: number[] = [];
+const placed = ordered.map((role) => {
+  const s = toNum(role.start);
+  const e = toNum(role.end) + (role.end ? 1 / 12 : 0);
+  // Tolerancia de 1 mes: un cambio de trabajo en el mismo mes no abre otro carril
+  let lane = laneEnds.findIndex((end) => end <= s + 1 / 12 + 0.001);
+  if (lane === -1) {
+    lane = laneEnds.length;
+    laneEnds.push(e);
+  } else {
+    laneEnds[lane] = e;
+  }
+  return { role, lane, left: pct(s), width: Math.max(pct(e) - pct(s), 0.9), company: companies[role.companyId] };
+});
+const laneCount = laneEnds.length;
+const years = Array.from({ length: span }, (_, i) => startYear + i);
+const base = inPage ? '' : getLocalizedPath('experience', lang);
+const label = (r: Role) => (r.companyId === 'previous' ? (lang === 'es' ? 'Android y mobile · 6 empresas' : 'Android & mobile · 6 companies') : companies[r.companyId].name);
+---
+
+<figure class:list={['career-graph', { 'is-compact': compact }]}>
+  <div class="career-graph-scroll" tabindex="0" aria-label={lang === 'es' ? 'Línea de tiempo de la carrera, desplazable' : 'Career timeline, scrollable'}>
+    <div class="career-graph-canvas" style={`--lanes:${laneCount}`}>
+      <div class="career-graph-grid" aria-hidden="true">
+        {years.map((y) => (
+          <span class="career-graph-year" style={`left:${pct(y)}%`}>
+            <span>{y}</span>
+          </span>
+        ))}
+      </div>
+
+      <ol class="career-graph-bars">
+        {placed.map(({ role, lane, left, width, company }) => (
+          <li style={`--lane:${lane};left:${left}%;width:${width}%;--brand:${company.color}`}>
+            <a
+              href={`${base}#${role.id}`}
+              class:list={['career-bar', { 'is-current': !role.end, 'is-part-time': role.partTime, 'is-narrow': width < 7 }]}
+              title={`${label(role)} · ${role.title[lang]} · ${formatPeriod(role, lang)}`}
+            >
+              {company.mark && <img src={company.mark} alt="" class="career-bar-mark" width="18" height="18" loading="lazy" />}
+              <span class="career-bar-label">{label(role)}</span>
+              <span class="sr-only">{`, ${role.title[lang]}, ${formatPeriod(role, lang)}`}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+  <figcaption class="career-graph-legend">
+    <span><i class="legend-swatch" aria-hidden="true"></i>{lang === 'es' ? 'Jornada completa' : 'Full-time'}</span>
+    <span><i class="legend-swatch is-part-time" aria-hidden="true"></i>{lang === 'es' ? 'Part-time en paralelo' : 'Part-time, in parallel'}</span>
+    <span><i class="legend-swatch is-current" aria-hidden="true"></i>{lang === 'es' ? 'Actualidad' : 'Current'}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .career-graph { margin: 0; }
+  .career-graph-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background:
+      linear-gradient(180deg, var(--color-glass), transparent 60%),
+      var(--color-carbon);
+    scrollbar-width: thin;
+  }
+  .career-graph-scroll:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; }
+  .career-graph-canvas {
+    position: relative;
+    min-width: 760px;
+    padding: 2.75rem 1.25rem 1.25rem;
+    height: calc(4.25rem + var(--lanes) * 3.25rem);
+  }
+  .is-compact .career-graph-canvas { height: calc(4rem + var(--lanes) * 2.9rem); }
+  .career-graph-grid { position: absolute; inset: 0 1.25rem; }
+  .career-graph-year {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed var(--color-border);
+  }
+  .career-graph-year span {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.35rem;
+    font-size: 0.72rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink-300);
+  }
+  .career-graph-bars { position: absolute; inset: 2.75rem 1.25rem 1rem; list-style: none; margin: 0; padding: 0; }
+  .career-graph-bars li { position: absolute; top: calc(var(--lane) * 3.25rem); height: 2.4rem; }
+  .is-compact .career-graph-bars li { top: calc(var(--lane) * 2.9rem); height: 2.15rem; }
+  .career-bar {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 0.45rem;
+    overflow: hidden;
+    border-radius: 0.6rem;
+    border: 1px solid color-mix(in srgb, var(--brand) 55%, transparent);
+    background: color-mix(in srgb, var(--brand) 22%, var(--color-carbon));
+    padding: 0 0.55rem;
+    color: var(--color-ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, transform 0.15s var(--ease-ui-out);
+  }
+  .career-bar:hover, .career-bar:focus-visible {
+    background: color-mix(in srgb, var(--brand) 40%, var(--color-carbon));
+    transform: translateY(-1px);
+  }
+  .career-bar:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; }
+  .career-bar.is-part-time {
+    background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--brand) 22%, var(--color-carbon)) 0 8px, color-mix(in srgb, var(--brand) 12%, var(--color-carbon)) 8px 16px);
+  }
+  .career-bar.is-current { border-right: 3px solid var(--color-success); }
+  .career-bar.is-narrow { justify-content: center; padding: 0; }
+  .career-bar.is-narrow .career-bar-label { display: none; }
+  .career-bar-mark {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: #fff;
+    padding: 2px;
+    object-fit: contain;
+  }
+  .career-bar-label { overflow: hidden; text-overflow: ellipsis; }
+  .career-graph-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-ink-200);
+  }
+  .career-graph-legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .legend-swatch {
+    display: inline-block;
+    width: 1.4rem;
+    height: 0.7rem;
+    border-radius: 0.25rem;
+    border: 1px solid color-mix(in srgb, var(--color-blue) 55%, transparent);
+    background: color-mix(in srgb, var(--color-blue) 25%, var(--color-carbon));
+  }
+  .legend-swatch.is-part-time {
+    background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-blue) 25%, var(--color-carbon)) 0 4px, var(--color-carbon) 4px 8px);
+  }
+  .legend-swatch.is-current { border-right: 3px solid var(--color-success); }
+  @media (prefers-reduced-motion: reduce) { .career-bar { transition: none; } }
+</style>
+
+<script>
+  // En pantallas estrechas, empezar mostrando lo más reciente
+  document.querySelectorAll<HTMLElement>('.career-graph-scroll').forEach((el) => {
+    if (el.scrollWidth > el.clientWidth) el.scrollLeft = el.scrollWidth;
+  });
+</script>

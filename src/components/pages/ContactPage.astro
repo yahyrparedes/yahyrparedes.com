@@ -1,7 +1,28 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { site } from '@data/site.ts';
-import { t } from '@i18n/ui.ts';
+import { t, getLangFromUrl } from '@i18n/ui.ts';
+
+const lang = getLangFromUrl(Astro.url);
+// Si se define PUBLIC_WEB3FORMS_KEY en el build, el formulario envía directo (sin abrir el cliente de correo).
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+const msgs = lang === 'en'
+  ? {
+      sending: 'Sending…',
+      ok: 'Thanks! Your message was sent. I will reply soon.',
+      mailto: 'Your email app should open with the message ready. If it does not, write to me directly at',
+      error: 'The message could not be sent. Please write to me directly at',
+      invalid: 'Please fill in your name, a valid email and your message.',
+      subject: 'New contact from yahyrparedes.com',
+    }
+  : {
+      sending: 'Enviando…',
+      ok: '¡Gracias! Tu mensaje se ha enviado. Te responderé pronto.',
+      mailto: 'Se abrirá tu aplicación de correo con el mensaje listo. Si no se abre, escríbeme directamente a',
+      error: 'No se pudo enviar el mensaje. Escríbeme directamente a',
+      invalid: 'Completa tu nombre, un correo válido y tu mensaje.',
+      subject: 'Nuevo contacto desde yahyrparedes.com',
+    };
 ---
 
 <BaseLayout title={t(Astro.url, 'contact.eyebrow') + ' · Yahyr Paredes'} description={t(Astro.url, 'contact.body')}>
@@ -51,7 +72,8 @@ import { t } from '@i18n/ui.ts';
           <h2 class="text-2xl sm:text-3xl mb-2">{t(Astro.url, 'contact.form_title')}</h2>
           <p class="text-ink-200 mb-6">{t(Astro.url, 'contact.form_subtitle')}</p>
 
-          <form class="space-y-4" onsubmit="event.preventDefault(); alert('Form submitted (demo)');">
+          <form class="space-y-4" data-contact-form data-email={site.email} data-key={web3formsKey} data-msgs={JSON.stringify(msgs)} novalidate>
+            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label for="name" class="block text-xs text-ink-300 uppercase tracking-wider mb-1.5">{t(Astro.url, 'contact.form_name')}</label>
@@ -72,6 +94,8 @@ import { t } from '@i18n/ui.ts';
               <label for="message" class="block text-xs text-ink-300 uppercase tracking-wider mb-1.5">{t(Astro.url, 'contact.form_message')}</label>
               <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-lg bg-midnight border border-border text-ink placeholder:text-ink-300 focus:border-blue-200 focus:outline-none transition-colors resize-none" placeholder={t(Astro.url, 'contact.form_message')}></textarea>
             </div>
+
+            <p class="hidden rounded-lg border px-4 py-3 text-sm" role="status" aria-live="polite" data-form-status></p>
 
             <button type="submit" class="btn btn-primary w-full sm:w-auto">
               {t(Astro.url, 'contact.form_send')}
@@ -114,3 +138,64 @@ import { t } from '@i18n/ui.ts';
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  if (form) {
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const email = form.dataset.email!;
+    const key = form.dataset.key;
+    const msgs = JSON.parse(form.dataset.msgs || '{}');
+    const show = (text: string, tone: 'ok' | 'error' | 'info', withEmail = false) => {
+      status.className = `rounded-lg border px-4 py-3 text-sm ${tone === 'ok' ? 'border-green/40 bg-green/10 text-ink' : tone === 'error' ? 'border-error/40 bg-error/10 text-ink' : 'border-blue/40 bg-blue/10 text-ink'}`;
+      status.textContent = text + (withEmail ? ' ' : '');
+      if (withEmail) {
+        const a = document.createElement('a');
+        a.href = `mailto:${email}`;
+        a.textContent = email;
+        a.className = 'font-semibold underline';
+        status.append(a);
+      }
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      if (data.get('botcheck')) return;
+      const name = String(data.get('name') || '').trim();
+      const from = String(data.get('email') || '').trim();
+      const company = String(data.get('company') || '').trim();
+      const message = String(data.get('message') || '').trim();
+      if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) {
+        show(msgs.invalid, 'error');
+        return;
+      }
+
+      if (!key) {
+        const body = `${message}\n\n— ${name}${company ? ` (${company})` : ''}\n${from}`;
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(msgs.subject)}&body=${encodeURIComponent(body)}`;
+        show(msgs.mailto, 'info', true);
+        return;
+      }
+
+      button.disabled = true;
+      show(msgs.sending, 'info');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ access_key: key, subject: msgs.subject, from_name: name, name, email: from, company, message }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || json.success === false) throw new Error('send failed');
+        form.reset();
+        show(msgs.ok, 'ok');
+      } catch {
+        show(msgs.error, 'error', true);
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>

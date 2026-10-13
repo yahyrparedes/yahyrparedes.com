@@ -4,7 +4,7 @@
 	LinkedIn: https://www.linkedin.com/in/yahyrparedes/
 
 /* SITE */
-	Last update: 2026/07/11
+	Last update: 2026/10/13
 	Standards: HTML5, CSS3, ES2022
 	Components: Astro 5, Tailwind CSS 4
 	Hosting: Coolify + nginx (self-hosted)

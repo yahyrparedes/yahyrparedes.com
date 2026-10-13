@@ -16,7 +16,7 @@ export default defineConfig({
     locales: ['es', 'en'],
     routing: {
       prefixDefaultLocale: true, // /es/ y /en/, no /about
-      // redirectToDefaultLocale: false → mi src/pages/index.astro hace el redirect con detección de navegador
+      // redirectToDefaultLocale: false → nginx (302 por Accept-Language) y src/pages/index.astro resuelven "/"
       redirectToDefaultLocale: false,
     },
   },
@@ -24,11 +24,15 @@ export default defineConfig({
     sitemap({
       entryLimit: 45000,
       filter: (page) =>
+        page !== 'https://yahyrparedes.com/' &&
         !page.includes('/404') &&
         !page.includes('/500') &&
         !page.includes('/admin') &&
         !page.includes('/plugins') &&
+        // detalle de servicios EN aún redirige a ES (pendiente de traducir)
+        !/\/en\/services\/.+/.test(new URL(page).pathname) &&
         !page.includes('/_astro'),
+      /** @param {import('@astrojs/sitemap').SitemapItem} item @returns {any} */
       serialize(item) {
         const url = item.url;
         const path = new URL(url).pathname;
@@ -37,7 +41,10 @@ export default defineConfig({
           return { ...item, changefreq: 'weekly', priority: 1.0 };
         }
 
-        if (path.includes('/sobre-mi') || path.includes('/behind-the-engineer')) {
+        if (path.includes('/experiencia') || path.includes('/experience') || path.includes('/profile')) {
+          return { ...item, changefreq: 'monthly', priority: 0.9 };
+        }
+        if (path.includes('/sobre-mi') || path.includes('/about')) {
           return { ...item, changefreq: 'monthly', priority: 0.9 };
         }
         if (path.includes('/perfil')) return { ...item, changefreq: 'monthly', priority: 0.8 };
@@ -91,6 +98,7 @@ export default defineConfig({
     }),
   ],
   vite: {
+    // @ts-expect-error — desajuste de tipos entre la versión de Vite de Astro y la de @tailwindcss/vite
     plugins: [tailwindcss()],
     resolve: {
       alias: {

@@ -66,7 +66,14 @@ npm run preview     # sirve el build localmente
 └── tsconfig.json
 ```
 
-## Secciones del sitio
+## Datos y rutas (léeme primero)
+
+- **Trayectoria profesional**: `src/data/career.ts` es la única fuente de verdad (ES/EN), basada en `cv-yahyrparedes/master-info/master-cv.md`. Home, Experiencia y CV se generan desde ahí.
+- **Testimonios**: se añaden en `career.ts` con `status: 'published'`. Para previsualizar borradores: `PUBLIC_SHOW_DRAFT_TESTIMONIALS=true npm run dev`.
+- **Rutas**: mapa completo, redirecciones y 404 en `docs/URLS.md`. Enlaza siempre con `getLocalizedPath()`.
+- **Formulario de contacto**: sin configuración abre el cliente de correo con el mensaje listo. Para envío directo, define `PUBLIC_WEB3FORMS_KEY` en el build (Coolify → Environment Variables, marcada como build variable).
+
+## Secciones del sitio (versión antigua, ver docs/URLS.md)
 
 - **/** Home (presenta todo)
 - **/sobre-mi/** About + galería de fotos personales

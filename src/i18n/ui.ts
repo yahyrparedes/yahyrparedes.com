@@ -36,9 +36,9 @@ type LocalizedRoute = {
 
 export const routeMap: LocalizedRoute[] = [
   { id: 'home', paths: { es: '/', en: '/' } },
-  { id: 'about', paths: { es: '/sobre-mi', en: '/behind-the-engineer' } },
-  { id: 'profile', paths: { es: '/perfil' }, fallbackId: 'about' },
-  { id: 'experience', paths: { es: '/experience', en: '/experience' } },
+  { id: 'about', paths: { es: '/sobre-mi', en: '/about' } },
+  { id: 'profile', paths: { es: '/perfil', en: '/profile' } },
+  { id: 'experience', paths: { es: '/experiencia', en: '/experience' } },
   { id: 'services', paths: { es: '/servicios', en: '/services' } },
   { id: 'serviceDetail', paths: { es: '/servicios/:slug', en: '/services/:slug' }, fallbackId: 'services' },
   { id: 'openSource', paths: { es: '/open-source', en: '/open-source' } },
@@ -58,6 +58,7 @@ export const ui = {
     'nav.home': 'Inicio',
     'nav.about': 'Sobre mí',
     'nav.experience': 'Experiencia',
+    'nav.profile': 'CV',
     'nav.services': 'Servicios',
     'nav.stack': 'Stack',
     'nav.open_source': 'Open Source',
@@ -144,7 +145,7 @@ export const ui = {
     'about.journey_spain': 'Spain',
     'about.journey_title_end': '.',
     'about.journey_body': 'Distintos lugares, la misma curiosidad. Cada paso ha moldeado al ingeniero y a la persona que soy hoy.',
-    'about.journey_step1_year': '2017',
+    'about.journey_step1_year': '2016',
     'about.journey_step1_label': 'Primeros pasos en tecnología',
     'about.journey_step2_year': '2024',
     'about.journey_step2_label': 'Nuevo capítulo en España',
@@ -306,8 +307,8 @@ export const ui = {
     'footer.col_nav': 'Navegación',
     'footer.col_services': 'Servicios',
     'footer.col_legal': 'Legal',
-    'footer.col_newsletter': 'Mantente al día',
-    'footer.col_newsletter_body': 'Recibe ocasionalmente novedades sobre proyectos, ideas y lo que estoy construyendo.',
+    'footer.col_newsletter': '¿Trabajamos juntos?',
+    'footer.col_newsletter_body': 'Escríbeme por correo o revisa mi CV completo. Normalmente respondo en menos de 24 h.',
     'footer.col_newsletter_placeholder': 'Tu correo electrónico',
     'footer.legal_privacy': 'Política de privacidad',
     'footer.legal_terms': 'Términos del servicio',
@@ -348,6 +349,7 @@ export const ui = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.experience': 'Experience',
+    'nav.profile': 'CV',
     'nav.services': 'Services',
     'nav.stack': 'Stack',
     'nav.open_source': 'Open Source',
@@ -434,7 +436,7 @@ export const ui = {
     'about.journey_spain': 'Spain',
     'about.journey_title_end': '.',
     'about.journey_body': 'Different places, same curiosity. Each step has shaped the engineer and the person I am today.',
-    'about.journey_step1_year': '2017',
+    'about.journey_step1_year': '2016',
     'about.journey_step1_label': 'First steps in tech',
     'about.journey_step2_year': '2024',
     'about.journey_step2_label': 'New chapter in Spain',
@@ -596,8 +598,8 @@ export const ui = {
     'footer.col_nav': 'Navigation',
     'footer.col_services': 'Services',
     'footer.col_legal': 'Legal',
-    'footer.col_newsletter': 'Stay in the loop',
-    'footer.col_newsletter_body': 'Get occasional updates about projects, thoughts and what I\'m building.',
+    'footer.col_newsletter': 'Work together?',
+    'footer.col_newsletter_body': 'Email me or check my full CV. I usually reply within 24h.',
     'footer.col_newsletter_placeholder': 'Enter your email',
     'footer.legal_privacy': 'Privacy Policy',
     'footer.legal_terms': 'Terms of Service',
@@ -717,6 +719,11 @@ export function getLocalizedPath(routeId: RouteId, targetLang: Language, params:
   }
 
   return `/${targetLang}/`;
+}
+
+/** Atajo para componentes: ruta localizada según la URL actual. */
+export function localePath(url: URL, routeId: RouteId, params: RouteParams = {}): string {
+  return getLocalizedPath(routeId, getLangFromUrl(url), params);
 }
 
 export function getAlternateUrl(pathname: string, targetLang: Language): string {

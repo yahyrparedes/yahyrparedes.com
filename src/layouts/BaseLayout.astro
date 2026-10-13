@@ -16,6 +16,7 @@ export interface Props {
   noindex?: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
+  lang?: 'es' | 'en';
 }
 
 const {
@@ -28,9 +29,10 @@ const {
   noindex = false,
   showHeader = true,
   showFooter = true,
+  lang,
 } = Astro.props;
 
-const meta = buildMeta({ title, description, image, type, publishedTime, author, noindex });
+const meta = buildMeta({ title, description, image, url: Astro.url.pathname, type, publishedTime, author, noindex });
 
 const sameAs = site.socials.map((s) => s.url).filter((u) => u.startsWith('http'));
 
@@ -45,7 +47,7 @@ const personLd = personJsonLd({
 
 const siteLd = webSiteJsonLd();
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
-const currentLang = getLangFromUrl(Astro.url);
+const currentLang = lang ?? getLangFromUrl(Astro.url);
 const path = getPathWithoutLang(Astro.url.pathname);
 const alternateEs = getAlternateUrl(Astro.url.pathname, 'es');
 const alternateEn = getAlternateUrl(Astro.url.pathname, 'en');
@@ -68,12 +70,16 @@ const alternateEnUrl = new URL(alternateEn, Astro.site).toString();
     <meta name="author" content={site.name} />
     <meta name="generator" content={Astro.generator} />
     <meta name="keywords" content="Yahyr Paredes, Product Engineer, Android, Kotlin, Java, Spring Boot, freelance, Jaén, Andalucía, open source, herramientas, AI Native" />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     <meta http-equiv="content-language" content={currentLang === 'en' ? 'en-US' : 'es-ES'} />
-    <link rel="alternate" hreflang="es" href={alternateEsUrl} />
-    <link rel="alternate" hreflang="en" href={alternateEnUrl} />
-    <link rel="alternate" hreflang="x-default" href={new URL(getAlternateUrl(Astro.url.pathname, 'es'), Astro.site).toString()} />
+    {!noindex && (
+      <>
+        <link rel="alternate" hreflang="es" href={alternateEsUrl} />
+        <link rel="alternate" hreflang="en" href={alternateEnUrl} />
+        <link rel="alternate" hreflang="x-default" href={alternateEsUrl} />
+      </>
+    )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />

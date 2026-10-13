@@ -1,92 +1,176 @@
 ---
 import { site } from '@data/site.ts';
-import { t, getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
+import { t, getLangFromUrl, getLocalizedPath, type RouteId } from '@i18n/ui.ts';
 import LanguageToggle from './LanguageToggle.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import '@styles/global.css';
 
 const currentPath = Astro.url.pathname;
 const currentLang = getLangFromUrl(Astro.url);
-const normalizePath = (value: string) => (value.endsWith('/') && value !== '/' ? value.slice(0, -1) : value);
-const isActive = (path: string) => {
-  const normalizedCurrentPath = normalizePath(currentPath);
-  const normalizedPath = normalizePath(path);
-  if (normalizedPath === '/') return normalizedCurrentPath === `/${currentLang}` || normalizedCurrentPath === '/';
-  return normalizedCurrentPath.startsWith(`/${currentLang}${normalizedPath}`) || normalizedCurrentPath === normalizedPath;
-};
+const normalize = (value: string) => (value.length > 1 && value.endsWith('/') ? value.slice(0, -1) : value);
 
-const navItems = [
-  { key: 'nav.home', href: getLocalizedPath('home', currentLang) },
-  { key: 'nav.about', href: getLocalizedPath('about', currentLang) },
-  { key: 'nav.experience', href: getLocalizedPath('experience', currentLang) },
-  { key: 'nav.services', href: getLocalizedPath('services', currentLang) },
-  { key: 'nav.open_source', href: getLocalizedPath('openSource', currentLang) },
-  { key: 'nav.blog', href: getLocalizedPath('blog', currentLang) },
-  { key: 'nav.contact', href: getLocalizedPath('contact', currentLang) },
-];
+const navItems: { key: string; id: RouteId; href: string }[] = ([
+  { key: 'nav.about', id: 'about' },
+  { key: 'nav.experience', id: 'experience' },
+  { key: 'nav.profile', id: 'profile' },
+  { key: 'nav.services', id: 'services' },
+  { key: 'nav.open_source', id: 'openSource' },
+  { key: 'nav.blog', id: 'blog' },
+  { key: 'nav.contact', id: 'contact' },
+] as { key: string; id: RouteId }[]).map((item) => ({ ...item, href: getLocalizedPath(item.id, currentLang) }));
+
+const isActive = (href: string) => {
+  const target = normalize(href);
+  const current = normalize(currentPath);
+  return current === target || current.startsWith(`${target}/`);
+};
+const menuLabel = currentLang === 'en' ? 'Open menu' : 'Abrir menú';
+const closeLabel = currentLang === 'en' ? 'Close menu' : 'Cerrar menú';
 ---
 
-<header class="sticky top-0 z-50 bg-midnight/95 backdrop-blur-md border-b border-blue/30 shadow-sm shadow-midnight/50">
-  <div class="container-page flex items-center justify-between h-16 sm:h-18">
-    <!-- Logo -->
-    <a href={getLocalizedPath('home', currentLang)} class="flex items-center gap-2.5 group">
+<header class="site-header sticky top-0 z-50 border-b border-border/80 bg-midnight/85 backdrop-blur-md">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a href={getLocalizedPath('home', currentLang)} class="group flex min-w-0 items-center gap-2.5" aria-label={`${site.name} · ${t(Astro.url, 'nav.home')}`}>
       <img
         src="/images/logo.png"
-        alt={site.name}
-        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover ring-1 ring-border group-hover:ring-blue-200 transition-all"
-        width="40"
-        height="40"
+        alt=""
+        class="h-9 w-9 shrink-0 rounded-full object-cover ring-1 ring-border transition-all group-hover:ring-blue-200"
+        width="36"
+        height="36"
         loading="eager"
       />
-      <div class="hidden sm:block leading-tight">
-        <p class="font-display font-bold text-sm tracking-tight text-ink">
-          {site.name.toUpperCase()}
-        </p>
-        <p class="text-xs text-blue-200 font-medium">
-          {t(Astro.url, 'hero.eyebrow')}
-        </p>
-      </div>
+      <span class="hidden leading-tight min-[360px]:block">
+        <span class="block font-display text-sm font-bold tracking-tight text-ink">{site.name}</span>
+        <span class="block text-xs font-medium text-blue-200">{t(Astro.url, 'hero.eyebrow')}</span>
+      </span>
     </a>
 
-    <!-- Desktop nav -->
-    <nav class="hidden lg:flex items-center gap-0.5" aria-label="Navegación principal">
+    <nav class="hidden items-center gap-0.5 xl:flex" aria-label={currentLang === 'en' ? 'Main navigation' : 'Navegación principal'}>
       {navItems.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            'nav-link',
-            isActive(item.href) ? 'active' : '',
-          ]}
-        >
+        <a href={item.href} class:list={['nav-link', { active: isActive(item.href) }]} aria-current={isActive(item.href) ? 'page' : undefined}>
           {t(Astro.url, item.key)}
         </a>
       ))}
     </nav>
 
-    <!-- Right: theme + language toggle + CTA -->
-    <div class="flex items-center gap-2 sm:gap-3">
-      <LanguageToggle />
+    <div class="flex shrink-0 items-center gap-1.5 sm:gap-2">
+      <div class="hidden sm:block"><LanguageToggle compact /></div>
       <ThemeToggle />
-      <a
-        href={getLocalizedPath('contact', currentLang)}
-        class="hidden sm:inline-flex btn btn-outline"
-      >
+      <div class="hidden md:block">
+        <a href={getLocalizedPath('contact', currentLang)} class="btn btn-outline">
         {t(Astro.url, 'nav.cta')}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <!-- Mobile menu button -->
+      </div>
       <button
         type="button"
-        class="lg:hidden p-2 -mr-2 text-ink-200 hover:text-ink"
-        aria-label="Abrir menú"
+        class="menu-button xl:hidden"
+        aria-label={menuLabel}
         aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-open
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M3 6h18M3 12h18M3 18h18"/>
-        </svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
+
 </header>
+
+  <!-- Menú móvil / tablet -->
+<div id="mobile-menu" class="mobile-menu xl:hidden" hidden data-menu>
+  <div class="mobile-menu-backdrop" data-menu-close aria-hidden="true"></div>
+  <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label={currentLang === 'en' ? 'Menu' : 'Menú'}>
+    <div class="flex items-center justify-between">
+      <span class="font-display text-sm font-bold text-ink">{site.name}</span>
+      <button type="button" class="menu-button" aria-label={closeLabel} data-menu-close>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="mt-6 flex flex-col" aria-label={currentLang === 'en' ? 'Mobile navigation' : 'Navegación móvil'}>
+      <a href={getLocalizedPath('home', currentLang)} class:list={['mobile-link', { active: normalize(currentPath) === normalize(getLocalizedPath('home', currentLang)) }]}>
+        {t(Astro.url, 'nav.home')}
+      </a>
+      {navItems.map((item) => (
+        <a href={item.href} class:list={['mobile-link', { active: isActive(item.href) }]} aria-current={isActive(item.href) ? 'page' : undefined}>
+          {t(Astro.url, item.key)}
+        </a>
+      ))}
+    </nav>
+    <div class="mt-auto space-y-4 pt-6">
+      <LanguageToggle />
+      <a href={getLocalizedPath('contact', currentLang)} class="btn btn-primary w-full justify-center">
+        {t(Astro.url, 'nav.cta')}
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .menu-button {
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.6rem;
+    color: var(--color-ink-100);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  @media (min-width: 1280px) { .menu-button[data-menu-open] { display: none; } }
+  .menu-button:hover { color: var(--color-ink); background: var(--color-glass); }
+  .mobile-menu { position: fixed; inset: 0; z-index: 60; }
+  .mobile-menu[hidden] { display: none; }
+  .mobile-menu-backdrop { position: absolute; inset: 0; background: rgba(2, 6, 23, 0.6); backdrop-filter: blur(2px); }
+  .mobile-menu-panel {
+    position: absolute;
+    inset: 0 0 0 auto;
+    display: flex;
+    width: min(22rem, 88vw);
+    flex-direction: column;
+    overflow-y: auto;
+    border-left: 1px solid var(--color-border);
+    background: var(--color-carbon);
+    padding: 1rem 1.25rem 1.5rem;
+    box-shadow: var(--shadow-lg);
+    animation: menu-in 0.22s var(--ease-ui-out) both;
+  }
+  .mobile-link {
+    display: block;
+    border-radius: 0.6rem;
+    padding: 0.8rem 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-ink-100);
+  }
+  .mobile-link:hover { color: var(--color-ink); background: var(--color-glass); }
+  .mobile-link.active { color: var(--color-ink); background: var(--color-glass-strong); }
+  @keyframes menu-in { from { transform: translateX(12%); opacity: 0; } to { transform: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .mobile-menu-panel { animation: none; } }
+</style>
+
+<script>
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  const openBtn = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+  if (menu && openBtn && !menu.dataset.bound) {
+    menu.dataset.bound = 'true';
+    const close = () => {
+      menu.hidden = true;
+      openBtn.setAttribute('aria-expanded', 'false');
+      document.documentElement.style.overflow = '';
+      openBtn.focus();
+    };
+    const open = () => {
+      menu.hidden = false;
+      openBtn.setAttribute('aria-expanded', 'true');
+      document.documentElement.style.overflow = 'hidden';
+      menu.querySelector<HTMLElement>('.mobile-link')?.focus();
+    };
+    openBtn.addEventListener('click', open);
+    menu.querySelectorAll('[data-menu-close]').forEach((el) => el.addEventListener('click', close));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { document.documentElement.style.overflow = ''; }));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) close(); });
+    window.matchMedia('(min-width: 1280px)').addEventListener('change', (e) => { if (e.matches && !menu.hidden) close(); });
+  }
+</script>

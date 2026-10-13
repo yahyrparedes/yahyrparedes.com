@@ -6,24 +6,6 @@ export interface Social {
   icon: 'linkedin' | 'github' | 'email' | 'instagram' | 'youtube';
 }
 
-export interface Experience {
-  company: string;
-  role: string;
-  period: string;
-  location: string;
-  url?: string;
-  description: string;
-  highlights: string[];
-  current?: boolean;
-}
-
-export interface Education {
-  institution: string;
-  degree: string;
-  period: string;
-  description?: string;
-}
-
 export interface Service {
   slug: string;
   name: string;
@@ -42,6 +24,7 @@ export interface Service {
 export interface Plugin {
   slug: string;
   name: string;
+  moduleName?: string;
   tagline: string;
   description: string;
   longDescription: string;
@@ -65,15 +48,7 @@ export interface PhotoGroup {
   photos: { src: string; alt: string; caption?: string }[];
 }
 
-export interface Project {
-  name: string;
-  description: string;
-  url?: string;
-  category: 'mobile' | 'web' | 'iot' | 'fintech' | 'other';
-  year: string;
-  highlights?: string[];
-}
-
+// La trayectoria (empresas, roles, formación, skills) vive en ./career.ts
 export interface SiteProfile {
   name: string;
   handle: string;
@@ -86,13 +61,9 @@ export interface SiteProfile {
   longBio: string;
   origin: string;
   socials: Social[];
-  experience: Experience[];
-  education: Education[];
-  skills: { category: string; items: string[] }[];
-  languages: { name: string; level: string }[];
+  image?: string;
   services: Service[];
   plugins: Plugin[];
-  projects: Project[];
   photos: PhotoGroup[];
 }
 
@@ -105,7 +76,7 @@ export const site: SiteProfile = {
   country: 'España',
   email: 'hola@yahyrparedes.com',
   bio: 'Software developer con background en mobile (Android nativo, Kotlin) y backend (Java/Spring). Disponible para proyectos freelance, consultoría y auditorías.',
-  longBio: `Nacido en Perú, llegué a España con mi familia en busca de nuevas oportunidades. Llevo más de 9 años construyendo software — empecé en Android, me especialicé en backend con Java/Spring, y ahora combino ambos mundos con infraestructura cloud (AWS, GCP) y desarrollo full-stack.
+  longBio: `Nacido en Perú, llegué a España con mi familia en busca de nuevas oportunidades. Llevo más de 10 años construyendo software: empecé en Android, sumé backend con Go, Java/Spring y Python, y ahora combino ambos mundos con infraestructura cloud (AWS, GCP) y desarrollo full-stack.
 
 Mi enfoque es pragmático: menos buzzwords, más producto funcionando. Disfruto tanto de una arquitectura limpia como de un hot fix a las 2am que salva un deploy.
 
@@ -115,81 +86,6 @@ Ahora mismo estoy basado en Cortijos Nuevos (Jaén, Andalucía) y disponible par
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/yahyrparedes/', icon: 'linkedin' },
     { label: 'GitHub', url: 'https://github.com/yahyrparedes', icon: 'github' },
     { label: 'Email', url: 'mailto:hola@yahyrparedes.com', icon: 'email' },
-  ],
-  experience: [
-    {
-      company: 'Delosi (Starbucks Perú)',
-      role: 'Backend / Mobile Software Engineer',
-      period: '2024 — 2025',
-      location: 'Lima, Perú (remoto desde España)',
-      url: 'https://delosi.com.pe',
-      description: 'Desarrollo backend y mobile para el ecosistema de apps y sistemas de Starbucks Perú. Microservicios en AWS, autenticación con Cognito, observabilidad con CloudWatch.',
-      highlights: [
-        'Microservicios en Spring Boot desplegados en AWS Lambda',
-        'Autenticación con AWS Cognito + JWT',
-        'Apps internas con logging y circuit breaker',
-      ],
-      current: false,
-    },
-    {
-      company: 'Avances Tecnológicos',
-      role: 'Android Tech Lead',
-      period: '2018 — 2020',
-      location: 'Lima, Perú',
-      description: 'Lideré el equipo Android en una empresa de IoT y seguridad. Arquitectura modular con Kotlin, integración con hardware vía Bluetooth y cámara.',
-      highlights: [
-        'Migré código legacy de Java a Kotlin (30% menos bugs)',
-        'Entrené a 2 developers junior que ahora son Tech Lead y SRE',
-        'Apps en producción con 50k+ instalaciones',
-      ],
-      current: false,
-    },
-    {
-      company: 'Bancamóvil Proempresa',
-      role: 'Android Developer',
-      period: '2017 — 2018',
-      location: 'Lima, Perú',
-      description: 'App de banca móvil para empresas. Integración con APIs del banco, biometría, y hardening de seguridad.',
-      highlights: [
-        'Implementé autenticación con biometría (huella, face ID)',
-        'Optimización de cold start time de 4.2s a 1.8s',
-        'Certificación PCI-DSS de la app',
-      ],
-      current: false,
-    },
-    {
-      company: 'Kwema',
-      role: 'Mobile & IoT Developer',
-      period: '2016 — 2017',
-      location: 'Lima, Perú',
-      description: 'App mobile que se conecta con wearables de seguridad personal. Integración BLE, geofencing, notificaciones críticas.',
-      highlights: [
-        'Integración Bluetooth Low Energy con wearables',
-        'Geofencing + alertas en tiempo real',
-        'App React Native (mi primer contacto con hybrid)',
-      ],
-      current: false,
-    },
-  ],
-  education: [
-    {
-      institution: 'Universidad Nacional de Ingeniería (UNI)',
-      degree: 'Ingeniería de Sistemas',
-      period: '2011 — 2016',
-      description: 'Formación base en algoritmia, estructuras de datos, redes y arquitectura de software.',
-    },
-  ],
-  skills: [
-    { category: 'Mobile', items: ['Kotlin', 'Java', 'Android', 'Jetpack Compose', 'Coroutines', 'Room', 'Retrofit', 'KMP'] },
-    { category: 'Backend', items: ['Java', 'Spring Boot', 'Node.js', 'Python', 'Express', 'NestJS', 'Laravel'] },
-    { category: 'Frontend', items: ['TypeScript', 'React', 'Astro', 'Next.js', 'Tailwind CSS', 'Vue'] },
-    { category: 'Cloud & DevOps', items: ['AWS (Lambda, S3, Cognito, EC2)', 'GCP (Cloud Run, Firebase)', 'Docker', 'GitHub Actions', 'Nginx'] },
-    { category: 'E-commerce', items: ['PrestaShop', 'WordPress', 'WooCommerce', 'PHP', 'MySQL', 'MariaDB'] },
-    { category: 'Tools', items: ['Git', 'Linux', 'Postman', 'Figma basics', 'Notion'] },
-  ],
-  languages: [
-    { name: 'Español', level: 'Nativo' },
-    { name: 'Inglés', level: 'Profesional (lectura técnica, conversación profesional)' },
   ],
   services: [
     {
@@ -581,34 +477,6 @@ Tiger Search Console sincroniza tu tienda con GSC: auto-indexación vía Indexin
       ],
       buyUrl: 'https://github.com/yahyrparedes/ps_search_console',
       status: 'available',
-    },
-  ],
-  projects: [
-    {
-      name: 'Starbucks Perú (Delosi)',
-      description: 'Backend y apps internas para el ecosistema Starbucks Perú.',
-      url: 'https://delosi.com.pe',
-      category: 'fintech',
-      year: '2024-2025',
-    },
-    {
-      name: 'Bancamóvil Proempresa',
-      description: 'App de banca móvil empresarial con biometría y hardening PCI-DSS.',
-      category: 'mobile',
-      year: '2017-2018',
-    },
-    {
-      name: 'Kwema',
-      description: 'App de seguridad personal con wearables BLE y geofencing.',
-      category: 'iot',
-      year: '2016-2017',
-    },
-    {
-      name: 'mavilagm.com',
-      description: 'Linktree + sitio oficial de marca para creadora de contenido.',
-      url: 'https://mavilagm.com',
-      category: 'web',
-      year: '2026',
     },
   ],
   photos: [

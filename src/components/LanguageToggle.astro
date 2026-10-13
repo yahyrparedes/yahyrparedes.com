@@ -3,6 +3,7 @@ import { languages, getLangFromUrl, getAlternateUrl } from '@i18n/ui.ts';
 import '@styles/global.css';
 
 const currentLang = getLangFromUrl(Astro.url);
+const { compact = false } = Astro.props as { compact?: boolean };
 ---
 
 <div class="lang-toggle inline-flex items-center gap-1 text-xs font-medium">
@@ -19,11 +20,11 @@ const currentLang = getLangFromUrl(Astro.url);
             ? 'text-ink bg-midnight-200'
             : 'text-ink-200 hover:text-ink hover:bg-midnight-200/60',
         ]}
-        aria-label={`Switch to ${label}`}
+        aria-label={lang === 'en' ? 'Read in English' : 'Leer en español'}
         aria-current={isActive ? 'true' : undefined}
         hreflang={lang}
       >
-        {label}
+        {compact ? lang.toUpperCase() : label}
       </a>
     );
   })}

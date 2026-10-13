@@ -11,6 +11,7 @@ const navItems = [
   { key: 'nav.home', href: getLocalizedPath('home', currentLang) },
   { key: 'nav.about', href: getLocalizedPath('about', currentLang) },
   { key: 'nav.experience', href: getLocalizedPath('experience', currentLang) },
+  { key: 'nav.profile', href: getLocalizedPath('profile', currentLang) },
   { key: 'nav.services', href: getLocalizedPath('services', currentLang) },
   { key: 'nav.open_source', href: getLocalizedPath('openSource', currentLang) },
   { key: 'nav.contact', href: getLocalizedPath('contact', currentLang) },
@@ -113,25 +114,15 @@ const socials = [
         <p class="text-ink-200 text-sm mb-3">
           {t(Astro.url, 'footer.col_newsletter_body')}
         </p>
-        <form class="mb-6" onsubmit="event.preventDefault();">
-          <div class="flex gap-2">
-            <input
-              type="email"
-              placeholder={t(Astro.url, 'footer.col_newsletter_placeholder')}
-              class="flex-1 px-3 py-2 rounded-lg bg-midnight-100 border border-border text-sm text-ink placeholder:text-ink-300 focus:border-blue-200 focus:outline-none transition-colors"
-              aria-label="Email"
-            />
-            <button
-              type="submit"
-              class="px-3 py-2 rounded-lg bg-midnight-200 border border-border text-ink-200 hover:text-ink hover:border-blue-200 transition-colors"
-              aria-label="Subscribe"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
-          </div>
-        </form>
+        <div class="mb-6 flex flex-wrap gap-2">
+          <a href={`mailto:${site.email}`} class="inline-flex items-center gap-2 rounded-lg border border-border bg-white/5 px-3 py-2 text-sm text-ink-100 hover:text-ink hover:border-blue/40 transition-colors">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            {site.email}
+          </a>
+          <a href={getLocalizedPath('profile', currentLang)} class="inline-flex items-center gap-2 rounded-lg border border-border bg-white/5 px-3 py-2 text-sm text-ink-100 hover:text-ink hover:border-blue/40 transition-colors">
+            {currentLang === 'en' ? 'View my CV' : 'Ver mi CV'}
+          </a>
+        </div>
 
         <h4 class="font-display font-semibold text-ink mb-3 text-xs uppercase tracking-wider">
           {t(Astro.url, 'footer.col_legal')}

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { site } from '@data/site.ts';
-import { t, getLangFromUrl } from '@i18n/ui.ts';
+import { t, getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
 
 const currentLang = getLangFromUrl(Astro.url);
 
@@ -225,7 +225,7 @@ const inspirations = [
           </h2>
           <p class="text-ink-200 mt-2">{t(Astro.url, 'about.cta_body')}</p>
         </div>
-        <a href={currentLang === 'en' ? '/en/experience' : '/es/experience'} class="btn btn-primary flex-shrink-0">
+        <a href={getLocalizedPath('experience', currentLang)} class="btn btn-primary flex-shrink-0">
           {t(Astro.url, 'about.cta_button')}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>

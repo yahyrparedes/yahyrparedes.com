@@ -1,492 +1,356 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import CareerGraph from '@components/CareerGraph.astro';
 import { site } from '@data/site.ts';
-import { t, getLangFromUrl } from '@i18n/ui.ts';
+import { t, getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
+import { featuredRoles, companies, trustedBy, formatPeriod, yearsOfExperience } from '@data/career.ts';
 
-const currentLang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const years = yearsOfExperience();
+const experienceUrl = getLocalizedPath('experience', lang);
 
-const selectedWork = currentLang === 'en'
-  ? [
-      {
-        name: 'Starbucks Perú',
-        logo: '/images/logos/starbucks.png',
-        tag: 'MOBILE COMMERCE · DELOSI',
-        accent: 'green',
-        title: 'Starbucks Perú Android app',
-        body: 'Android ownership for the Starbucks Perú customer app: rewards, commerce flows and production mobile evolution.',
-        role: 'Android · Mobile architecture',
-        meta: ['Kotlin', 'Android', 'Rewards', 'Production app'],
-        links: [
-          { label: 'Website', href: 'https://www.starbucks.pe/' },
-          { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.starbucks.peru&hl=es_419' },
-          { label: 'App Store', href: 'https://apps.apple.com/pe/app/starbucks-per%C3%BA/id1409811746' },
-        ],
-      },
-      {
-        name: 'Kwema',
-        logo: '/images/logos/kwema.png',
-        tag: 'SAFETY TECH · IOT',
-        accent: 'blue',
-        title: 'Wearable safety mobile platform',
-        body: 'Mobile and IoT work for emergency-response experiences connected to wearable devices and real-world safety protocols.',
-        role: 'Mobile · BLE · background services',
-        meta: ['BLE', 'iBeacon', 'Geofencing', 'Realtime alerts'],
-        links: [
-          { label: 'Website', href: 'https://www.kwema.co/' },
-          { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=inc.kwema.kwema2&hl=es_419' },
-          { label: 'App Store', href: 'https://apps.apple.com/es/app/kwema/id1144512993' },
-        ],
-      },
-      {
-        name: 'Interseguro',
-        logo: '/images/logos/interseguro.svg',
-        tag: 'INSURANCE · FINTECH',
-        accent: 'orange',
-        title: 'Insurance products and digital flows',
-        body: 'Backend and platform evolution for insurance experiences such as vehicle insurance, SOAT and customer-facing digital services.',
-        role: 'Backend · architecture · performance',
-        meta: ['Java', 'Spring', 'Cloud', 'SOAT / Vehicular'],
-        links: [
-          { label: 'Website', href: 'https://www.interseguro.pe/' },
-          { label: 'Vehicular', href: 'https://www.interseguro.pe/vehicular/' },
-          { label: 'SOAT', href: 'https://www.interseguro.pe/soat-digital/' },
-        ],
-      },
-      {
-        name: 'Urbaner',
-        logo: '/images/logos/urbaner.png',
-        tag: 'LOGISTICS · LAST MILE',
-        accent: 'cyan',
-        title: 'Urban delivery customer app',
-        body: 'Mobile experience for on-demand logistics, focused on customer flows, tracking and reliable delivery operations.',
-        role: 'Android · mobile product',
-        meta: ['Android', 'Maps', 'Tracking', 'Logistics'],
-        links: [
-          { label: 'Website', href: 'https://www.urbaner.com/' },
-          { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.urbaner.client.app&hl=es_419' },
-        ],
-      },
-      {
-        name: 'Zapatillas Tigre / Atlas',
-        logo: '/images/logos/zapatillas-tigre.png',
-        tag: 'RETAIL · E-COMMERCE',
-        accent: 'red',
-        title: 'Retail technology for Zapatillas Tigre',
-        body: 'Technology work for the Atlas retail ecosystem, now connected to the remaining Zapatillas Tigre brand presence.',
-        role: 'Web · commerce · operations',
-        meta: ['Retail', 'E-commerce', 'Perú', 'Brand systems'],
-        links: [
-          { label: 'Tigre', href: 'https://zapatillastigre.com/' },
-          { label: 'Atlas record', href: 'https://m.universidadperu.com/empresas/marca/20185788599-atlas' },
-        ],
-      },
-    ]
-  : [
-      {
-        name: 'Starbucks Perú',
-        logo: '/images/logos/starbucks.png',
-        tag: 'MOBILE COMMERCE · DELOSI',
-        accent: 'green',
-        title: 'App Android de Starbucks Perú',
-        body: 'Responsable Android de la app de clientes de Starbucks Perú: rewards, flujos comerciales y evolución móvil en producción.',
-        role: 'Android · arquitectura mobile',
-        meta: ['Kotlin', 'Android', 'Rewards', 'App en producción'],
-        links: [
-          { label: 'Web', href: 'https://www.starbucks.pe/' },
-          { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.starbucks.peru&hl=es_419' },
-          { label: 'App Store', href: 'https://apps.apple.com/pe/app/starbucks-per%C3%BA/id1409811746' },
-        ],
-      },
-      {
-        name: 'Kwema',
-        logo: '/images/logos/kwema.png',
-        tag: 'SAFETY TECH · IOT',
-        accent: 'blue',
-        title: 'Plataforma móvil para seguridad wearable',
-        body: 'Trabajo mobile e IoT para experiencias de respuesta ante emergencias conectadas a wearables y protocolos de seguridad reales.',
-        role: 'Mobile · BLE · servicios en background',
-        meta: ['BLE', 'iBeacon', 'Geofencing', 'Alertas realtime'],
-        links: [
-          { label: 'Web', href: 'https://www.kwema.co/' },
-          { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=inc.kwema.kwema2&hl=es_419' },
-          { label: 'App Store', href: 'https://apps.apple.com/es/app/kwema/id1144512993' },
-        ],
-      },
-      {
-        name: 'Interseguro',
-        logo: '/images/logos/interseguro.svg',
-        tag: 'SEGUROS · FINTECH',
-        accent: 'orange',
-        title: 'Productos digitales de seguros',
-        body: 'Evolución backend y plataforma para experiencias de seguros como vehicular, SOAT y servicios digitales para clientes.',
-        role: 'Backend · arquitectura · performance',
-        meta: ['Java', 'Spring', 'Cloud', 'SOAT / Vehicular'],
-        links: [
-          { label: 'Web', href: 'https://www.interseguro.pe/' },
-          { label: 'Vehicular', href: 'https://www.interseguro.pe/vehicular/' },
-          { label: 'SOAT', href: 'https://www.interseguro.pe/soat-digital/' },
-        ],
-      },
-      {
-        name: 'Urbaner',
-        logo: '/images/logos/urbaner.png',
-        tag: 'LOGÍSTICA · LAST MILE',
-        accent: 'cyan',
-        title: 'App cliente para delivery urbano',
-        body: 'Experiencia mobile para logística bajo demanda, enfocada en flujos de cliente, tracking y operación confiable de entregas.',
-        role: 'Android · producto mobile',
-        meta: ['Android', 'Mapas', 'Tracking', 'Logística'],
-        links: [
-          { label: 'Web', href: 'https://www.urbaner.com/' },
-          { label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.urbaner.client.app&hl=es_419' },
-        ],
-      },
-      {
-        name: 'Zapatillas Tigre / Atlas',
-        logo: '/images/logos/zapatillas-tigre.png',
-        tag: 'RETAIL · E-COMMERCE',
-        accent: 'red',
-        title: 'Tecnología retail para Zapatillas Tigre',
-        body: 'Trabajo tecnológico para el ecosistema retail de Atlas, hoy conectado a la presencia vigente de la marca Zapatillas Tigre.',
-        role: 'Web · comercio · operación',
-        meta: ['Retail', 'E-commerce', 'Perú', 'Sistemas de marca'],
-        links: [
-          { label: 'Tigre', href: 'https://zapatillastigre.com/' },
-          { label: 'Registro Atlas', href: 'https://m.universidadperu.com/empresas/marca/20185788599-atlas' },
-        ],
-      },
-    ];
-
-const philosophy = currentLang === 'en'
-  ? [
-      {
-        title: 'Think',
-        body: 'Understand the product, users and constraints before writing a single line of code.',
-      },
-      {
-        title: 'Build',
-        body: 'Engineering focused on maintainability, velocity and production quality.',
-      },
-      {
-        title: 'Scale',
-        body: 'Architecture designed to grow without forcing the team to rebuild six months later.',
-      },
-    ]
-  : [
-      {
-        title: 'Think',
-        body: 'Entender el producto, los usuarios y las restricciones antes de escribir una sola línea de código.',
-      },
-      {
-        title: 'Build',
-        body: 'Ingeniería enfocada en mantenibilidad, velocidad y calidad de producción.',
-      },
-      {
-        title: 'Scale',
-        body: 'Arquitectura diseñada para crecer sin obligar al equipo a rehacerlo seis meses después.',
-      },
-    ];
-
-const stats = [
-  {
-    value: currentLang === 'en' ? '+9' : '+9',
-    label: currentLang === 'en' ? 'Years building products' : 'Años construyendo productos',
-    icon: 'calendar',
-  },
-  {
-    value: '20+',
-    label: currentLang === 'en' ? 'Products delivered' : 'Productos entregados',
-    icon: 'cube',
-  },
-  {
-    value: '5',
-    label: currentLang === 'en' ? 'Industries served' : 'Industrias atendidas',
-    icon: 'users',
-  },
-  {
-    value: currentLang === 'en' ? 'Worldwide' : 'Global',
-    label: currentLang === 'en' ? 'Remote collaboration' : 'Colaboración remota',
-    icon: 'globe',
-  },
-];
+const copy = lang === 'en'
+  ? {
+      title: 'Yahyr Paredes · Android & backend engineer',
+      description: `Android engineer at Starbucks Peru and backend developer (Go, Java, Python). ${years} years shipping apps and services to production. Based in Spain.`,
+      headline: 'Building products people trust.',
+      sub: `Android engineer at Starbucks Peru and backend developer with Go, Java and Python. ${years} years taking apps and services to production, now from Jaén, Spain.`,
+      ctaPrimary: 'See my experience',
+      ctaSecondary: "Let's talk",
+      nowLabel: 'Right now',
+      nowTitle: 'Android Engineer at Starbucks Peru',
+      now: [
+        'Starbucks Rewards app rewritten in Kotlin + Compose',
+        '1M+ downloads on Google Play',
+        'Monthly releases, 4.0.0 → 4.0.19',
+        'In parallel: Android & backend for Kwema (part-time)',
+      ],
+      nowLink: 'See the role',
+      trust: 'Companies I have worked with',
+      proofTitle: 'Some numbers from my work',
+      proof: [
+        { value: `${years}+`, label: 'years in production', source: 'Since 2016, Android first, then backend and cloud' },
+        { value: '1M+', label: 'downloads', source: 'Starbucks Peru app, which I rewrote' },
+        { value: '50% → 10%', label: 'errors issuing policies', source: 'SOAT sales at Interseguro, after moving to Go' },
+        { value: '120+', label: 'stores with a synced menu', source: 'Starbucks Peru product-menu ETL' },
+      ],
+      workTitle: 'Selected work',
+      workIntro: 'Products in production for food & beverage, insurance, workplace safety, logistics and retail.',
+      details: 'Read the case',
+      earlyTitle: 'Before that: 2016 – 2019',
+      earlyBody: 'Android and mobile at ESAN, Force Close, Avances Tecnológicos, Intercorp and more.',
+      graphTitle: 'My career at a glance',
+      graphLink: 'Full timeline',
+      ctaTitle: 'Have a product that needs to work in production?',
+      ctaBody: 'I can join your team, take over an Android app or untangle a backend. Tell me what you are building.',
+      ctaButton: 'Write to me',
+    }
+  : {
+      title: 'Yahyr Paredes · Ingeniero Android y backend',
+      description: `Android Engineer en Starbucks Perú y desarrollador backend (Go, Java, Python). ${years} años llevando apps y servicios a producción. Desde España.`,
+      headline: 'Construyendo productos en los que la gente confía.',
+      sub: `Android Engineer en Starbucks Perú y desarrollador backend con Go, Java y Python. ${years} años llevando apps y servicios a producción, ahora desde Jaén, España.`,
+      ctaPrimary: 'Ver mi experiencia',
+      ctaSecondary: 'Hablemos',
+      nowLabel: 'Ahora mismo',
+      nowTitle: 'Android Engineer en Starbucks Perú',
+      now: [
+        'App Starbucks Rewards reescrita en Kotlin + Compose',
+        'Más de 1M de descargas en Google Play',
+        'Releases mensuales, de la 4.0.0 a la 4.0.19',
+        'En paralelo: Android y backend para Kwema (part-time)',
+      ],
+      nowLink: 'Ver el rol',
+      trust: 'Empresas con las que he trabajado',
+      proofTitle: 'Algunos números de mi trabajo',
+      proof: [
+        { value: `${years}+`, label: 'años en producción', source: 'Desde 2016: primero Android, después backend y cloud' },
+        { value: '1M+', label: 'descargas', source: 'App de Starbucks Perú, que reescribí' },
+        { value: '50% → 10%', label: 'errores al emitir pólizas', source: 'Venta del SOAT en Interseguro, tras migrarla a Go' },
+        { value: '120+', label: 'tiendas con la carta sincronizada', source: 'ETL de la carta de Starbucks Perú' },
+      ],
+      workTitle: 'Trabajo seleccionado',
+      workIntro: 'Productos en producción para restauración, seguros, seguridad laboral, logística y retail.',
+      details: 'Ver el caso',
+      earlyTitle: 'Antes: 2016 – 2019',
+      earlyBody: 'Android y mobile en ESAN, Force Close, Avances Tecnológicos, Intercorp y más.',
+      graphTitle: 'Mi carrera de un vistazo',
+      graphLink: 'Línea de tiempo completa',
+      ctaTitle: '¿Tienes un producto que tiene que funcionar en producción?',
+      ctaBody: 'Puedo sumarme a tu equipo, hacerme cargo de una app Android o desenredar un backend. Cuéntame qué estás construyendo.',
+      ctaButton: 'Escríbeme',
+    };
 
 const howSteps = [
-  { num: '01', titleKey: 'how.discover', descKey: 'how.discover_desc', icon: 'discover' },
-  { num: '02', titleKey: 'how.design', descKey: 'how.design_desc', icon: 'design' },
-  { num: '03', titleKey: 'how.build', descKey: 'how.build_desc', icon: 'build' },
-  { num: '04', titleKey: 'how.measure', descKey: 'how.measure_desc', icon: 'measure' },
-  { num: '05', titleKey: 'how.improve', descKey: 'how.improve_desc', icon: 'improve' },
+  { num: '01', titleKey: 'how.discover', descKey: 'how.discover_desc' },
+  { num: '02', titleKey: 'how.design', descKey: 'how.design_desc' },
+  { num: '03', titleKey: 'how.build', descKey: 'how.build_desc' },
+  { num: '04', titleKey: 'how.measure', descKey: 'how.measure_desc' },
+  { num: '05', titleKey: 'how.improve', descKey: 'how.improve_desc' },
 ];
 ---
 
-<BaseLayout
-  title={t(Astro.url, 'hero.eyebrow') + ' · ' + site.name}
-  description={t(Astro.url, 'hero.subheadline')}
-  type="profile"
->
+<BaseLayout title={copy.title} description={copy.description} type="profile">
+  <!-- HERO -->
   <section class="hero-editorial relative overflow-hidden">
     <div class="absolute inset-0 lg:left-[43%]" aria-hidden="true">
-      <img
-        src="/images/hero-banner.png"
-        alt=""
-        class="h-full w-full object-cover object-center opacity-50 lg:opacity-100"
-        width="1536"
-        height="1024"
-        loading="eager"
-      />
+      <img src="/images/hero-banner.png" alt="" class="h-full w-full object-cover object-[70%_center] opacity-40 lg:opacity-100" width="1536" height="1024" loading="eager" fetchpriority="high" />
     </div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_22%,rgba(59,130,246,.22),transparent_34%),linear-gradient(90deg,var(--color-midnight)_0%,rgba(11,18,32,.96)_34%,rgba(11,18,32,.68)_58%,rgba(11,18,32,.36)_100%)]" aria-hidden="true"></div>
+    <div class="hero-shade absolute inset-0" aria-hidden="true"></div>
     <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-midnight to-transparent" aria-hidden="true"></div>
 
-    <div class="container-page relative min-h-[680px] pt-20 sm:pt-24 lg:pt-24 pb-12 sm:pb-16 flex items-center">
-      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end w-full">
+    <div class="container-page relative flex min-h-[640px] items-center pt-20 pb-14 sm:pt-24 lg:min-h-[680px]">
+      <div class="grid w-full items-end gap-10 lg:grid-cols-12">
         <div class="lg:col-span-7 xl:col-span-6">
-          <p class="eyebrow mb-6">{t(Astro.url, 'hero.eyebrow')}</p>
-
-          <h1 class="text-ink mb-6 text-balance font-display font-bold text-5xl sm:text-6xl lg:text-7xl leading-[0.98] tracking-tight">
-            {t(Astro.url, 'hero.headline_start')}{' '}
-            <span class="relative inline-block text-blue-200">
-              {t(Astro.url, 'hero.headline_trust')}
-            </span>
-            {t(Astro.url, 'hero.headline_end')}
+          <p class="mb-5 text-sm font-semibold text-blue-200">{site.name} · {t(Astro.url, 'hero.eyebrow')}</p>
+          <h1 class="mb-6 text-balance font-display text-[2.6rem] font-bold leading-[1.02] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            {copy.headline}
           </h1>
-
-          <p class="text-ink-100 text-lg sm:text-xl max-w-2xl leading-relaxed mb-8">
-            {t(Astro.url, 'hero.subheadline')}
-          </p>
-
+          <p class="mb-8 max-w-xl text-lg leading-relaxed text-ink-100 sm:text-xl">{copy.sub}</p>
           <div class="flex flex-wrap gap-3">
-            <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary">
-              {t(Astro.url, 'hero.cta_primary')}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href={currentLang === 'en' ? '/en/experience' : '/es/experience'} class="btn btn-outline">
-              {t(Astro.url, 'hero.cta_secondary')}
-            </a>
-          </div>
-
-        </div>
-
-        <div class="hidden lg:block lg:col-span-5 xl:col-span-4 xl:col-start-9 relative min-h-[440px]">
-          <div class="absolute bottom-0 right-0 w-72 card-glass p-5 shadow-soft-lg">
-            <div class="flex items-center justify-between mb-2.5">
-              <p class="text-[11px] text-ink-300 uppercase tracking-wider font-semibold">{t(Astro.url, 'hero.currently_label')}</p>
-              <span class="w-1.5 h-1.5 rounded-full bg-green animate-pulse" aria-hidden="true"></span>
-            </div>
-            <p class="text-sm text-ink leading-snug mb-4">{t(Astro.url, 'hero.currently_title')}</p>
-            <div class="space-y-2.5 border-y border-border py-4 mb-4">
-              {[
-                'hero.currently_android',
-                'hero.currently_kmp',
-                'hero.currently_go',
-                'hero.currently_aws',
-                'hero.currently_architecture',
-                'hero.currently_problem_solver',
-              ].map((key) => (
-                <div class="flex items-center gap-2.5 text-xs text-ink-200">
-                  <span class="h-4 w-4 rounded border border-border-strong bg-white/5" aria-hidden="true"></span>
-                  {t(Astro.url, key)}
-                </div>
-              ))}
-            </div>
-            <p class="text-xs text-blue-200 font-semibold">{t(Astro.url, 'hero.currently_footer')}</p>
+            <a href={experienceUrl} class="btn btn-primary">{copy.ctaPrimary}</a>
+            <a href={getLocalizedPath('contact', lang)} class="btn btn-outline">{copy.ctaSecondary}</a>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="border-y border-border bg-carbon/40">
-    <div class="container-page py-12">
-      <p class="eyebrow text-center mb-8">{t(Astro.url, 'trust.label')}</p>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-        <a href="https://www.starbucks.pe/" target="_blank" rel="noopener noreferrer" class="trust-logo-card" aria-label="Starbucks Perú">
-          <img src="/images/logos/starbucks.png" alt="Starbucks Perú" class="max-h-10 w-auto object-contain" loading="lazy" />
-        </a>
-        <a href="https://www.kwema.co/" target="_blank" rel="noopener noreferrer" class="trust-logo-card" aria-label="Kwema">
-          <img src="/images/logos/kwema.png" alt="Kwema" class="max-h-9 w-auto object-contain" loading="lazy" />
-        </a>
-        <a href="https://www.interseguro.pe/" target="_blank" rel="noopener noreferrer" class="trust-logo-card trust-logo-card-light" aria-label="Interseguro">
-          <img src="/images/logos/interseguro.svg" alt="Interseguro" class="max-h-10 w-auto object-contain" loading="lazy" />
-        </a>
-        <a href="https://www.urbaner.com/" target="_blank" rel="noopener noreferrer" class="trust-logo-card trust-logo-card-light" aria-label="Urbaner">
-          <img src="/images/logos/urbaner.png" alt="Urbaner" class="max-h-9 w-auto object-contain" loading="lazy" />
-        </a>
-        <a href="https://zapatillastigre.com/" target="_blank" rel="noopener noreferrer" class="trust-logo-card trust-logo-card-light" aria-label="Zapatillas Tigre">
-          <img src="/images/logos/zapatillas-tigre.png" alt="Zapatillas Tigre" class="max-h-14 w-auto object-contain" loading="lazy" />
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="border-b border-border bg-midnight">
-    <div class="container-page py-6">
-      <div class="flex flex-wrap justify-center gap-x-6 gap-y-3">
-        {['hero.pill_mobile', 'hero.pill_backend', 'hero.pill_cloud', 'hero.pill_ai', 'hero.pill_architecture', 'hero.pill_product'].map((key) => (
-          <span class="inline-flex items-center gap-2 text-sm text-ink-200">
-            <span class="h-1.5 w-1.5 rounded-full bg-blue-200 shadow-[0_0_14px_var(--color-blue-glow)]" aria-hidden="true"></span>
-            {t(Astro.url, key)}
-          </span>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="container-page py-12 sm:py-16">
-    <div class="stats-panel card-glass overflow-hidden">
-      <div class="grid grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat) => (
-          <div class="relative p-7 sm:p-9 text-center">
-            <div class="mx-auto mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-blue/25 bg-blue/10 text-blue-200">
-              {stat.icon === 'calendar' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>}
-              {stat.icon === 'cube' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>}
-              {stat.icon === 'users' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>}
-              {stat.icon === 'globe' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>}
-            </div>
-            <p class="font-display font-bold text-4xl sm:text-5xl text-ink tracking-tight">{stat.value}</p>
-            <p class="mt-2 text-sm text-ink-200 leading-relaxed">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="container-page py-12 sm:py-16">
-    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-10">
-      <div class="lg:col-span-5">
-        <p class="eyebrow mb-3">{currentLang === 'en' ? 'PHILOSOPHY' : 'FILOSOFÍA'}</p>
-        <h2 class="text-balance">{currentLang === 'en' ? 'Product engineering with purpose.' : 'Ingeniería de producto con propósito.'}</h2>
-      </div>
-      <p class="lg:col-span-5 lg:col-start-8 text-ink-200 leading-relaxed">
-        {currentLang === 'en'
-          ? 'Yahyr moves across technologies because the real skill is understanding products, reducing risk and creating systems that keep evolving.'
-          : 'Yahyr se mueve entre tecnologías porque la habilidad real es entender productos, reducir riesgo y crear sistemas que sigan evolucionando.'}
-      </p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-4 sm:gap-5">
-      {philosophy.map((item, index) => (
-        <article class="card-glass p-7 sm:p-8">
-          <p class="text-blue-200 font-display font-bold text-sm mb-8">0{index + 1}</p>
-          <h3 class="font-display font-bold text-2xl text-ink mb-3">{item.title}</h3>
-          <p class="text-sm text-ink-200 leading-relaxed">{item.body}</p>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="container-page py-12 sm:py-16">
-    <div class="flex items-end justify-between mb-8">
-      <div>
-        <p class="eyebrow mb-2">{t(Astro.url, 'work.eyebrow')}</p>
-        <h2 class="text-balance">{t(Astro.url, 'work.title')}</h2>
-      </div>
-      <a href={currentLang === 'en' ? '/en/experience' : '/es/experience'} class="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200 hover:text-blue transition-colors">
-        {t(Astro.url, 'work.view_all')}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-    <div class="grid md:grid-cols-2 xl:grid-cols-6 gap-4 sm:gap-5">
-      {selectedWork.map((work, index) => (
-        <article class={`work-card work-card-brand ${index < 3 ? 'work-card-primary' : 'work-card-secondary'} card-glass overflow-hidden group flex min-h-[430px] flex-col transition-colors ${work.accent === 'green' ? 'hover:border-green/50' : work.accent === 'orange' ? 'hover:border-orange/50' : work.accent === 'cyan' ? 'hover:border-accent/50' : work.accent === 'red' ? 'hover:border-error/50' : 'hover:border-blue-200/50'}`}>
-          <div class={`relative overflow-hidden border-b border-border p-6 min-h-[210px] flex flex-col justify-between ${work.accent === 'green' ? 'work-visual-green' : work.accent === 'orange' ? 'work-visual-orange' : work.accent === 'cyan' ? 'work-visual-cyan' : work.accent === 'red' ? 'work-visual-red' : 'work-visual-blue'}`}>
-            <div class="flex items-start justify-between gap-4">
-              <div class={`work-logo-tile ${work.accent === 'cyan' || work.accent === 'red' ? 'work-logo-tile-light' : ''}`}>
-                <img
-                  src={work.logo}
-                  alt={`${work.name} logo`}
-                  class="max-h-full max-w-full object-contain"
-                  loading="lazy"
-                />
+        <aside class="lg:col-span-5 xl:col-span-4 xl:col-start-9" aria-label={copy.nowLabel}>
+          <div class="now-card card-glass shadow-soft-lg">
+            <div class="flex items-center gap-3">
+              <span class="now-logo"><img src={companies.starbucks.mark} alt="" width="28" height="28" /></span>
+              <div>
+                <p class="flex items-center gap-2 text-xs font-semibold text-ink-200">
+                  <span class="h-1.5 w-1.5 rounded-full bg-green animate-pulse" aria-hidden="true"></span>{copy.nowLabel}
+                </p>
+                <p class="font-display text-base font-bold text-ink">{copy.nowTitle}</p>
               </div>
-              <span class="rounded-full border border-white/10 bg-midnight/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink-100">
-                {work.role.split(' · ')[0]}
-              </span>
             </div>
-            <div>
-              <p class="text-[11px] font-semibold uppercase tracking-wider text-ink-200">{work.name}</p>
-              <p class="mt-1 font-display text-2xl font-bold leading-tight text-ink">{work.role}</p>
-            </div>
-          </div>
-          <div class="p-6 flex-1 flex flex-col">
-            <p class={`text-xs font-semibold uppercase tracking-wider mb-3 ${work.accent === 'green' ? 'text-green' : work.accent === 'orange' ? 'text-orange' : work.accent === 'cyan' ? 'text-accent' : work.accent === 'red' ? 'text-error' : 'text-blue-200'}`}>{work.tag}</p>
-            <h3 class="font-display font-bold text-lg text-ink mb-2 leading-snug">{work.title}</h3>
-            <p class="text-sm text-ink-200 leading-relaxed mb-4 flex-1">{work.body}</p>
-            <div class="flex flex-wrap gap-1.5 mb-5">
-              {work.meta.map((item) => (
-                <span class="rounded-md border border-border bg-white/5 px-2 py-1 text-[11px] font-medium text-ink-200">{item}</span>
+            <ul class="mt-4 space-y-2.5 border-t border-border pt-4">
+              {copy.now.map((item) => (
+                <li class="flex gap-2.5 text-sm text-ink-100">
+                  <svg class="mt-0.5 shrink-0 text-green" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                  {item}
+                </li>
               ))}
-            </div>
-            <div class="mt-auto flex flex-wrap gap-2">
-              {work.links.map((link) => (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 rounded-md border border-border bg-white/5 px-2.5 py-1.5 text-[11px] font-semibold text-ink-100 transition-colors hover:border-blue/40 hover:text-ink"
-                >
-                  {link.label}
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-                </a>
-              ))}
-            </div>
+            </ul>
+            <a href={`${experienceUrl}#starbucks`} class="mt-4 inline-flex text-sm font-semibold text-blue-200 hover:text-ink">{copy.nowLink}</a>
           </div>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="container-page py-16 sm:py-24">
-    <p class="eyebrow mb-2">{t(Astro.url, 'how.eyebrow')}</p>
-    <h2 class="text-balance max-w-2xl mb-16">{t(Astro.url, 'how.title')}</h2>
-    <div class="relative">
-      <div class="hidden lg:block absolute top-6 left-[8%] right-[8%] h-px border-t border-dashed border-blue/40"></div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-10 gap-x-6">
-        {howSteps.map((step) => (
-          <div class="text-center relative">
-            <div class="inline-flex w-12 h-12 rounded-full bg-midnight-100 border border-blue/30 items-center justify-center mb-4 relative z-10">
-              <span class="text-blue-200 font-bold text-sm">{step.num}</span>
-            </div>
-            <p class="font-display font-bold text-base text-ink mb-2">{t(Astro.url, step.titleKey)}</p>
-            <p class="text-sm text-ink-200 leading-relaxed">{t(Astro.url, step.descKey)}</p>
-          </div>
-        ))}
+        </aside>
       </div>
     </div>
   </section>
 
-  <section class="border-t border-border">
-    <div class="container-page py-16 sm:py-24">
-      <div class="closing-panel card-glass p-8 sm:p-12 relative overflow-hidden">
-        <div class="grid sm:grid-cols-2 gap-8 items-center relative">
-          <div>
-            <h2 class="text-balance mb-4">
-              {t(Astro.url, 'cta.title')}{' '}
-              <span class="text-blue-200">{t(Astro.url, 'cta.title_strong')}</span>.
-            </h2>
-            <p class="text-ink-200 leading-relaxed">{t(Astro.url, 'cta.body')}</p>
-          </div>
+  <!-- LOGOS -->
+  <section class="border-y border-border bg-carbon/40" aria-labelledby="trust-title">
+    <div class="container-page py-10 sm:py-12">
+      <h2 id="trust-title" class="mb-6 text-center text-sm font-semibold text-ink-200">{copy.trust}</h2>
+      <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {trustedBy.map((c) => (
+          <li>
+            <a href={`${experienceUrl}#${c.id}`} class="logo-chip" aria-label={c.name}>
+              {c.id === 'starbucks' && (<><img src={c.mark} alt="" class="h-9 w-9" /><span class="logo-chip-text" style="color:#00704A">Starbucks<small>Perú</small></span></>)}
+              {c.id === 'kwema' && (<><img src={c.mark} alt="" class="h-7 w-auto" /><span class="logo-chip-text text-sm tracking-[0.14em]" style="color:#1f1f1f">KWEMA</span></>)}
+              {c.id === 'interseguro' && <img src={c.wordmark} alt="" class="h-7 w-auto max-w-[85%]" />}
+              {c.id === 'urbaner' && <img src={c.wordmark} alt="" class="h-7 w-auto max-w-[85%]" />}
+              {c.id === 'atlas' && (<><img src={c.mark} alt="" class="h-11 w-auto" /><span class="logo-chip-text" style="color:#383638">Calzado<small>Atlas</small></span></>)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 
-          <div class="space-y-3">
-            <a href={`mailto:${site.email}`} class="flex items-center gap-3 text-sm text-ink-200 hover:text-ink transition-colors">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-              </svg>
-              {site.email}
+  <!-- PRUEBAS -->
+  <section class="container-page py-14 sm:py-20" aria-labelledby="proof-title">
+    <h2 id="proof-title" class="sr-only">{copy.proofTitle}</h2>
+    <dl class="proof-grid">
+      {copy.proof.map((p) => (
+        <div class="proof-item">
+          <dt class="order-2 mt-1 text-[0.95rem] font-semibold text-ink">{p.label}</dt>
+          <dd class="order-1 font-display text-4xl font-bold tracking-tight text-ink sm:text-[2.75rem]">{p.value}</dd>
+          <dd class="order-3 mt-2 text-sm leading-relaxed text-ink-200">{p.source}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- TRABAJO SELECCIONADO -->
+  <section class="container-page py-8 sm:py-12" aria-labelledby="work-title">
+    <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 id="work-title" class="text-balance">{copy.workTitle}</h2>
+        <p class="mt-2 max-w-xl text-ink-200">{copy.workIntro}</p>
+      </div>
+    </div>
+
+    <ul class="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {featuredRoles.map((role) => {
+        const c = companies[role.companyId];
+        return (
+          <li class="work-tile" style={`--brand:${c.color}`}>
+            <a href={`${experienceUrl}#${role.id}`} class="work-tile-link">
+              <div class="flex items-center gap-3">
+                <span class="work-tile-logo"><img src={c.mark} alt="" width="32" height="32" loading="lazy" /></span>
+                <div class="min-w-0">
+                  <p class="font-display font-bold text-ink">{c.name}</p>
+                  <p class="text-xs text-ink-200">{c.industry[lang]}</p>
+                </div>
+              </div>
+              <p class="mt-5 font-display text-lg font-bold leading-snug text-ink">{role.title[lang]}</p>
+              <p class="mt-1 text-sm text-ink-300">{formatPeriod(role, lang)}</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-200">{role.highlights[lang][0]}</p>
+              <ul class="mt-5 flex flex-wrap gap-1.5">
+                {role.stack.slice(0, 4).map((s) => <li class="rounded-md border border-border bg-white/5 px-2 py-0.5 text-[11px] text-ink-100">{s}</li>)}
+              </ul>
+              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200">
+                {copy.details}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </a>
-            <a href={site.socials.find((s) => s.icon === 'linkedin')?.url || 'https://www.linkedin.com/in/yahyrparedes/'} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm text-ink-200 hover:text-ink transition-colors">
-              LinkedIn
-            </a>
-            <a href={site.socials.find((s) => s.icon === 'github')?.url || 'https://github.com/yahyrparedes'} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm text-ink-200 hover:text-ink transition-colors">
-              GitHub
-            </a>
-            <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary mt-5">
-              {t(Astro.url, 'cta.cta_primary')}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+          </li>
+        );
+      })}
+      <li class="work-tile work-tile-muted" style="--brand:#3B82F6">
+        <a href={`${experienceUrl}#previous`} class="work-tile-link">
+          <span class="work-tile-logo font-display font-bold text-blue">&lt;/&gt;</span>
+          <p class="mt-5 font-display text-lg font-bold leading-snug text-ink">{copy.earlyTitle}</p>
+          <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-200">{copy.earlyBody}</p>
+          <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200">
+            {copy.details}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CARRERA -->
+  <section class="container-page py-12 sm:py-16" aria-labelledby="graph-title">
+    <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+      <h2 id="graph-title" class="text-balance">{copy.graphTitle}</h2>
+      <a href={experienceUrl} class="text-sm font-semibold text-blue-200 hover:text-ink">{copy.graphLink}</a>
+    </div>
+    <CareerGraph lang={lang} compact />
+  </section>
+
+  <!-- CÓMO TRABAJO -->
+  <section class="container-page py-14 sm:py-20" aria-labelledby="how-title">
+    <h2 id="how-title" class="mb-12 max-w-2xl text-balance">{t(Astro.url, 'how.title')}</h2>
+    <ol class="relative grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+      <div class="absolute left-[8%] right-[8%] top-6 hidden border-t border-dashed border-blue/40 lg:block" aria-hidden="true"></div>
+      {howSteps.map((step) => (
+        <li class="relative flex gap-4 lg:block lg:text-center">
+          <span class="relative z-10 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue/30 bg-midnight-100 text-sm font-bold text-blue-200 lg:mb-4">{step.num}</span>
+          <div>
+            <p class="mb-1.5 font-display text-base font-bold text-ink">{t(Astro.url, step.titleKey)}</p>
+            <p class="text-sm leading-relaxed text-ink-200">{t(Astro.url, step.descKey)}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-t border-border">
+    <div class="container-page py-16 sm:py-20">
+      <div class="closing-panel card-glass relative overflow-hidden p-8 sm:p-12">
+        <div class="grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
+          <div>
+            <h2 class="mb-4 text-balance">{copy.ctaTitle}</h2>
+            <p class="leading-relaxed text-ink-200">{copy.ctaBody}</p>
+          </div>
+          <div class="flex flex-col items-start gap-3">
+            <a href={getLocalizedPath('contact', lang)} class="btn btn-primary">{copy.ctaButton}</a>
+            <a href={`mailto:${site.email}`} class="text-sm text-ink-200 hover:text-ink">{site.email}</a>
+            <div class="flex gap-4 text-sm">
+              <a href={site.socials.find((s) => s.icon === 'linkedin')?.url} target="_blank" rel="noopener noreferrer" class="text-ink-200 hover:text-ink">LinkedIn</a>
+              <a href={site.socials.find((s) => s.icon === 'github')?.url} target="_blank" rel="noopener noreferrer" class="text-ink-200 hover:text-ink">GitHub</a>
+              <a href={getLocalizedPath('profile', lang)} class="text-ink-200 hover:text-ink">CV</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .hero-shade {
+    background:
+      radial-gradient(circle at 75% 22%, rgba(59, 130, 246, 0.2), transparent 34%),
+      linear-gradient(90deg, var(--color-midnight) 0%, color-mix(in srgb, var(--color-midnight) 94%, transparent) 36%, color-mix(in srgb, var(--color-midnight) 62%, transparent) 60%, color-mix(in srgb, var(--color-midnight) 25%, transparent) 100%);
+  }
+  @media (max-width: 1023px) {
+    .hero-shade { background: linear-gradient(180deg, color-mix(in srgb, var(--color-midnight) 70%, transparent), var(--color-midnight) 85%); }
+  }
+  .now-card { padding: 1.25rem 1.35rem; background: color-mix(in srgb, var(--color-carbon) 90%, transparent); backdrop-filter: blur(14px); }
+  .now-logo, .work-tile-logo {
+    display: inline-flex;
+    width: 2.6rem;
+    height: 2.6rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.7rem;
+    background: #fff;
+    padding: 0.35rem;
+  }
+  .now-logo img, .work-tile-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+  .logo-chip {
+    display: flex;
+    height: 4.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    padding: 0 0.75rem;
+    transition: transform 0.15s var(--ease-ui-out), box-shadow 0.15s ease;
+  }
+  .logo-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .logo-chip:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 3px; }
+  .logo-chip-text { display: flex; flex-direction: column; font-family: var(--font-heading); font-weight: 700; font-size: 1rem; line-height: 1.05; }
+  .logo-chip-text small { font-size: 0.72rem; font-weight: 600; opacity: 0.75; }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    border-top: 1px solid var(--color-border);
+  }
+  @media (min-width: 640px) { .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .proof-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .proof-item {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+  }
+  @media (min-width: 640px) {
+    .proof-item { padding: 1.75rem 1.5rem 1.75rem 0; }
+  }
+  @media (min-width: 1024px) {
+    .proof-item { border-bottom: 0; padding: 2rem 1.75rem 0 0; }
+    .proof-item + .proof-item { border-left: 1px solid var(--color-border); padding-left: 1.75rem; }
+  }
+
+  .work-tile { display: flex; }
+  .work-tile-link {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--brand);
+    border-radius: 1rem;
+    background: var(--color-carbon);
+    padding: 1.5rem;
+    transition: border-color 0.15s ease, transform 0.15s var(--ease-ui-out);
+  }
+  .work-tile-link:hover { border-color: color-mix(in srgb, var(--brand) 55%, var(--color-border)); transform: translateY(-2px); }
+  .work-tile-link:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 3px; }
+  .work-tile-muted .work-tile-link { background: transparent; border-style: dashed; border-top-style: solid; }
+  @media (prefers-reduced-motion: reduce) {
+    .logo-chip, .work-tile-link { transition: none; }
+    .logo-chip:hover, .work-tile-link:hover { transform: none; }
+  }
+</style>

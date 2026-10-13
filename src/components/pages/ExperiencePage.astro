@@ -1,313 +1,427 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { getLangFromUrl } from '@i18n/ui.ts';
+import CareerGraph from '@components/CareerGraph.astro';
+import { getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
+import {
+  roles,
+  companies,
+  formatPeriod,
+  formatDuration,
+  yearsOfExperience,
+  isTestimonialVisible,
+  type Track,
+} from '@data/career.ts';
 
-const currentLang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const years = yearsOfExperience();
+const VISIBLE_HIGHLIGHTS = 3;
 
-const copy = currentLang === 'en'
+const copy = lang === 'en'
   ? {
-      title: 'Experience · Yahyr Paredes',
-      description: 'Building products that matter. Case studies from my career.',
-      eyebrow: 'EXPERIENCE',
-      hero1: 'Building products.',
-      hero2: 'Solving problems.',
-      hero3: 'Delivering',
-      heroStrong: 'impact',
-      intro: "Over the years I've partnered with startups and companies to build digital products that solve real problems and generate meaningful impact.",
-      myRole: 'My role',
-      impact: 'Impact',
-      technologies: 'Technologies',
-      recommendedBy: 'Recommended by',
-      finalTitle: 'Every project has a story.',
-      finalStrong: "Let's build the next one.",
-      finalBody: "I'm always open to new challenges and meaningful collaborations.",
-      cta: "Let's build together",
-      entries: [
-        {
-          year: '2024 — 2025',
-          company: 'STARBUCKS PERÚ',
-          companyTag: 'Mobile',
-          title: 'Modernizing the mobile experience and building a multiplatform future.',
-          href: 'https://starbucks.pe',
-          role: 'Mobile Engineer (Android)',
-          impact: ['+35% improvement in app performance', 'New rewards and loyalty features', 'Better stability and crash reduction', 'Kotlin Multiplatform adoption'],
-          technologies: ['Kotlin', 'KMP', 'Compose', 'SwiftUI', 'GraphQL'],
-          image: '/images/experience/starbucks.png',
-          recommended: {
-            quote: 'Yahyr is a highly skilled engineer who consistently delivers high quality solutions and raises the bar for the entire team.',
-            author: 'Fernando C.',
-            role: 'Engineering Manager',
-          },
-        },
-        {
-          year: '2021 — 2024',
-          company: 'KWEMA INC',
-          companyTag: 'Backend',
-          title: 'Safety in real-time critical environments.',
-          href: 'https://kwema.com',
-          role: 'Tech Lead',
-          impact: ['Real-time monitoring platform with BLE and IoT', '+99.9% system availability', 'Scalable microservices architecture', 'International expansion to LATAM'],
-          technologies: ['Go', 'gRPC', 'PostgreSQL', 'Docker', 'AWS'],
-          image: '/images/experience/kwema.png',
-          recommended: {
-            quote: 'Yahyr combines deep technical expertise with leadership and ownership. He is someone you can trust with any challenge.',
-            author: 'Michael T.',
-            role: 'CTO & Co-founder',
-          },
-        },
-        {
-          year: '2019 — 2021',
-          company: 'INTERSEGURO',
-          companyTag: 'Backend',
-          title: 'Scaling an insurance platform to the next level.',
-          href: 'https://interseguro.com.pe',
-          role: 'Software Engineer',
-          impact: ['+40% performance improvement', 'New digital products for thousands of users', 'Improved system reliability and observability', 'Migration to cloud infrastructure'],
-          technologies: ['Java', 'Spring Boot', 'Kafka', 'AWS', 'MySQL'],
-          image: '/images/experience/interseguro.png',
-          recommended: {
-            quote: 'He is the kind of engineer that brings clarity to complexity and always delivers more than expected.',
-            author: 'Patricia A.',
-            role: 'Product Owner',
-          },
-        },
-        {
-          year: '2017 — 2019',
-          company: 'URBANER',
-          companyTag: 'Full Stack',
-          title: 'Building the foundation of my journey.',
-          href: 'https://urbaner.com',
-          role: 'Full Stack Developer',
-          impact: ['Built the core platform from scratch', 'New rewards and loyalty features', 'Key features that drove product growth', 'Agile culture and best practices'],
-          technologies: ['Laravel', 'React', 'MySQL', 'Docker', 'Stripe'],
-          image: '/images/experience/urbaner.png',
-          recommended: {
-            quote: "Yahyr's curiosity and problem solving ability is exceptional, and any day you work with him. A great teammate and engineer.",
-            author: 'Daniel L.',
-            role: 'Co-founder',
-          },
-        },
-        {
-          year: '2015 — 2017',
-          company: 'ATLAS TECH',
-          companyTag: 'Backend',
-          title: 'My first professional experience in tech.',
-          href: 'https://calzadoatlas.com',
-          role: 'Junior Developer',
-          impact: ['Contributed to internal tools', 'Learned team-oriented practices', 'Built features under code and architecture', 'Grew in real-world practices'],
-          technologies: ['PHP', 'MySQL', 'Bootstrap', 'jQuery'],
-          image: '/images/experience/atlas.png',
-          recommended: {
-            quote: 'He was always eager to learn, quick to absorb new ideas, and the boost among the less experienced team. He was the kind of junior every team wants.',
-            author: 'Maria S.',
-            role: 'Senior Developer',
-          },
-        },
-      ],
+      title: 'Experience',
+      description: `${years} years building Android apps and backends in production: Starbucks Peru, Interseguro, Kwema, Urbaner and more.`,
+      h1: `${years} years shipping apps and backends that people use every day.`,
+      intro: 'From my first Android apps in Lima to owning the Starbucks Peru app from Spain. Every role below links to the products, the stack and what changed thanks to the work.',
+      graphTitle: 'At a glance',
+      graphHint: 'Click a bar to jump to that role.',
+      filterLabel: 'Filter by area',
+      all: 'All',
+      showMore: (n: number) => `Show ${n} more`,
+      showLess: 'Show less',
+      about: 'About the company',
+      stack: 'Stack',
+      recommended: 'Recommendation',
+      draft: 'Draft · not published',
+      companiesTitle: 'Companies in this period',
+      empty: 'No roles in this area.',
+      ctaTitle: 'Want the short version?',
+      ctaBody: 'The CV page has the same story on one page, with education, certifications and languages.',
+      ctaCv: 'See my CV',
+      ctaContact: 'Contact me',
+      present: 'Current',
+      early: 'Early career',
     }
   : {
-      title: 'Experiencia · Yahyr Paredes',
-      description: 'Construyendo productos que importan. Casos de estudio de mi carrera.',
-      eyebrow: 'EXPERIENCIA',
-      hero1: 'Construyendo productos.',
-      hero2: 'Resolviendo problemas.',
-      hero3: 'Entregando',
-      heroStrong: 'impacto',
-      intro: 'A lo largo de los años he trabajado con startups y empresas para construir productos digitales que resuelven problemas reales y generan impacto significativo.',
-      myRole: 'Mi rol',
-      impact: 'Impacto',
-      technologies: 'Tecnologías',
-      recommendedBy: 'Recomendado por',
-      finalTitle: 'Cada proyecto tiene una historia.',
-      finalStrong: 'Construyamos la siguiente.',
-      finalBody: 'Siempre estoy abierto a nuevos retos y colaboraciones con sentido.',
-      cta: 'Construyamos juntos',
-      entries: [
-        {
-          year: '2024 — 2025',
-          company: 'STARBUCKS PERÚ',
-          companyTag: 'Mobile',
-          title: 'Modernizando la experiencia móvil y construyendo un futuro multiplataforma.',
-          href: 'https://starbucks.pe',
-          role: 'Mobile Engineer (Android)',
-          impact: ['+35% mejora en el rendimiento de la app', 'Nuevas features de recompensas y lealtad', 'Mayor estabilidad y reducción de crashes', 'Adopción de Kotlin Multiplatform'],
-          technologies: ['Kotlin', 'KMP', 'Compose', 'SwiftUI', 'GraphQL'],
-          image: '/images/experience/starbucks.png',
-          recommended: {
-            quote: 'Yahyr es un ingeniero muy habilidoso que entrega consistentemente soluciones de alta calidad y eleva el nivel de todo el equipo.',
-            author: 'Fernando C.',
-            role: 'Engineering Manager',
-          },
-        },
-        {
-          year: '2021 — 2024',
-          company: 'KWEMA INC',
-          companyTag: 'Backend',
-          title: 'Seguridad en entornos críticos en tiempo real.',
-          href: 'https://kwema.com',
-          role: 'Tech Lead',
-          impact: ['Plataforma de monitoreo en tiempo real con BLE e IoT', '+99.9% disponibilidad del sistema', 'Arquitectura de microservicios escalable', 'Expansión internacional a LATAM'],
-          technologies: ['Go', 'gRPC', 'PostgreSQL', 'Docker', 'AWS'],
-          image: '/images/experience/kwema.png',
-          recommended: {
-            quote: 'Yahyr combina expertise técnico profundo con liderazgo y ownership. Es alguien con quien puedes confiar cualquier reto.',
-            author: 'Michael T.',
-            role: 'CTO & Co-founder',
-          },
-        },
-        {
-          year: '2019 — 2021',
-          company: 'INTERSEGURO',
-          companyTag: 'Backend',
-          title: 'Llevando una plataforma de seguros al siguiente nivel.',
-          href: 'https://interseguro.com.pe',
-          role: 'Software Engineer',
-          impact: ['+40% mejora de rendimiento', 'Nuevos productos digitales para miles de usuarios', 'Mayor fiabilidad y observabilidad del sistema', 'Migración a infraestructura cloud'],
-          technologies: ['Java', 'Spring Boot', 'Kafka', 'AWS', 'MySQL'],
-          image: '/images/experience/interseguro.png',
-          recommended: {
-            quote: 'Es el tipo de ingeniero que lleva claridad a la complejidad y siempre entrega más de lo esperado.',
-            author: 'Patricia A.',
-            role: 'Product Owner',
-          },
-        },
-        {
-          year: '2017 — 2019',
-          company: 'URBANER',
-          companyTag: 'Full Stack',
-          title: 'Construyendo las bases de mi journey.',
-          href: 'https://urbaner.com',
-          role: 'Full Stack Developer',
-          impact: ['Construí la plataforma core desde cero', 'Nuevas features de recompensas y loyalty', 'Features clave que impulsaron el crecimiento', 'Cultura agile y best practices'],
-          technologies: ['Laravel', 'React', 'MySQL', 'Docker', 'Stripe'],
-          image: '/images/experience/urbaner.png',
-          recommended: {
-            quote: 'La curiosidad de Yahyr y su habilidad para resolver problemas es excepcional, y cualquier día que trabajes con él. Un gran teammate e ingeniero.',
-            author: 'Daniel L.',
-            role: 'Co-founder',
-          },
-        },
-        {
-          year: '2015 — 2017',
-          company: 'ATLAS TECH',
-          companyTag: 'Backend',
-          title: 'Mi primera experiencia profesional en tech.',
-          href: 'https://calzadoatlas.com',
-          role: 'Junior Developer',
-          impact: ['Contribuí a herramientas internas', 'Aprendí prácticas orientadas a equipo', 'Construí features bajo código y arquitectura', 'Crecí en prácticas del mundo real'],
-          technologies: ['PHP', 'MySQL', 'Bootstrap', 'jQuery'],
-          image: '/images/experience/atlas.png',
-          recommended: {
-            quote: 'Siempre estaba ansioso por aprender, rápido para absorber nuevas ideas, y el más proactivo del equipo junior. Era el junior que todo equipo quiere tener.',
-            author: 'Maria S.',
-            role: 'Senior Developer',
-          },
-        },
-      ],
+      title: 'Experiencia',
+      description: `${years} años construyendo apps Android y backends en producción: Starbucks Perú, Interseguro, Kwema, Urbaner y más.`,
+      h1: `${years} años creando apps y backends que la gente usa a diario.`,
+      intro: 'De mis primeras apps Android en Lima a ser responsable de la app de Starbucks Perú desde España. Cada rol enlaza a los productos, el stack y lo que cambió gracias al trabajo.',
+      graphTitle: 'De un vistazo',
+      graphHint: 'Pulsa una barra para ir a ese rol.',
+      filterLabel: 'Filtrar por área',
+      all: 'Todo',
+      showMore: (n: number) => `Ver ${n} más`,
+      showLess: 'Ver menos',
+      about: 'Sobre la empresa',
+      stack: 'Stack',
+      recommended: 'Recomendación',
+      draft: 'Borrador · no publicado',
+      companiesTitle: 'Empresas en esta etapa',
+      empty: 'No hay roles en esta área.',
+      ctaTitle: '¿Prefieres la versión corta?',
+      ctaBody: 'La página de CV tiene esta misma historia en una sola página, con formación, certificaciones e idiomas.',
+      ctaCv: 'Ver mi CV',
+      ctaContact: 'Escríbeme',
+      present: 'Actual',
+      early: 'Primeros años',
     };
+
+const filters: { id: Track | 'all'; label: string }[] = [
+  { id: 'all', label: copy.all },
+  { id: 'mobile', label: 'Mobile' },
+  { id: 'backend', label: 'Backend' },
+  { id: 'fullstack', label: 'Full stack' },
+  { id: 'cloud', label: 'Cloud' },
+  { id: 'lead', label: lang === 'en' ? 'Leadership' : 'Liderazgo' },
+];
 ---
 
-<BaseLayout title={copy.title} description={copy.description}>
-  <section class="hero-editorial relative overflow-hidden py-16 sm:py-24">
-    <div class="container-page">
-      <p class="eyebrow mb-5">{copy.eyebrow}</p>
-      <h1 class="text-balance max-w-3xl mb-6">
-        {copy.hero1}<br />
-        {copy.hero2}<br />
-        {copy.hero3} <span class="text-blue-200 font-display italic font-medium">{copy.heroStrong}</span>.
-      </h1>
-      <p class="text-ink-100 text-lg max-w-2xl leading-relaxed">{copy.intro}</p>
+<BaseLayout title={copy.title} description={copy.description} type="profile">
+  <section class="hero-editorial relative overflow-hidden">
+    <div class="container-page relative pt-16 pb-12 sm:pt-24 sm:pb-16">
+      <p class="eyebrow mb-5">{copy.title}</p>
+      <h1 class="max-w-4xl text-balance">{copy.h1}</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-100">{copy.intro}</p>
     </div>
   </section>
 
-  <section class="container-page py-12 sm:py-16">
-    <div class="space-y-6">
-      {copy.entries.map((exp) => (
-        <article class="card-glass overflow-hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
-            <!-- Left: logo + company + year + body -->
-            <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border flex flex-col">
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-lg bg-midnight-200 flex items-center justify-center flex-shrink-0">
-                  <span class="text-xs font-display font-bold text-blue-200 uppercase">{exp.company.charAt(0)}</span>
-                </div>
-                <div>
-                  <p class="font-display font-bold text-sm text-ink">{exp.company}</p>
-                  <span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-blue/10 text-blue-200 border border-blue/30 mt-1">{exp.companyTag}</span>
-                </div>
-              </div>
-              <p class="font-display font-bold text-2xl text-blue-200 mb-3">{exp.year}</p>
-              <p class="text-ink-100 leading-relaxed mb-4">{exp.title}</p>
-              <a href={exp.href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200 hover:text-blue transition-colors mt-auto">
-                {currentLang === 'en' ? 'Visit website' : 'Visitar sitio'}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-              </a>
-            </div>
+  <section class="container-page pb-6" aria-labelledby="graph-title">
+    <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+      <h2 id="graph-title" class="text-xl sm:text-2xl">{copy.graphTitle}</h2>
+      <p class="text-sm text-ink-200">{copy.graphHint}</p>
+    </div>
+    <CareerGraph lang={lang} inPage />
+  </section>
 
-            <!-- Middle: my role + impact + technologies -->
-            <div class="lg:col-span-4 p-6 sm:p-8 lg:border-r lg:border-border">
-              <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.myRole}</p>
-              <p class="font-display font-bold text-base text-ink mb-5">{exp.role}</p>
-
-              <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.impact}</p>
-              <ul class="space-y-1.5 mb-5">
-                {exp.impact.map((point) => (
-                  <li class="flex items-start gap-2 text-sm text-ink-200">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-blue-200 flex-shrink-0 mt-1" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <p class="text-xs text-ink-300 uppercase tracking-wider mb-2">{copy.technologies}</p>
-              <div class="flex flex-wrap gap-1.5">
-                {exp.technologies.map((tech) => (
-                  <span class="text-xs px-2 py-0.5 rounded-full bg-midnight-200 text-ink-200">{tech}</span>
-                ))}
-              </div>
-            </div>
-
-            <!-- Right: product screenshot -->
-            <div class="lg:col-span-4 p-6 sm:p-8 flex items-center justify-center bg-midnight-200/30">
-              <div class="relative w-full overflow-hidden rounded-xl border border-border bg-midnight p-4">
-                <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(59,130,246,.18),transparent_55%)]" aria-hidden="true"></div>
-                <img src={exp.image} alt={exp.company} class="relative mx-auto max-w-full max-h-52 rounded-lg object-contain drop-shadow-2xl" loading="lazy" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Recommended by: full width below -->
-          <div class="border-t border-border p-6 sm:p-8 bg-midnight-200/20">
-            <p class="text-xs text-ink-300 uppercase tracking-wider mb-3">{copy.recommendedBy}</p>
-            <div class="flex items-start gap-3">
-              <div class="w-10 h-10 rounded-full bg-blue/20 flex items-center justify-center flex-shrink-0">
-                <span class="text-sm font-display font-bold text-blue-200">{exp.recommended.author.charAt(0)}</span>
-              </div>
-              <div class="flex-1">
-                <blockquote class="text-sm text-ink-100 italic leading-relaxed mb-2">&ldquo;{exp.recommended.quote}&rdquo;</blockquote>
-                <p class="text-xs text-ink-300"><span class="font-semibold text-ink-200">{exp.recommended.author}</span> · {exp.recommended.role}</p>
-              </div>
-            </div>
-          </div>
-        </article>
+  <section class="container-page py-12 sm:py-16" aria-label={copy.title}>
+    <div class="exp-filters mb-10" role="group" aria-label={copy.filterLabel} data-exp-filters>
+      {filters.map((f, i) => (
+        <button type="button" class="exp-filter" data-filter={f.id} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {f.label}
+        </button>
       ))}
     </div>
+
+    <ol class="exp-list" data-exp-list>
+      {roles.map((role) => {
+        const company = companies[role.companyId];
+        const extra = role.highlights[lang].slice(VISIBLE_HIGHLIGHTS);
+        const testimonial = isTestimonialVisible(role.testimonial) ? role.testimonial : undefined;
+        const isGroup = role.companyId === 'previous';
+        return (
+          <li id={role.id} class="exp-item" data-tracks={role.tracks.join(' ')} style={`--brand:${company.color}`}>
+            <div class="exp-when">
+              <p class="exp-period">{formatPeriod(role, lang)}</p>
+              <p class="exp-duration">{formatDuration(role, lang)}</p>
+            </div>
+            <div class="exp-rail" aria-hidden="true"><span class:list={['exp-dot', { 'is-current': !role.end }]}></span></div>
+
+            <article class="exp-card">
+              <header class="flex items-start gap-4">
+                <div class="exp-logo">
+                  {company.mark
+                    ? <img src={company.mark} alt="" width="40" height="40" loading="lazy" />
+                    : <span>{isGroup ? '</>' : company.name.charAt(0)}</span>}
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h3 class="font-display text-xl font-bold leading-snug text-ink">
+                    {isGroup ? role.title[lang] : company.name}
+                    {company.context && <span class="ml-1.5 text-sm font-medium text-ink-200">{company.context[lang]}</span>}
+                  </h3>
+                  <p class="mt-1 text-[0.95rem] text-ink-100">{isGroup ? copy.early : role.title[lang]}</p>
+                  <p class="mt-1 text-sm text-ink-200">
+                    {role.employment[lang]}, {role.location[lang]}
+                    <span class="exp-period-inline"><br />{formatPeriod(role, lang)} ({formatDuration(role, lang)})</span>
+                    {!role.end && <span class="exp-badge">{copy.present}</span>}
+                  </p>
+                </div>
+              </header>
+
+              <p class="mt-5 leading-relaxed text-ink-100">{role.summary[lang]}</p>
+
+              <ul class="exp-highlights mt-4">
+                {role.highlights[lang].slice(0, VISIBLE_HIGHLIGHTS).map((h) => <li>{h}</li>)}
+              </ul>
+              {extra.length > 0 && (
+                <details class="exp-more">
+                  <summary>
+                    <span class="when-closed">{copy.showMore(extra.length)}</span>
+                    <span class="when-open">{copy.showLess}</span>
+                  </summary>
+                  <ul class="exp-highlights">
+                    {extra.map((h) => <li>{h}</li>)}
+                  </ul>
+                </details>
+              )}
+
+              {role.group && (
+                <div class="mt-6">
+                  <h4 class="mb-3 text-sm font-semibold text-ink">{copy.companiesTitle}</h4>
+                  <ul class="grid gap-3 sm:grid-cols-2">
+                    {role.group.map((g) => (
+                      <li class="rounded-xl border border-border bg-white/[0.03] p-4">
+                        <p class="flex items-baseline justify-between gap-3">
+                          <span class="font-semibold text-ink">{g.company}</span>
+                          <span class="text-xs tabular-nums text-ink-300">{g.years}</span>
+                        </p>
+                        <p class="text-sm text-ink-100">{g.role[lang]}</p>
+                        <p class="mt-1.5 text-sm leading-relaxed text-ink-200">{g.note[lang]}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div class="mt-6">
+                <h4 class="sr-only">{copy.stack}</h4>
+                <ul class="flex flex-wrap gap-1.5">
+                  {role.stack.map((s) => <li class="exp-chip">{s}</li>)}
+                </ul>
+              </div>
+
+              {!isGroup && (
+                <p class="mt-6 border-t border-border pt-4 text-sm leading-relaxed text-ink-200">
+                  <span class="font-semibold text-ink-100">{copy.about}: </span>{company.about[lang]}
+                </p>
+              )}
+
+              {role.links && role.links.length > 0 && (
+                <ul class="mt-4 flex flex-wrap gap-2">
+                  {role.links.map((link) => (
+                    <li>
+                      <a href={link.href} target="_blank" rel="noopener noreferrer" class="exp-link">
+                        {link.label[lang]}
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+                        <span class="sr-only">{lang === 'en' ? '(opens in a new tab)' : '(se abre en otra pestaña)'}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {testimonial && (
+                <figure class:list={['exp-quote', { 'is-draft': testimonial.status === 'draft' }]}>
+                  <figcaption class="mb-2 flex flex-wrap items-center gap-2 text-xs font-semibold text-ink-200">
+                    {copy.recommended}
+                    {testimonial.status === 'draft' && <span class="exp-draft">{copy.draft}</span>}
+                  </figcaption>
+                  <blockquote class="text-[0.95rem] leading-relaxed text-ink-100">“{testimonial.quote[lang]}”</blockquote>
+                  <p class="mt-2 text-sm text-ink-200"><span class="font-semibold text-ink">{testimonial.author}</span>, {testimonial.role[lang]}</p>
+                </figure>
+              )}
+            </article>
+          </li>
+        );
+      })}
+    </ol>
+    <p class="hidden text-ink-200" data-exp-empty>{copy.empty}</p>
   </section>
 
   <section class="border-t border-border">
     <div class="container-page py-12 sm:py-16">
-      <div class="closing-panel card-glass p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div class="text-center sm:text-left">
-          <p class="font-display italic text-2xl sm:text-3xl text-ink mb-2">
-            {copy.finalTitle} <span class="text-blue-200">{copy.finalStrong}</span>
-          </p>
-          <p class="text-ink-200 text-sm">{copy.finalBody}</p>
+      <div class="closing-panel card-glass flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center sm:p-10">
+        <div>
+          <h2 class="text-2xl sm:text-3xl">{copy.ctaTitle}</h2>
+          <p class="mt-2 max-w-xl text-ink-200">{copy.ctaBody}</p>
         </div>
-        <a href={currentLang === 'en' ? '/en/contact' : '/es/contacto'} class="btn btn-primary flex-shrink-0">
-          {copy.cta}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="flex flex-wrap gap-3">
+          <a href={getLocalizedPath('profile', lang)} class="btn btn-primary">{copy.ctaCv}</a>
+          <a href={getLocalizedPath('contact', lang)} class="btn btn-outline">{copy.ctaContact}</a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .exp-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-filter {
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    padding: 0.45rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-ink-200);
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  }
+  .exp-filter:hover { color: var(--color-ink); border-color: var(--color-ink-300); }
+  .exp-filter[aria-pressed='true'] { color: #fff; background: var(--color-blue); border-color: var(--color-blue); }
+  .exp-filter:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; }
+
+  .exp-list { list-style: none; margin: 0; padding: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1.5rem minmax(0, 1fr);
+    column-gap: 0.9rem;
+    scroll-margin-top: 6rem;
+  }
+  .exp-item[hidden] { display: none; }
+  .exp-when { display: none; }
+  .exp-rail { position: relative; grid-row: 1; grid-column: 1; }
+  .exp-rail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: var(--color-border);
+  }
+  .exp-dot {
+    position: absolute;
+    top: 1.6rem;
+    left: 50%;
+    width: 0.85rem;
+    height: 0.85rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: var(--brand);
+    box-shadow: 0 0 0 4px var(--color-midnight);
+  }
+  .exp-dot.is-current { box-shadow: 0 0 0 4px var(--color-midnight), 0 0 0 6px var(--color-success); }
+  .exp-card {
+    grid-column: 2;
+    margin-bottom: 1.5rem;
+    min-width: 0;
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--brand);
+    border-radius: 1rem;
+    background: var(--color-carbon);
+    padding: 1.25rem;
+  }
+  .exp-item:target .exp-card { box-shadow: 0 0 0 2px var(--color-blue), var(--shadow-md); }
+  @media (min-width: 640px) { .exp-card { padding: 1.75rem 2rem; } }
+  @media (min-width: 1024px) {
+    .exp-item { grid-template-columns: 10rem 2.5rem minmax(0, 1fr); column-gap: 1.25rem; }
+    .exp-when { display: block; grid-column: 1; padding-top: 1.3rem; text-align: right; }
+    .exp-rail { grid-column: 2; }
+    .exp-card { grid-column: 3; }
+    .exp-period-inline { display: none; }
+  }
+  .exp-period { font-family: var(--font-heading); font-weight: 600; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+  .exp-duration { margin-top: 0.15rem; font-size: 0.85rem; color: var(--color-ink-300); }
+  .exp-logo {
+    display: flex;
+    width: 3.25rem;
+    height: 3.25rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.8rem;
+    background: #fff;
+    padding: 0.45rem;
+  }
+  .exp-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .exp-logo span { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; color: var(--brand); }
+  .exp-badge {
+    margin-left: 0.5rem;
+    display: inline-block;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-success) 16%, transparent);
+    padding: 0.1rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-success);
+    vertical-align: 0.1em;
+  }
+  .exp-highlights { display: grid; gap: 0.55rem; list-style: none; margin: 0; padding: 0; }
+  .exp-highlights li {
+    position: relative;
+    padding-left: 1.15rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-ink-200);
+  }
+  .exp-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 2px;
+    background: var(--brand);
+  }
+  .exp-more { margin-top: 0.55rem; display: flex; flex-direction: column; }
+  .exp-more summary {
+    order: 2;
+    cursor: pointer;
+    list-style: none;
+    align-self: flex-start;
+    margin-top: 0.55rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-blue-soft);
+  }
+  .exp-more:not([open]) summary { order: 0; margin-top: 0; }
+  .exp-more summary::-webkit-details-marker { display: none; }
+  .exp-more summary:focus-visible { outline: 2px solid var(--color-blue); outline-offset: 2px; border-radius: 4px; }
+  .exp-more .when-open, .exp-more[open] .when-closed { display: none; }
+  .exp-more[open] .when-open { display: inline; }
+  .exp-chip {
+    border-radius: 0.4rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-glass);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-ink-100);
+  }
+  .exp-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-100);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .exp-link:hover { color: var(--color-ink); border-color: color-mix(in srgb, var(--brand) 60%, transparent); }
+  .exp-quote {
+    margin: 1.5rem 0 0;
+    border-left: 3px solid var(--brand);
+    border-radius: 0 0.75rem 0.75rem 0;
+    background: var(--color-glass);
+    padding: 1rem 1.25rem;
+  }
+  .exp-quote.is-draft { border-left-style: dashed; opacity: 0.8; }
+  .exp-draft {
+    border-radius: 999px;
+    border: 1px dashed var(--color-warning);
+    padding: 0 0.5rem;
+    font-weight: 500;
+    color: var(--color-warning);
+  }
+</style>
+
+<script>
+  const group = document.querySelector<HTMLElement>('[data-exp-filters]');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('[data-exp-list] > li'));
+  const empty = document.querySelector<HTMLElement>('[data-exp-empty]');
+  group?.addEventListener('click', (event) => {
+    const btn = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
+    if (!btn) return;
+    const filter = btn.dataset.filter!;
+    group.querySelectorAll('[data-filter]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    let visible = 0;
+    items.forEach((item) => {
+      const show = filter === 'all' || (item.dataset.tracks || '').split(' ').includes(filter);
+      item.hidden = !show;
+      if (show) visible++;
+    });
+    empty?.classList.toggle('hidden', visible > 0);
+  });
+
+  // Al llegar con #rol (desde el gráfico o la Home): mostrarlo y abrir sus detalles
+  const openFromHash = () => {
+    const target = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (!target || !target.matches('[data-exp-list] > li')) return;
+    if (target.hidden) group?.querySelector<HTMLButtonElement>('[data-filter="all"]')?.click();
+    target.querySelector('details')?.setAttribute('open', '');
+  };
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>

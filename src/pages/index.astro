@@ -1,5 +1,31 @@
 ---
-import HomePage from '@components/pages/HomePage.astro';
+// "/" lo resuelve nginx (302 según Accept-Language). Esta página es el respaldo
+// para `astro dev` / `astro preview` o si el servidor sirve el HTML directamente.
 ---
 
-<HomePage />
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Yahyr Paredes</title>
+    <link rel="canonical" href="https://yahyrparedes.com/es/" />
+    <script is:inline>
+      (function () {
+        var lang = 'es';
+        try {
+          var saved = localStorage.getItem('site-lang');
+          if (saved === 'es' || saved === 'en') lang = saved;
+          else if ((navigator.language || '').toLowerCase().indexOf('en') === 0) lang = 'en';
+        } catch (e) {}
+        location.replace('/' + lang + '/');
+      })();
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=/es/" /></noscript>
+    <style>body{background:#0B1220;color:#F9FAFB;font-family:system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#60A5FA}</style>
+  </head>
+  <body>
+    <p><a href="/es/">Español</a> · <a href="/en/">English</a></p>
+  </body>
+</html>

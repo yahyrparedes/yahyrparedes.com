@@ -312,6 +312,12 @@
     border-bottom: 1px solid var(--color-border);
   }
 
+  :root.theme-light .hero-editorial {
+    background:
+      radial-gradient(circle at 70% 18%, rgba(37, 99, 235, .10), transparent 38%),
+      linear-gradient(180deg, #EEF2F8 0%, var(--color-midnight) 70%);
+  }
+
   .hero-editorial::before {
     content: '';
     position: absolute;

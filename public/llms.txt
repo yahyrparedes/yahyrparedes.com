@@ -1,44 +1,38 @@
-# yahyrparedes.com — LLM-friendly content
+# yahyrparedes.com — contenido para LLMs / content for LLMs
 
-# Yahyr Paredes
-# Software developer disponible para proyectos
-# Ubicación: Cortijos Nuevos, Jaén, Andalucía, España
-# Background: fullstack + mobile (5+ años Android, 4+ años Java/Spring)
+# Yahyr Paredes (Yahyr Enrique Paredes Arteaga)
+# Senior Software Engineer · Android y backend
+# Ubicación: Jaén, Andalucía, España · Autorización para trabajar en España
 
-## Sobre mí
-- Software developer con background en mobile (Android nativo, Kotlin)
-  y backend (Java/Spring).
-- Disponible para proyectos freelance, consultoría y auditorías.
-- Stack: Kotlin, Java, Spring Boot, Android (Jetpack Compose), Node.js,
-  AWS, GCP, Docker, Astro, PrestaShop, WordPress.
-- Idioma nativo: español. Profesional: inglés.
+## Resumen
+- Más de 10 años de experiencia profesional (desde 2016).
+- Base fuerte en Android: Kotlin, Java, Jetpack Compose, Kotlin Multiplatform.
+- Backend y cloud: Go, Java/Spring Boot, Python/Django, Node.js, AWS, GCP.
+- Idiomas: español (nativo), inglés (B1, MCER).
 
-## Servicios que ofrezco
-- Webs de alto rendimiento (Astro, Next.js, con o sin backend).
-- Apps móviles nativas e híbridas (Android + iOS).
-- Ecosistemas completos: web + backend + infraestructura (AWS/GCP).
-- Hot fixes / mejoras a proyectos existentes.
-- Rescate de proyectos AI / Vibe Coding mal desplegados.
+## Trayectoria (más reciente primero)
+- 09/2024 – actualidad · Android Engineer · Starbucks Perú (vía DELOSI). Reescritura de la app Starbucks Rewards Perú (1M+ descargas) en Kotlin, Compose y KMP.
+- 01/2023 – 08/2024 · Full Stack Engineer II · Interseguro. Migración del SOAT de PHP a Go; errores de emisión del ~50% al ~10%.
+- 11/2022 – 01/2023 · Backend Developer (Django) · Silabuz.
+- 09/2021 – 02/2022 · Full Stack Developer y docente · Groway Studio.
+- 08/2021 – actualidad · Android & Python Backend Engineer (part-time) · Kwema Inc. (EE. UU.).
+- 09/2019 – 08/2021 · Software Engineer Android & Go · Urbaner.
+- 02/2019 – 08/2020 · Líder técnico e-commerce y mobile · Calzado Atlas (Zapatillas Tigre).
+- 08/2016 – 02/2019 · Android y mobile: ESAN, Force Close, Avances Tecnológicos, Sistemas Integrales 7A, MAP Salud, Intercorp (Clínica Aviva), Urbaner.
 
-## Open Source
-- Herramientas, extensiones y módulos de libre uso.
-- Catálogo en /open-source/
+## Formación
+- Técnico Superior en Telemática · IBEROTEC / IDAT (Lima, 2014 – 2016).
 
-## Trayectoria
-- Delosi (Starbucks Perú) — backend / mobile
-- Avances Tecnológicos — Android lead
-- Bancamóvil Proempresa — Android
-- Kwema — IoT + mobile
+## Páginas
+- Experiencia: https://yahyrparedes.com/es/experiencia/ (EN: /en/experience/)
+- CV: https://yahyrparedes.com/es/perfil/ (EN: /en/profile/)
+- Servicios: https://yahyrparedes.com/es/servicios/
+- Open source: https://yahyrparedes.com/es/open-source/
 
 ## Contacto
 - Email: hola@yahyrparedes.com
-- LinkedIn: www.linkedin.com/in/yahyrparedes/
-- GitHub: github.com/yahyrparedes
-
-## Lo que NO hago
-- No hago "consultoría" sin compromiso de proyecto. Mi tiempo se enfoca
-  en trabajo entregable.
-- No uso cookies de tracking invasivas. Analytics privacy-friendly.
+- LinkedIn: https://www.linkedin.com/in/yahyrparedes/
+- GitHub: https://github.com/yahyrparedes
 
 ## Sitemap
 https://yahyrparedes.com/sitemap-index.xml

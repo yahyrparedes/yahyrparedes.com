@@ -1,6 +1,6 @@
 // SEO helpers
-const SITE_NAME = 'Yahyr Paredes · Software developer';
-const DEFAULT_OG_IMAGE = '/og-default.png';
+const SITE_NAME = 'Yahyr Paredes';
+const DEFAULT_OG_IMAGE = '/images/og-default.png';
 const SITE_URL = 'https://yahyrparedes.com';
 
 export interface SeoMeta {
@@ -17,7 +17,7 @@ export interface SeoMeta {
 export function buildMeta({
   title, description, image, url, type = 'website', publishedTime, author, noindex = false,
 }: SeoMeta) {
-  const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL;
   const ogImage = image
     ? image.startsWith('http') ? image : `${SITE_URL}${image}`
