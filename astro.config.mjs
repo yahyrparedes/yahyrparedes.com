@@ -29,8 +29,8 @@ export default defineConfig({
         !page.includes('/500') &&
         !page.includes('/admin') &&
         !page.includes('/plugins') &&
-        // detalle de servicios EN aún redirige a ES (pendiente de traducir)
-        !/\/en\/services\/.+/.test(new URL(page).pathname) &&
+        // módulos Tiger: ocultos del índice hasta reorganizar la colección
+        !/\/open-source\/(google-shopping|rich-snippets|pixel-suite|meta-shop|search-console)\//.test(page) &&
         !page.includes('/_astro'),
       /** @param {import('@astrojs/sitemap').SitemapItem} item @returns {any} */
       serialize(item) {

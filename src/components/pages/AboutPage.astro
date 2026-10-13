@@ -1,235 +1,239 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { site } from '@data/site.ts';
-import { t, getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
+import { getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
+import { yearsOfExperience } from '@data/career.ts';
 
-const currentLang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url);
+const years = yearsOfExperience();
+const experienceUrl = getLocalizedPath('experience', lang);
 
-const principles = [
-  { num: '01', titleKey: 'about.principle_1_title', bodyKey: 'about.principle_1_body' },
-  { num: '02', titleKey: 'about.principle_2_title', bodyKey: 'about.principle_2_body' },
-  { num: '03', titleKey: 'about.principle_3_title', bodyKey: 'about.principle_3_body' },
-  { num: '04', titleKey: 'about.principle_4_title', bodyKey: 'about.principle_4_body' },
-];
-
-const timeline = [
-  { yearKey: 'about.story_1_year', labelKey: 'about.story_1_label', bodyKey: 'about.story_1_body' },
-  { yearKey: 'about.story_2_year', labelKey: 'about.story_2_label', bodyKey: 'about.story_2_body' },
-  { yearKey: 'about.story_3_year', labelKey: 'about.story_3_label', bodyKey: 'about.story_3_body' },
-  { yearKey: 'about.story_4_year', labelKey: 'about.story_4_label', bodyKey: 'about.story_4_body' },
-  { yearKey: 'about.story_5_year', labelKey: 'about.story_5_label', bodyKey: 'about.story_5_body' },
-];
-
-const inspirations = [
-  { nameKey: 'about.inspires_travel', icon: 'travel' },
-  { nameKey: 'about.inspires_photography', icon: 'photography' },
-  { nameKey: 'about.inspires_security', icon: 'security' },
-  { nameKey: 'about.inspires_coffee', icon: 'coffee' },
-  { nameKey: 'about.inspires_family', icon: 'family' },
-  { nameKey: 'about.inspires_open_source', icon: 'open_source' },
-];
+const copy = lang === 'en'
+  ? {
+      title: 'About me',
+      description: 'Peruvian software engineer based in Jaén, Spain. Android first, backend and cloud after: how I got here and how I work.',
+      h1: 'Peruvian engineer, Android first, backend by choice.',
+      intro: [
+        `I trained in Telematics in Lima and shipped my first Android app in 2016. Over ${years} years I have gone from native apps to Go, Java and Python services in the cloud, working for startups, agencies and large companies in insurance, food & beverage, logistics and retail.`,
+        'Since December 2025 I live in Jaén, Spain, where I worked remotely as the Android engineer for the Starbucks Peru app. Today I am looking for my next team, as an Android or backend engineer.',
+      ],
+      facts: [
+        { label: 'Based in', value: 'Jaén, Spain' },
+        { label: 'Work permit', value: 'Authorized to work in Spain' },
+        { label: 'Languages', value: 'Spanish (native), English (B1)' },
+        { label: 'Availability', value: 'Immediate · remote, hybrid or on-site' },
+      ],
+      photoAlt: 'Yahyr Paredes working at his desk',
+      pathTitle: 'How I got here',
+      path: [
+        { year: '2014 – 2016', title: 'Telematics at IBEROTEC / IDAT', body: 'Networking, programming, microcontrollers and IoT. My first internship was in the institute’s systems team.' },
+        { year: '2016 – 2019', title: 'Android, from developer to tech lead', body: 'Urbaner, Intercorp, ESAN, Force Close and Avances Tecnológicos. I shipped apps to the stores and, as mobile tech lead, mentored two juniors.' },
+        { year: '2019 – 2021', title: 'E-commerce and logistics', body: 'Tech lead for Calzado Atlas’ digital transformation, then Android and Go for Urbaner’s courier platform.' },
+        { year: '2021 – 2024', title: 'Backend, IoT and teaching', body: 'Kwema (US), Groway Studio, where I also taught microservices and Docker, Silabuz and Interseguro, where I helped introduce Go.' },
+        { year: '2024 – 2026', title: 'Starbucks Peru', body: 'I rewrote the Starbucks Rewards Android app (1M+ downloads) in Kotlin, Compose and KMP.' },
+        { year: 'Dec 2025', title: 'New home in Spain', body: 'I moved to Jaén with my family and kept working remotely.' },
+      ],
+      principlesTitle: 'How I work',
+      principles: [
+        { title: 'Production is the goal', body: 'Shipping is not the finish line. I care about what happens after release: monitoring, security hardening and releases the team can repeat every month.' },
+        { title: 'Migrate without breaking', body: 'Most of my work has been evolving systems that were already live: SOAT from PHP to Go, a legacy Android app to Kotlin, a full platform from Azure to AWS.' },
+        { title: 'Leave the team better', body: 'Go templates other teams adopted, commit and README standards, mentoring juniors and teaching. Knowledge that stays when I leave.' },
+        { title: 'Mobile and backend are one product', body: 'Having worked on both sides, I design APIs thinking about the app that consumes them, and apps thinking about the services behind them.' },
+      ],
+      teamAlt: 'Yahyr with his development team in Lima',
+      teamCaption: 'With my development team in Lima.',
+      interestsTitle: 'What I am exploring',
+      interests: [
+        { title: 'Security', body: 'App hardening, ethical hacking and secure-by-default backends.' },
+        { title: 'AI applied to development', body: 'Claude Code, Cursor and Copilot, with tests and reviews that keep the output honest.' },
+        { title: 'Kotlin Multiplatform', body: 'Shared business logic with native UIs on Android and iOS.' },
+        { title: 'Open source', body: 'Small tools such as Flow-GM and modules for e-commerce stores.' },
+      ],
+      ctaTitle: 'Looking for an Android or backend engineer?',
+      ctaBody: 'I am available now for remote, hybrid or on-site roles in Spain.',
+      ctaPrimary: 'See my experience',
+      ctaSecondary: 'Contact me',
+    }
+  : {
+      title: 'Sobre mí',
+      description: 'Ingeniero de software peruano afincado en Jaén, España. Primero Android, después backend y cloud: cómo llegué aquí y cómo trabajo.',
+      h1: 'Ingeniero peruano, Android de origen, backend por elección.',
+      intro: [
+        `Me formé en Telemática en Lima y publiqué mi primera app Android en 2016. En ${years} años he pasado de las apps nativas a servicios en Go, Java y Python en la nube, trabajando para startups, agencias y grandes empresas de seguros, restauración, logística y retail.`,
+        'Desde diciembre de 2025 vivo en Jaén, España, donde trabajé en remoto como ingeniero Android de la app de Starbucks Perú. Ahora busco mi próximo equipo, como ingeniero Android o backend.',
+      ],
+      facts: [
+        { label: 'Ubicación', value: 'Jaén, España' },
+        { label: 'Permiso de trabajo', value: 'Autorización para trabajar en España' },
+        { label: 'Idiomas', value: 'Español (nativo), inglés (B1)' },
+        { label: 'Disponibilidad', value: 'Inmediata · remoto, híbrido o presencial' },
+      ],
+      photoAlt: 'Yahyr Paredes trabajando en su escritorio',
+      pathTitle: 'Cómo llegué hasta aquí',
+      path: [
+        { year: '2014 – 2016', title: 'Telemática en IBEROTEC / IDAT', body: 'Redes, programación, microcontroladores e IoT. Mis primeras prácticas fueron en el equipo de sistemas del instituto.' },
+        { year: '2016 – 2019', title: 'Android, de desarrollador a líder técnico', body: 'Urbaner, Intercorp, ESAN, Force Close y Avances Tecnológicos. Publiqué apps en las tiendas y, como líder técnico móvil, formé a dos desarrolladores junior.' },
+        { year: '2019 – 2021', title: 'E-commerce y logística', body: 'Líder técnico de la transformación digital de Calzado Atlas y después Android y Go en la plataforma de courier de Urbaner.' },
+        { year: '2021 – 2024', title: 'Backend, IoT y docencia', body: 'Kwema (EE. UU.), Groway Studio, donde también enseñé microservicios y Docker, Silabuz e Interseguro, donde ayudé a introducir Go.' },
+        { year: '2024 – 2026', title: 'Starbucks Perú', body: 'Reescribí la app Android de Starbucks Rewards (más de 1M de descargas) en Kotlin, Compose y KMP.' },
+        { year: 'dic 2025', title: 'Nuevo hogar en España', body: 'Me mudé a Jaén con mi familia y seguí trabajando en remoto.' },
+      ],
+      principlesTitle: 'Cómo trabajo',
+      principles: [
+        { title: 'La meta es producción', body: 'Publicar no es la línea de meta. Me importa lo que pasa después: monitorización, seguridad y releases que el equipo pueda repetir cada mes.' },
+        { title: 'Migrar sin romper', body: 'Gran parte de mi trabajo ha sido evolucionar sistemas que ya estaban en producción: el SOAT de PHP a Go, una app Android heredada a Kotlin y una plataforma entera de Azure a AWS.' },
+        { title: 'Dejar al equipo mejor', body: 'Templates de Go que adoptaron otros equipos, estándares de commits y README, mentoring a juniors y docencia. Conocimiento que se queda cuando me voy.' },
+        { title: 'Mobile y backend, un solo producto', body: 'Como he trabajado en los dos lados, diseño APIs pensando en la app que las consume, y apps pensando en los servicios que hay detrás.' },
+      ],
+      teamAlt: 'Yahyr con su equipo de desarrollo en Lima',
+      teamCaption: 'Con mi equipo de desarrollo en Lima.',
+      interestsTitle: 'Lo que estoy explorando',
+      interests: [
+        { title: 'Seguridad', body: 'Hardening de apps, hacking ético y backends seguros por defecto.' },
+        { title: 'IA aplicada al desarrollo', body: 'Claude Code, Cursor y Copilot, con tests y revisiones que mantienen el resultado bajo control.' },
+        { title: 'Kotlin Multiplatform', body: 'Lógica de negocio compartida con interfaces nativas en Android e iOS.' },
+        { title: 'Open source', body: 'Herramientas pequeñas como Flow-GM y módulos para tiendas e-commerce.' },
+      ],
+      ctaTitle: '¿Buscas un ingeniero Android o backend?',
+      ctaBody: 'Estoy disponible ya para roles en remoto, híbridos o presenciales en España.',
+      ctaPrimary: 'Ver mi experiencia',
+      ctaSecondary: 'Escríbeme',
+    };
 ---
 
-<BaseLayout title={t(Astro.url, 'about.eyebrow') + ' · ' + site.name} description={t(Astro.url, 'about.subheadline')} type="profile">
+<BaseLayout title={copy.title} description={copy.description} type="profile">
   <section class="hero-editorial relative overflow-hidden">
-    <div class="container-page relative pt-16 sm:pt-24 pb-16">
-      <p class="eyebrow mb-5">{t(Astro.url, 'about.eyebrow')}</p>
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        <div class="lg:col-span-7">
-        <h1 class="text-balance mb-6">
-          {t(Astro.url, 'about.title_start')}{' '}
-          <span class="font-display italic text-ink font-medium">{t(Astro.url, 'about.title_strong')}</span>
-          {t(Astro.url, 'about.title_end')}
-        </h1>
-        <p class="text-ink-100 text-lg sm:text-xl max-w-2xl leading-relaxed mb-6">{t(Astro.url, 'about.subheadline')}</p>
-        <div class="flex flex-wrap gap-4 text-sm text-ink-200">
-          <div class="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-            </svg>
-            <span>{t(Astro.url, 'about.location')}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="text-blue-200" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-            </svg>
-            <span>{t(Astro.url, 'about.remote')}</span>
-          </div>
-        </div>
-        </div>
-        <div class="lg:col-span-5">
-          <div class="card-glass relative aspect-square max-w-md mx-auto overflow-hidden p-2">
-            <img src="/images/personal-3.png" alt={site.name} class="relative w-full h-full object-cover rounded-xl" width="500" height="500" loading="eager" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="border-y border-border bg-carbon/40">
-    <div class="container-page py-12 sm:py-16">
-      <div class="grid lg:grid-cols-12 gap-10 items-center">
-        <div class="lg:col-span-5">
-          <p class="eyebrow mb-3">{t(Astro.url, 'about.journey_eyebrow')}</p>
-          <h2 class="text-balance mb-4">
-            {t(Astro.url, 'about.journey_title_start')}{' '}
-            <span class="text-blue-200 font-display italic font-medium">{t(Astro.url, 'about.journey_peru')}</span>{' '}
-            {t(Astro.url, 'about.journey_to')}{' '}
-            <span class="text-blue-200 font-display italic font-medium">{t(Astro.url, 'about.journey_spain')}</span>
-            {t(Astro.url, 'about.journey_title_end')}
-          </h2>
-          <p class="text-ink-200 leading-relaxed">{t(Astro.url, 'about.journey_body')}</p>
-        </div>
-
-        <div class="lg:col-span-7">
-          <div class="relative">
-            <div class="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-blue/30 -translate-y-1/2"></div>
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
-              <div class="text-center md:text-left">
-                <p class="font-display font-bold text-2xl text-blue-200 mb-1">{t(Astro.url, 'about.journey_step1_year')}</p>
-                <p class="font-display font-bold text-base text-ink">{t(Astro.url, 'about.journey_step1_label')}</p>
-                <p class="text-xs text-ink-300 mt-1">Perú</p>
-              </div>
-              <div class="text-center md:text-left">
-                <p class="font-display font-bold text-2xl text-blue-200 mb-1">{t(Astro.url, 'about.journey_step2_year')}</p>
-                <p class="font-display font-bold text-base text-ink">{t(Astro.url, 'about.journey_step2_label')}</p>
-                <p class="text-xs text-ink-300 mt-1">España</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container-page py-16 sm:py-20">
-    <div class="mb-12 max-w-2xl">
-      <p class="eyebrow mb-3">{t(Astro.url, 'about.principles_eyebrow')}</p>
-      <h2 class="text-balance">
-        {t(Astro.url, 'about.principles_title_start')}{' '}
-        <span class="text-blue-200 font-display italic font-medium">{t(Astro.url, 'about.principles_title_strong')}</span>
-        {t(Astro.url, 'about.principles_title_end')}
-      </h2>
-    </div>
-
-    <div class="grid sm:grid-cols-2 gap-4 sm:gap-5">
-      {principles.map((p) => (
-        <div class="card-glass p-6 sm:p-8">
-          <p class="font-display font-bold text-3xl text-blue-200 mb-4">{p.num}</p>
-          <h3 class="font-display font-bold text-lg text-ink mb-3">{t(Astro.url, p.titleKey)}</h3>
-          <p class="text-ink-200 text-sm leading-relaxed">{t(Astro.url, p.bodyKey)}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <section class="border-y border-border bg-carbon/40">
-    <div class="container-page py-16 sm:py-20">
-      <div class="mb-12 max-w-2xl">
-        <p class="eyebrow mb-3">{t(Astro.url, 'about.story_eyebrow')}</p>
-        <h2 class="text-balance">{t(Astro.url, 'about.story_title')}</h2>
-      </div>
-      <div class="relative">
-        <div class="absolute left-0 md:left-32 top-0 bottom-0 w-px bg-blue/30"></div>
-        <div class="space-y-12">
-          {timeline.map((item) => (
-            <div class="relative pl-8 md:pl-48">
-              <div class="absolute left-0 md:left-32 top-2 -translate-x-1/2 w-3 h-3 rounded-full bg-blue ring-4 ring-midnight"></div>
-              <div class="md:absolute md:left-0 md:top-0 md:w-32 md:text-right">
-                <p class="font-display font-bold text-sm text-blue-200">{t(Astro.url, item.yearKey)}</p>
-              </div>
-              <div class="md:ml-0">
-                <p class="font-display font-bold text-lg text-ink mb-2">{t(Astro.url, item.labelKey)}</p>
-                <p class="text-ink-200 text-sm leading-relaxed">{t(Astro.url, item.bodyKey)}</p>
-              </div>
+    <div class="container-page relative grid items-center gap-10 pt-16 pb-14 sm:pt-20 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-7">
+        <p class="eyebrow mb-5">{copy.title}</p>
+        <h1 class="mb-6 text-balance">{copy.h1}</h1>
+        {copy.intro.map((p) => <p class="mb-4 max-w-[62ch] text-lg leading-relaxed text-ink-100">{p}</p>)}
+        <dl class="about-facts mt-8">
+          {copy.facts.map((f) => (
+            <div>
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
+      </div>
+      <div class="lg:col-span-5">
+        <figure class="about-portrait">
+          <img src="/images/portrait.jpg" alt={copy.photoAlt} width="620" height="775" loading="eager" />
+        </figure>
       </div>
     </div>
   </section>
 
-  <section class="container-page py-16 sm:py-20">
-    <div class="mb-12 max-w-2xl">
-      <p class="eyebrow mb-3">{t(Astro.url, 'about.inspires_eyebrow')}</p>
-      <h2 class="text-balance">
-        {t(Astro.url, 'about.inspires_title_start')}{' '}
-        <span class="text-blue-200 font-display italic font-medium">{t(Astro.url, 'about.inspires_title_strong')}</span>
-        {t(Astro.url, 'about.inspires_title_end')}
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-      {inspirations.map((item) => (
-        <div class="card-glass aspect-square flex flex-col items-center justify-center p-4 group hover:border-blue/30">
-          <div class="w-10 h-10 mb-3 text-blue-200 group-hover:text-blue transition-colors" aria-hidden="true">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              {item.icon === 'travel' && <><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></>}
-              {item.icon === 'photography' && <><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></>}
-              {item.icon === 'security' && <><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></>}
-              {item.icon === 'coffee' && <><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4z"/><path d="M6 1v3M10 1v3M14 1v3"/></>}
-              {item.icon === 'family' && <><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></>}
-              {item.icon === 'open_source' && <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>}
-            </svg>
+  <section class="container-page py-16 sm:py-20" aria-labelledby="path-title">
+    <h2 id="path-title" class="mb-10 text-balance">{copy.pathTitle}</h2>
+    <ol class="about-path">
+      {copy.path.map((step) => (
+        <li>
+          <p class="about-path-year">{step.year}</p>
+          <div>
+            <h3 class="font-display text-lg font-bold text-ink">{step.title}</h3>
+            <p class="mt-1.5 max-w-[68ch] leading-relaxed text-ink-200">{step.body}</p>
           </div>
-          <p class="font-display font-semibold text-sm text-ink text-center">{t(Astro.url, item.nameKey)}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ol>
+    <a href={experienceUrl} class="mt-8 inline-flex text-sm font-semibold text-blue-200 hover:text-ink">{copy.ctaPrimary}</a>
   </section>
 
-  <section class="border-y border-border bg-carbon/40">
-    <div class="container-page py-16 sm:py-20">
-      <p class="eyebrow mb-10">{t(Astro.url, 'about.outside_eyebrow')}</p>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="card-glass p-6">
-          <p class="text-xs text-blue-200 uppercase tracking-wider mb-2">{t(Astro.url, 'about.outside_reading')}</p>
-          <p class="font-display font-bold text-base text-ink">Atomic Habits</p>
-          <p class="text-xs text-ink-200 mt-1">James Clear</p>
-        </div>
-        <div class="card-glass p-6">
-          <p class="text-xs text-blue-200 uppercase tracking-wider mb-2">{t(Astro.url, 'about.outside_listening')}</p>
-          <p class="font-display font-bold text-base text-ink">Lex Fridman Podcast</p>
-          <p class="text-xs text-ink-200 mt-1">#380</p>
-        </div>
-        <div class="card-glass p-6">
-          <p class="text-xs text-blue-200 uppercase tracking-wider mb-2">{t(Astro.url, 'about.outside_learning')}</p>
-          <p class="font-display font-bold text-base text-ink">Rust</p>
-          <p class="text-xs text-ink-200 mt-1">Systems programming</p>
-        </div>
-        <div class="card-glass p-6">
-          <p class="text-xs text-blue-200 uppercase tracking-wider mb-2">{t(Astro.url, 'about.outside_exploring')}</p>
-          <p class="font-display font-bold text-base text-ink">AI Agents</p>
-          <p class="text-xs text-ink-200 mt-1">Next frontier</p>
-        </div>
+  <section class="border-y border-border bg-carbon/40" aria-labelledby="principles-title">
+    <div class="container-page grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <h2 id="principles-title" class="mb-8 text-balance">{copy.principlesTitle}</h2>
+        <figure class="about-team">
+          <img src="/images/team-lima.jpg" alt={copy.teamAlt} width="1200" height="900" loading="lazy" />
+          <figcaption>{copy.teamCaption}</figcaption>
+        </figure>
+      </div>
+      <div class="grid content-start gap-4 sm:grid-cols-2 lg:col-span-7">
+        {copy.principles.map((p) => (
+          <article class="about-principle">
+            <h3 class="font-display text-lg font-bold text-ink">{p.title}</h3>
+            <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-200">{p.body}</p>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="container-page py-16 sm:py-24">
-    <div class="max-w-3xl mx-auto text-center">
-      <p class="font-display italic text-3xl sm:text-4xl text-ink leading-snug mb-6">&ldquo;{t(Astro.url, 'about.why_title_strong')}&rdquo;</p>
-      <p class="text-ink-200 leading-relaxed mb-8">{t(Astro.url, 'about.why_body')}</p>
-      <p class="font-display italic text-blue-200">— {site.name}</p>
-    </div>
+  <section class="container-page py-16 sm:py-20" aria-labelledby="interests-title">
+    <h2 id="interests-title" class="mb-8 text-balance">{copy.interestsTitle}</h2>
+    <ul class="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+      {copy.interests.map((i) => (
+        <li class="border-t border-border pt-4">
+          <h3 class="font-display text-lg font-bold text-ink">{i.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-ink-200">{i.body}</p>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <section class="border-t border-border">
     <div class="container-page py-12 sm:py-16">
-      <div class="closing-panel card-glass p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div class="text-center sm:text-left">
-          <h2 class="text-2xl sm:text-3xl text-balance">
-            {t(Astro.url, 'about.cta_title_start')}{' '}
-            <span class="text-blue-200 font-display italic font-medium">{t(Astro.url, 'about.cta_title_strong')}</span>
-            {t(Astro.url, 'about.cta_title_end')}
-          </h2>
-          <p class="text-ink-200 mt-2">{t(Astro.url, 'about.cta_body')}</p>
+      <div class="closing-panel card-glass flex flex-col items-start justify-between gap-6 p-8 sm:flex-row sm:items-center sm:p-10">
+        <div>
+          <h2 class="text-2xl sm:text-3xl text-balance">{copy.ctaTitle}</h2>
+          <p class="mt-2 text-ink-200">{copy.ctaBody}</p>
         </div>
-        <a href={getLocalizedPath('experience', currentLang)} class="btn btn-primary flex-shrink-0">
-          {t(Astro.url, 'about.cta_button')}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+        <div class="flex flex-wrap gap-3">
+          <a href={experienceUrl} class="btn btn-primary">{copy.ctaPrimary}</a>
+          <a href={getLocalizedPath('contact', lang)} class="btn btn-outline">{copy.ctaSecondary}</a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .about-facts { display: grid; gap: 1rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); max-width: 40rem; }
+  .about-facts dt { font-size: 0.8rem; color: var(--color-ink-300); }
+  .about-facts dd { margin-top: 0.15rem; font-weight: 600; color: var(--color-ink); }
+  .about-portrait {
+    margin: 0 auto;
+    max-width: 26rem;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+  }
+  .about-portrait img { display: block; width: 100%; height: auto; }
+
+  .about-path { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--color-border); }
+  .about-path li {
+    position: relative;
+    display: grid;
+    gap: 0.35rem;
+    padding: 0 0 2rem 1.5rem;
+  }
+  .about-path li::before {
+    content: '';
+    position: absolute;
+    left: -0.35rem;
+    top: 0.45rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 999px;
+    background: var(--color-blue);
+    box-shadow: 0 0 0 4px var(--color-midnight);
+  }
+  .about-path li:last-child { padding-bottom: 0; }
+  .about-path li:last-child::before { background: var(--color-success); }
+  .about-path-year { font-family: var(--font-heading); font-size: 0.9rem; font-weight: 600; color: var(--color-blue-soft); font-variant-numeric: tabular-nums; }
+  @media (min-width: 768px) {
+    .about-path { border-left: 0; }
+    .about-path li { grid-template-columns: 9rem 1fr; gap: 2rem; padding: 0; }
+    .about-path li::before { left: 10.65rem; }
+    .about-path li > div { border-left: 1px solid var(--color-border); padding: 0 0 2rem 2rem; }
+    .about-path li:last-child > div { padding-bottom: 0; }
+    .about-path-year { text-align: right; padding-top: 0.1rem; }
+  }
+
+  .about-team { margin: 0; }
+  .about-team img { display: block; width: 100%; height: auto; border-radius: 1rem; border: 1px solid var(--color-border); }
+  .about-team figcaption { margin-top: 0.6rem; font-size: 0.85rem; color: var(--color-ink-300); }
+  .about-principle { border: 1px solid var(--color-border); border-radius: 1rem; background: var(--color-carbon); padding: 1.5rem; }
+</style>

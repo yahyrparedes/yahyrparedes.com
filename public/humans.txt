@@ -9,7 +9,7 @@
 	Components: Astro 5, Tailwind CSS 4
 	Hosting: Coolify + nginx (self-hosted)
 	CDN: Cloudflare
-	Analytics: Umami (privacy-friendly)
+	Analytics: none
 
 /* THANKS */
 	Astro — https://astro.build

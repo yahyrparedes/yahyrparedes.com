@@ -6,21 +6,6 @@ export interface Social {
   icon: 'linkedin' | 'github' | 'email' | 'instagram' | 'youtube';
 }
 
-export interface Service {
-  slug: string;
-  name: string;
-  tagline: string;
-  description: string;
-  icon: 'web' | 'mobile' | 'stack' | 'wrench' | 'sparkles';
-  features: string[];
-  stack: string[];
-  process: { title: string; description: string }[];
-  idealFor: string;
-  notFor: string;
-  pricing: string;
-  faq: { question: string; answer: string }[];
-}
-
 export interface Plugin {
   slug: string;
   name: string;
@@ -62,7 +47,6 @@ export interface SiteProfile {
   origin: string;
   socials: Social[];
   image?: string;
-  services: Service[];
   plugins: Plugin[];
   photos: PhotoGroup[];
 }
@@ -70,12 +54,12 @@ export interface SiteProfile {
 export const site: SiteProfile = {
   name: 'Yahyr Paredes',
   handle: 'yahyrparedes',
-  role: 'Software developer',
-  tagline: 'Software developer disponible para proyectos',
+  role: 'Senior Software Engineer · Android & Backend',
+  tagline: 'Ingeniero Android y backend',
   location: 'Cortijos Nuevos, Jaén, Andalucía',
   country: 'España',
   email: 'yahyrparedesarteaga@gmail.com',
-  bio: 'Software developer con background en mobile (Android nativo, Kotlin) y backend (Java/Spring). Disponible para proyectos freelance, consultoría y auditorías.',
+  bio: 'Ingeniero de software Android y backend (Kotlin, Go, Java, Python) con más de 10 años de experiencia. Disponible para nuevas oportunidades en España, en remoto o presencial.',
   longBio: `Nacido en Perú, llegué a España con mi familia en busca de nuevas oportunidades. Llevo más de 10 años construyendo software: empecé en Android, sumé backend con Go, Java/Spring y Python, y ahora combino ambos mundos con infraestructura cloud (AWS, GCP) y desarrollo full-stack.
 
 Mi enfoque es pragmático: menos buzzwords, más producto funcionando. Disfruto tanto de una arquitectura limpia como de un hot fix a las 2am que salva un deploy.
@@ -86,158 +70,6 @@ Ahora mismo estoy basado en Cortijos Nuevos (Jaén, Andalucía) y disponible par
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/yahyrparedes/', icon: 'linkedin' },
     { label: 'GitHub', url: 'https://github.com/yahyrparedes', icon: 'github' },
     { label: 'Email', url: 'mailto:yahyrparedesarteaga@gmail.com', icon: 'email' },
-  ],
-  services: [
-    {
-      slug: 'webs',
-      name: 'Webs de alto rendimiento',
-      tagline: 'Sitios web rápidos, optimizados para SEO, hechos para convertir.',
-      description: 'Diseño y desarrollo de webs modernas con Astro, Next.js o lo que tu proyecto necesite. Desde landing pages hasta plataformas completas con backend.',
-      icon: 'web',
-      features: [
-        'Static-first para velocidad extrema (LCP < 1s)',
-        'SEO técnico completo: meta tags, schema, sitemap, Open Graph',
-        'Diseño responsive mobile-first',
-        'CMS opcional (Decap CMS, Sanity, Strapi) para que edites sin código',
-        'Hosting optimizado: Coolify + Cloudflare CDN',
-        'Analytics privacy-friendly (Umami o Plausible)',
-      ],
-      stack: ['Astro', 'Next.js', 'Tailwind CSS', 'TypeScript', 'Astro DB / PostgreSQL', 'Cloudflare'],
-      process: [
-        { title: 'Discovery', description: 'Entiendo tu negocio, audiencia y objetivos. 1 sesión de 1h.' },
-        { title: 'Diseño', description: 'Wireframes + mockups en Figma. Iteramos hasta que encaje.' },
-        { title: 'Desarrollo', description: 'Build iterativo, deploys semanales para que veas progreso real.' },
-        { title: 'Lanzamiento', description: 'Deploy + DNS + SSL + monitoring + handover con docs.' },
-      ],
-      idealFor: 'Negocios que necesitan una web rápida para captar clientes o mostrar producto.',
-      notFor: 'Webs corporativas de 30 páginas estáticas que no necesitan performance extrema (uso un template más barato).',
-      pricing: 'Desde 1.500€ para landing. Desde 4.500€ para sitio completo con CMS.',
-      faq: [
-        { question: '¿Cuánto tarda una web?', answer: 'Landing: 2-3 semanas. Sitio completo: 6-10 semanas.' },
-        { question: '¿Puedo editar el contenido yo?', answer: 'Sí, integramos un CMS (Decap, Sanity o Strapi) y te enseño a usarlo.' },
-        { question: '¿Qué pasa si ya tengo un sitio?', answer: 'Migramos el contenido y el SEO, sin perder rankings en Google.' },
-      ],
-    },
-    {
-      slug: 'apps',
-      name: 'Apps móviles nativas e híbridas',
-      tagline: 'Apps Android e iOS que la gente quiere usar.',
-      description: 'Desarrollo de apps móviles con foco en UX y performance. Android nativo (Kotlin) es mi fuerte, iOS y React Native/Flutter cuando tiene sentido.',
-      icon: 'mobile',
-      features: [
-        'Android nativo con Kotlin y Jetpack Compose (recomendado)',
-        'iOS con Swift o SwiftUI',
-        'Kotlin Multiplatform (KMP) si quieres compartir lógica con iOS',
-        'React Native o Flutter si el equipo lo prefiere',
-        'Integración con APIs REST/GraphQL',
-        'Push notifications (FCM / APNs)',
-        'Publicación en Google Play y App Store',
-      ],
-      stack: ['Kotlin', 'Jetpack Compose', 'Swift', 'KMP', 'Coroutines', 'Room', 'Retrofit', 'Firebase'],
-      process: [
-        { title: 'Concepto', description: 'Definimos features MVP, descartamos lo que no aporta.' },
-        { title: 'Diseño UX/UI', description: 'Figma con flows de usuario + prototipado navegable.' },
-        { title: 'Desarrollo iterativo', description: 'Sprints de 2 semanas, demo cada viernes.' },
-        { title: 'QA + Lanzamiento', description: 'Testing en dispositivos reales, publicación en stores.' },
-      ],
-      idealFor: 'Negocios con un producto digital mobile-first o que necesitan una app para fidelizar clientes.',
-      notFor: 'Apps internas de gestión muy simples (en ese caso una web app responsive es suficiente).',
-      pricing: 'Desde 8.000€ para MVP Android. Desde 14.000€ para MVP Android + iOS.',
-      faq: [
-        { question: '¿Nativo o híbrido?', answer: 'Para 90% de casos, nativo (Kotlin/Swift) gana en UX y performance. Híbrido solo si necesitas lanzar en ambas plataformas rápido y el equipo lo prefiere.' },
-        { question: '¿Cuánto tarda?', answer: 'MVP: 2-4 meses. App completa: 4-8 meses.' },
-        { question: '¿Mantenimiento después?', answer: 'Ofrezco planes mensuales de mantenimiento. 1-2 días/mes desde 500€.' },
-      ],
-    },
-    {
-      slug: 'ecosistema',
-      name: 'Ecosistema completo',
-      tagline: 'Web + backend + infra + apps, todo conectado.',
-      description: 'Para proyectos que necesitan toda la stack: frontend, backend, infraestructura cloud, mobile. AWS o GCP, lo que tu presupuesto indique.',
-      icon: 'stack',
-      features: [
-        'Arquitectura completa: backend + frontend + mobile + infra',
-        'Infraestructura como código (Terraform o Pulumi)',
-        'CI/CD con GitHub Actions',
-        'Monitoreo con CloudWatch / Cloud Logging',
-        'Costos optimizados (serverless cuando conviene)',
-        'Documentación técnica y runbooks',
-      ],
-      stack: ['AWS', 'GCP', 'Spring Boot', 'Node.js', 'Astro/Next.js', 'Kotlin', 'Terraform', 'Docker'],
-      process: [
-        { title: 'Arquitectura', description: 'Diagramas, decisiones técnicas documentadas, estimación de costos cloud.' },
-        { title: 'Implementación por fases', description: 'Dividimos en milestones entregables. Pagas por fase completada.' },
-        { title: 'QA + Seguridad', description: 'Pentesting básico, OWASP top 10, hardening.' },
-        { title: 'Operación', description: 'Monitoring, alertas, runbooks, transferencia al equipo.' },
-      ],
-      idealFor: 'Startups con producto digital, empresas digitalizando procesos, productos SaaS.',
-      notFor: 'Proyectos sin presupuesto claro o sin sponsor dedicado.',
-      pricing: 'A medida. Típicamente 20.000€-80.000€ dependiendo del scope.',
-      faq: [
-        { question: '¿AWS o GCP?', answer: 'Lo que tu equipo prefiera o lo que tenga más sentido por pricing. Trabajo con ambos.' },
-        { question: '¿Puedo pagar por fases?', answer: 'Sí, divido en milestones de 2-4 semanas con pago por entrega.' },
-        { question: '¿Y después?', answer: 'Opción de retainer mensual para mantenimiento y evolución.' },
-      ],
-    },
-    {
-      slug: 'hot-fixes',
-      name: 'Hot fixes y mejoras',
-      tagline: 'Tu proyecto ya está en producción y necesita arreglos o nuevas features.',
-      description: 'Cuando el proyecto ya está vivo y necesitas añadir funcionalidad, corregir bugs, refactorizar legacy, o mejorar performance sin tirar todo a la basura.',
-      icon: 'wrench',
-      features: [
-        'Análisis rápido del código existente',
-        'Refactor sin breaking changes cuando es posible',
-        'Nuevas features integradas al código existente',
-        'Mejoras de performance (DB queries, caching, etc.)',
-        'Code review del equipo',
-        'Documentación de los cambios',
-      ],
-      stack: ['Cualquier stack: Java, Kotlin, Node, PHP, Python, etc.'],
-      process: [
-        { title: 'Diagnóstico', description: 'Auditoría rápida del código, 2-4 horas. Te digo qué veo.' },
-        { title: 'Plan de trabajo', description: 'Lista priorizada de cambios con estimaciones.' },
-        { title: 'Implementación', description: 'Pull requests pequeños, revisables.' },
-      ],
-      idealFor: 'Proyectos en producción que necesitan evolucionar sin reescribirse desde cero.',
-      notFor: 'Sistemas tan rotos que necesitan reescritura completa (mejor opción "ecosistema").',
-      pricing: 'Desde 80€/hora. Diagnóstico inicial: 200€ (se descuenta del trabajo posterior).',
-      faq: [
-        { question: '¿Trabajas con código legacy?', answer: 'Sí, es mi especialidad. Java EE, PHP legacy, Kotlin pre-Compose, etc.' },
-        { question: '¿Cuánto tarda?', answer: 'Depende del scope. Cambios pequeños: 1-3 días. Features medianas: 1-2 semanas.' },
-        { question: '¿Puedo contratarte solo para code review?', answer: 'Sí, 80€/h. Te hago review detallada de PRs con sugerencias concretas.' },
-      ],
-    },
-    {
-      slug: 'ai-rescue',
-      name: 'Rescate de proyectos AI / Vibe Coding',
-      tagline: 'Tu proyecto generado con IA no funciona. Te lo arreglo.',
-      description: 'Si contrataste a alguien que "programa con IA" o lo hiciste tú mismo con Claude/Copilot, y tienes un Frankenstein que se cae, tiene huecos de seguridad, o simplemente no escala, te lo rescato.',
-      icon: 'sparkles',
-      features: [
-        'Auditoría de código generado con IA',
-        'Refactor a código mantenible (no más "lo escribió la IA, no sé cómo funciona")',
-        'Implementación de tests (los AI casi nunca los hacen bien)',
-        'CI/CD básico (los AI tampoco lo montan)',
-        'Hardening de seguridad (los AI meten vulnerabilidades sin saber)',
-        'Documentación de qué hace el código',
-      ],
-      stack: ['Cualquier stack', 'Especialidad: Node.js/Next.js, Python, Java'],
-      process: [
-        { title: 'Auditoría inicial', description: 'Reviso el código, te digo qué está roto y qué se puede salvar.' },
-        { title: 'Plan de rescate', description: 'Estrategia priorizada: qué arreglar, qué reescribir, qué tirar.' },
-        { title: 'Implementación', description: 'Refactor por fases, sin tirar la app a la basura.' },
-        { title: 'Tests + Deploy', description: 'Tests que verifican que funciona, deploy reproducible.' },
-      ],
-      idealFor: 'Proyectos generados con Cursor, Claude Code, Bolt.new, v0, Windsurf, etc. que se rompieron.',
-      notFor: 'Proyectos de juguete o si esperas que "la IA lo haga sola".',
-      pricing: 'Auditoría inicial: 300€ (se descuenta del trabajo). Trabajo: desde 80€/h.',
-      faq: [
-        { question: '¿Cuánto cuesta "arreglar un proyecto de Bolt/Cursor"?', answer: 'Depende del daño. 500€-3.000€ para proyectos medianos. Te doy precio cerrado tras la auditoría.' },
-        { question: '¿Puedes enseñarme a usar mejor la IA mientras?', answer: 'Sí, incluyo 2 horas de pair programming con IA al final del proyecto.' },
-        { question: '¿Trabajas con [stack específico]?', answer: 'Trabajo con casi cualquier stack moderno. Si es COBOL, no.' },
-      ],
-    },
   ],
   plugins: [
     {

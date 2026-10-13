@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { getLangFromUrl, getLocalizedPath } from '@i18n/ui.ts';
+import { getService } from '@data/services.ts';
 
 const currentLang = getLangFromUrl(Astro.url);
 
@@ -117,7 +118,7 @@ const copy = currentLang === 'en'
           slug: 'ai-rescue',
           num: '05',
           icon: 'sparkles',
-          title: 'Rescate de proyectos IA / Vibe Coding',
+          title: 'Rescate de proyectos hechos con IA',
           body: 'Rescato proyectos estancados o en riesgo. Aprovecho la IA y flujos de trabajo modernos para avanzar rápido y entregar resultados.',
           bullets: ['Auditoría del proyecto', 'Rediseño de arquitectura', 'Desarrollo asistido por IA', 'Entrega rápida', 'Habilitación del equipo'],
         },
@@ -206,7 +207,7 @@ const iconPaths: Record<string, string> = {
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="text-blue-200" aria-hidden="true" set:html={iconPaths[s.icon]} />
                   </div>
                 </div>
-                <h3 class="font-display font-bold text-lg text-ink mb-3 leading-snug">{s.title}</h3>
+                <h3 class="font-display font-bold text-lg text-ink mb-3 leading-snug">{getService(s.slug)?.name[currentLang] ?? s.title}</h3>
                 <p class="text-sm text-ink-200 leading-relaxed mb-4">{s.body}</p>
                 <a href={getLocalizedPath('serviceDetail', currentLang, { slug: s.slug })} class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-200 hover:text-blue transition-colors">
                   {copy.viewDetails}

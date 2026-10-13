@@ -39,12 +39,15 @@ export function personJsonLd(profile: {
     email: profile.email,
     url: SITE_URL,
     sameAs: profile.sameAs,
-    knowsAbout: ['Android', 'Kotlin', 'Java', 'Spring Boot', 'AWS', 'GCP', 'Mobile Development', 'Backend Development'],
+    jobTitle: 'Senior Software Engineer (Android & Backend)',
+    alumniOf: { '@type': 'EducationalOrganization', name: 'IBEROTEC / IDAT' },
+    nationality: { '@type': 'Country', name: 'Peru' },
+    knowsAbout: ['Android', 'Kotlin', 'Jetpack Compose', 'Kotlin Multiplatform', 'Go', 'Java', 'Spring Boot', 'Python', 'Django', 'AWS', 'GCP', 'Mobile Development', 'Backend Development'],
     knowsLanguage: ['es', 'en'],
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Cortijos Nuevos',
-      addressRegion: 'Jaén',
+      addressLocality: 'Jaén',
+      addressRegion: 'Andalucía',
       addressCountry: 'ES',
     },
   };
@@ -57,12 +60,7 @@ export function webSiteJsonLd() {
     name: 'Yahyr Paredes',
     alternateName: 'yahyrparedes',
     url: SITE_URL,
-    inLanguage: 'es-ES',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
+    inLanguage: ['es-ES', 'en'],
   };
 }
 
@@ -89,11 +87,11 @@ export function productJsonLd(plugin: {
     category: `Módulo SEO para ${plugin.platform}`,
     offers: {
       '@type': 'Offer',
-      price: plugin.price,
+      price: /^\d/.test(plugin.price) ? plugin.price : '0',
       priceCurrency: 'EUR',
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
-        price: plugin.price,
+        price: /^\d/.test(plugin.price) ? plugin.price : '0',
         priceCurrency: 'EUR',
         unitText: plugin.priceUnit,
       },

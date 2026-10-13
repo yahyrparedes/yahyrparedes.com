@@ -1,13 +1,12 @@
 ---
-// Página placeholder para /en/services/[slug].
-// El contenido detallado solo existe en español por ahora,
-// así que cada ruta EN redirige a su equivalente ES.
-import { site } from '@data/site.ts';
+import ServiceDetailPage from '@components/pages/ServiceDetailPage.astro';
+import { services, type ServiceDetail } from '@data/services.ts';
 
-export async function getStaticPaths() {
-  return site.services.map((s) => ({
-    params: { slug: s.slug },
-    redirect: `/es/servicios/${s.slug}/`,
-  }));
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
+
+const { service } = Astro.props as { service: ServiceDetail };
 ---
+
+<ServiceDetailPage service={service} />

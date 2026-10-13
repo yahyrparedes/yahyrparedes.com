@@ -9,16 +9,15 @@ terminan en `/`. Las redirecciones viven en `nginx.conf`.
 | id (routeMap)   | Español                         | English                          | Estado |
 |-----------------|---------------------------------|----------------------------------|--------|
 | home            | /es/                            | /en/                             | ✅ |
-| about           | /es/sobre-mi/                   | /en/about/                       | ✅ (contenido: fase 4) |
+| about           | /es/sobre-mi/                   | /en/about/                       | ✅ |
 | experience      | /es/experiencia/                | /en/experience/                  | ✅ nueva línea de tiempo |
 | profile (CV)    | /es/perfil/                     | /en/profile/                     | ✅ nueva, imprimible a PDF |
 | services        | /es/servicios/                  | /en/services/                    | ✅ |
-| serviceDetail   | /es/servicios/{slug}/           | /en/services/{slug}/             | ⚠️ EN redirige a ES (fase 5: traducir) |
+| serviceDetail   | /es/servicios/{slug}/           | /en/services/{slug}/             | ✅ ES y EN (`src/data/services.ts`) |
 | openSource      | /es/open-source/                | /en/open-source/                 | ✅ |
-| openSourceItem  | /es/open-source/{slug}/         | /en/open-source/{slug}/          | ✅ |
+| openSourceItem  | /es/open-source/{slug}/         | /en/open-source/{slug}/          | ⚠️ módulos Tiger: noindex y fuera del sitemap hasta reorganizar la colección; EN redirige a ES |
 | flowGm          | /es/open-source/flow-gm/        | /en/open-source/flow-gm/         | ✅ |
-| blog            | /es/blog/                       | /en/blog/                        | ✅ "próximamente" (fase 8) |
-| stack           | /es/stack/                      | /en/stack/                       | ⚠️ huérfana: nadie enlaza aquí. Decidir: integrar en Perfil o eliminar |
+| blog            | /es/blog/                       | /en/blog/                        | ⏸️ "próximamente" (pendiente) |
 | contact         | /es/contacto/                   | /en/contact/                     | ✅ formulario funcional |
 | privacy         | /es/privacidad/                 | /en/privacy/                     | ✅ |
 | terms           | /es/aviso-legal/                | /en/terms/                       | ✅ |
@@ -43,6 +42,7 @@ Antes, cualquier URL inexistente devolvía la portada con código 200 (soft-404)
 | URL antigua | Destino |
 |-------------|---------|
 | /es/experience/ | /es/experiencia/ |
+| /es/stack/, /en/stack/, /stack/ (eliminadas) | /es/perfil/, /en/profile/ |
 | /en/behind-the-engineer/ | /en/about/ |
 | /es/plugins/, /es/plugins/{slug}/ | /es/open-source/, /es/open-source/{slug}/ |
 | /en/plugins/... | /en/open-source/... |
